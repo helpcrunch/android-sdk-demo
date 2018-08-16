@@ -1,0 +1,60 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/registration_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/nameEditText"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/app_demo_name"
+            android:text="Andr" />
+
+        <EditText
+            android:id="@+id/emailEditText"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/app_demo_email"
+            android:inputType="textEmailAddress"
+            android:text="andr@gmail.com" />
+
+        <EditText
+            android:id="@+id/phoneEditText"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/app_demo_phone"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/userIdEditText"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/app_demo_user_id"
+            android:text="AndrId" />
+
+        <Button
+            android:id="@+id/saveUserDataButton"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp">
+
+                <Button
+                    android:id="@+id/chatButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Standard Chat"/>
+
+                <ImageView
+                    android:id="@+id/badge1ImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/chatButton"
+                    android:layout_alignRight="@+id/chatButton"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:elevation="3dp"
+                    android:visibility="invisible"
+                    app:srcCompat="@android:drawable/ic_notification_overlay"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp">
+
+                <Button
+                    android:id="@+id/anonimousChatButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Anonimous Chat"/>
+
+                <ImageView
+                    android:id="@+id/badge2ImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/anonimousChatButton"
+                    android:layout_alignRight="@+id/anonimousChatButton"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:elevation="3dp"
+                    android:visibility="invisible"
+                    app:srcCompat="@android:drawable/ic_notification_overlay"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp">
+
+                <Button
+                    android:id="@+id/chatActivityButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chat Activity"/>
+
+                <ImageView
+                    android:id="@+id/badge3ImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/chatActivityButton"
+                    android:layout_alignRight="@+id/chatActivityButton"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:elevation="3dp"
+                    android:visibility="invisible"
+                    app:srcCompat="@android:drawable/ic_notification_overlay"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                >
+
+                <Button
+                    android:id="@+id/chatFragmentButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Chat Fragment"/>
+
+                <ImageView
+                    android:id="@+id/badge4ImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/chatFragmentButton"
+                    android:layout_alignRight="@+id/chatFragmentButton"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:elevation="3dp"
+                    android:visibility="invisible"
+                    app:srcCompat="@android:drawable/ic_notification_overlay"/>
+
+            </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/changeUserDataButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Change User Data"/>
+
+            <Button
+                android:id="@+id/sendCustomDataButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Send Custom Data"/>
+
+            <Button
+                android:id="@+id/getUnreadMessagesButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Get Unread Messages"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/logoutButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Logout"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

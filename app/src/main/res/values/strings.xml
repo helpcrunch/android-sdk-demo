@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">HelpCrunch Demo</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_demo_name">name</string>
+    <string name="app_demo_email">email</string>
+    <string name="app_demo_phone">phone</string>
+    <string name="app_demo_user_id">user id</string>
+    <string name="name_is_empty">Name is empty</string>
+    <string name="all_fields_are_empty">All fields are empty</string>
+    <string name="data_saved">User data is saved</string>
+    <string name="something_wrong">Something went wrong. Try later.</string>
+</resources>
