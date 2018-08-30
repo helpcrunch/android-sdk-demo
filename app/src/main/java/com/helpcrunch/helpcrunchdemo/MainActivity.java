@@ -15,6 +15,7 @@ import com.helpcrunch.library.core.HelpCrunchOptions;
 import com.helpcrunch.library.model.MessagesCountResponse;
 import com.helpcrunch.library.ui.HelpCrunchChatExtraKeys;
 import com.helpcrunch.library.ui.design.HelpCrunchDesign;
+import com.helpcrunch.library.ui.design.MessageArea;
 import com.helpcrunch.library.utils.HCViewUtils;
 
 import static com.helpcrunch.library.core.HelpCrunch.FCM_INTENT_ACTION_ID;
@@ -47,8 +48,16 @@ public class MainActivity extends AppCompatActivity {
         (findViewById(R.id.chatActivityButton)).setOnClickListener(view -> {
             //Optional.
             //  Set the necessary options to change the style.
+            MessageArea messageArea = new MessageArea()
+                    .setAttachmentPopupTitle("Custom title")
+                    .setAttachmentPopupCameraText("Custom camera")
+                    .setAttachmentPopupGalleryText("Custom gallery")
+                    .setAttachmentsButtonVisible(true);
+
             HelpCrunchDesign design = new HelpCrunchDesign()
-                    .setToolbarTitle("THIS IS MY ACTIVITY");
+                    .setToolbarTitle("THIS IS MY ACTIVITY")
+                    .setMessageArea(messageArea);
+
 
             HelpCrunchOptions options = new HelpCrunchOptions()
                     .setDesign(design)
