@@ -3,7 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorDarkAccent">#c43062</color>
     <color name="colorIn">#FFFBF253</color>
     <color name="colorOut">#FFD3EEE7</color>
+    <color name="colorStart">#3fda59</color>
+    <color name="colorEnd">#5dceb1</color>
     <color name="colorToolbar">#FF9BDADA</color>
+
+    <color name="colorBlue">#4c82f8</color>
+    <color name="colorDarkBlue">#365bac</color>
+
 </resources>

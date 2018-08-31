@@ -1,7 +1,5 @@
 package com.helpcrunch.helpcrunchdemo;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -78,24 +76,5 @@ public class UserDataActivity extends AppCompatActivity {
                 }
             }
         });
-        findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateMyActivity(UserDataActivity.this, "mess iii");
-            }
-        });
-    }
-
-
-
-    static void updateMyActivity(Context context, String message) {
-
-        Intent intent = new Intent("unique_name");
-
-        //put whatever data you want to send, if any
-        intent.putExtra("message", message);
-
-        //send broadcast
-        context.sendBroadcast(intent);
     }
 }

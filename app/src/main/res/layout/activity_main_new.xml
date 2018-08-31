@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -8,166 +8,151 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp">
+                android:id="@+id/chatButton"
+                style="@style/Button">
 
-                <Button
-                    android:id="@+id/chatButton"
-                    android:layout_width="fill_parent"
+                <TextView
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Standard Chat"/>
 
-                <ImageView
-                    android:id="@+id/badge1ImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/chatButton"
-                    android:layout_alignRight="@+id/chatButton"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
-                    android:elevation="3dp"
-                    android:visibility="invisible"
-                    app:srcCompat="@android:drawable/ic_notification_overlay"/>
+                <FrameLayout
+                    android:id="@+id/badge1View"
+                    style="@style/Indicator">
 
+                    <TextView
+                        android:id="@+id/badge1TextView"
+                        style="@style/Text.Counter"
+                        tools:text="1"/>
+                </FrameLayout>
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp">
+                android:id="@+id/anonimousChatButton"
+                style="@style/Button">
 
-                <Button
-                    android:id="@+id/anonimousChatButton"
-                    android:layout_width="fill_parent"
+                <TextView
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
                     android:text="Anonimous Chat"/>
 
-                <ImageView
-                    android:id="@+id/badge2ImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/anonimousChatButton"
-                    android:layout_alignRight="@+id/anonimousChatButton"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
-                    android:elevation="3dp"
-                    android:visibility="invisible"
-                    app:srcCompat="@android:drawable/ic_notification_overlay"/>
+                <FrameLayout
+                    android:id="@+id/badge2View"
+                    style="@style/Indicator">
 
+                    <TextView
+                        android:id="@+id/badge2TextView"
+                        style="@style/Text.Counter"
+                        tools:text="1"/>
+                </FrameLayout>
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp">
+                android:id="@+id/chatActivityButton"
+                style="@style/Button">
 
-                <Button
-                    android:id="@+id/chatActivityButton"
-                    android:layout_width="fill_parent"
+                <TextView
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chat Activity"/>
 
-                <ImageView
-                    android:id="@+id/badge3ImageView"
+                <FrameLayout
+                    android:id="@+id/badge3View"
+                    style="@style/Indicator">
+
+                    <TextView
+                        android:id="@+id/badge3TextView"
+                        style="@style/Text.Counter"
+                        tools:text="1"/>
+                </FrameLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/chatFragmentButton"
+                style="@style/Button">
+
+                <TextView
+                    style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/chatActivityButton"
-                    android:layout_alignRight="@+id/chatActivityButton"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
-                    android:elevation="3dp"
-                    android:visibility="invisible"
-                    app:srcCompat="@android:drawable/ic_notification_overlay"/>
+                    android:text="Chat Fragment"/>
+
+                <FrameLayout
+                    android:id="@+id/badge4View"
+                    style="@style/Indicator">
+
+                    <TextView
+                        android:id="@+id/badge4TextView"
+                        style="@style/Text.Counter"
+                        tools:text="1"/>
+                </FrameLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/changeUserDataButton"
+                style="@style/Button">
+
+                <TextView
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change User Data"/>
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                >
+                android:id="@+id/sendCustomDataButton"
+                style="@style/Button">
 
-                <Button
-                    android:id="@+id/chatFragmentButton"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:text="Chat Fragment"/>
-
-                <ImageView
-                    android:id="@+id/badge4ImageView"
+                <TextView
+                    style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/chatFragmentButton"
-                    android:layout_alignRight="@+id/chatFragmentButton"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
-                    android:elevation="3dp"
-                    android:visibility="invisible"
-                    app:srcCompat="@android:drawable/ic_notification_overlay"/>
+                    android:text="Send Custom Data"/>
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/customDesignButton"
+                style="@style/Button">
 
-            <Button
-                android:id="@+id/changeUserDataButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:text="Change User Data"/>
+                <TextView
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Custom Design"/>
 
-            <Button
-                android:id="@+id/sendCustomDataButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:text="Send Custom Data"/>
+            </RelativeLayout>
 
-            <Button
-                android:id="@+id/getUnreadMessagesButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:text="Get Unread Messages"
-                android:visibility="gone"/>
-
-            <Button
-                android:id="@+id/logoutButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:text="Logout"/>
         </LinearLayout>
     </ScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/logoutButton"
+        style="@style/Button.Logout"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <TextView
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

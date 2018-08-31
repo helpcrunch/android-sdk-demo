@@ -7,13 +7,14 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
 import com.helpcrunch.library.core.HelpCrunchOptions;
 import com.helpcrunch.library.model.MessagesCountResponse;
 import com.helpcrunch.library.ui.HelpCrunchChatExtraKeys;
+import com.helpcrunch.library.ui.design.HelpCrunchButton;
 import com.helpcrunch.library.ui.design.HelpCrunchDesign;
 import com.helpcrunch.library.ui.design.MessageArea;
 import com.helpcrunch.library.utils.HCViewUtils;
@@ -22,20 +23,22 @@ import static com.helpcrunch.library.core.HelpCrunch.FCM_INTENT_ACTION_ID;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button changeUserDataButton;
-    Button sendCustomDataButton;
+    private View badge1View;
+    private View badge2View;
+    private View badge3View;
+    private View badge4View;
 
-    View badge1ImageView;
-    View badge2ImageView;
-    View badge3ImageView;
-    View badge4ImageView;
-
+    private TextView badge1TextView;
+    private TextView badge2TextView;
+    private TextView badge3TextView;
+    private TextView badge4TextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_new);
 
+        initViews();
 
         (findViewById(R.id.chatButton)).setOnClickListener(view -> HelpCrunch.showChatScreen(MainActivity.this));
 
@@ -48,15 +51,8 @@ public class MainActivity extends AppCompatActivity {
         (findViewById(R.id.chatActivityButton)).setOnClickListener(view -> {
             //Optional.
             //  Set the necessary options to change the style.
-            MessageArea messageArea = new MessageArea()
-                    .setAttachmentPopupTitle("Custom title")
-                    .setAttachmentPopupCameraText("Custom camera")
-                    .setAttachmentPopupGalleryText("Custom gallery")
-                    .setAttachmentsButtonVisible(true);
-
             HelpCrunchDesign design = new HelpCrunchDesign()
-                    .setToolbarTitle("THIS IS MY ACTIVITY")
-                    .setMessageArea(messageArea);
+                    .setToolbarTitle("SUPPORT");
 
 
             HelpCrunchOptions options = new HelpCrunchOptions()
@@ -64,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
                     .setRequestName(true);
 
             Intent intent = new Intent(MainActivity.this, ChatActivityInherited.class);
-            //  Optional.
+
+            //  Optional. You cau also use showChatScreen(Context, HelpCrunchOptions)
             intent.putExtras(options.toBundle());
             startActivity(intent);
 
@@ -88,14 +85,57 @@ public class MainActivity extends AppCompatActivity {
             }
         }));
 
-        badge1ImageView = findViewById(R.id.badge1ImageView);
-        badge2ImageView = findViewById(R.id.badge2ImageView);
-        badge3ImageView = findViewById(R.id.badge3ImageView);
-        badge4ImageView = findViewById(R.id.badge4ImageView);
+        (findViewById(R.id.customDesignButton)).setOnClickListener(view -> {
+            //Optional.
+            //  Set the necessary options to change the style.
+            MessageArea messageArea = new MessageArea()
+                    .setAttachmentPopupTitle("Custom title")
+                    .setAttachmentPopupCameraText("Custom camera")
+                    .setAttachmentPopupGalleryText("Custom gallery")
+                    .setAttachmentsButtonVisible(true);
 
-        updateUnreadMessages();
+            HelpCrunchButton backButton = new HelpCrunchButton();
+            backButton.setImageSrcRes(R.drawable.ic_arrow_back);
+
+            HelpCrunchButton attachmentsButton = new HelpCrunchButton();
+            attachmentsButton.setImageSrcRes(R.drawable.ic_attach_file);
+
+            HelpCrunchButton sendButton = new HelpCrunchButton();
+            sendButton.setImageSrcRes(R.drawable.ic_send);
+            sendButton.setBackgroundRes(R.drawable.bg_oval_red);
+
+            HelpCrunchDesign design = new HelpCrunchDesign()
+                    .setToolbarImage(R.drawable.ic_hc_image)
+                    .setToolbarVisible(true)
+                    .setActionBackButton(backButton)
+                    .setActionAttachmentButton(attachmentsButton)
+                    .setActionSendButton(sendButton)
+                    .setChatBackgroundRes(R.drawable.bg_chat)
+                    .setIncomingBubbleColor(R.color.colorIn)
+                    .setOutcomingBubbleColor(R.color.colorOut)
+                    .setMessageArea(messageArea);
+
+
+            HelpCrunchOptions options = new HelpCrunchOptions()
+                    .setDesign(design)
+                    .setRequestName(true);
+
+            HelpCrunch.showChatScreen(MainActivity.this, options);
+        });
 
         registerReceiver(fcmBroadcastReceiver, new IntentFilter(FCM_INTENT_ACTION_ID));
+    }
+
+    private void initViews() {
+        badge1View = findViewById(R.id.badge1View);
+        badge2View = findViewById(R.id.badge2View);
+        badge3View = findViewById(R.id.badge3View);
+        badge4View = findViewById(R.id.badge4View);
+
+        badge1TextView = findViewById(R.id.badge1TextView);
+        badge2TextView = findViewById(R.id.badge2TextView);
+        badge3TextView = findViewById(R.id.badge3TextView);
+        badge4TextView = findViewById(R.id.badge4TextView);
     }
 
 
@@ -103,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         HelpCrunch.getUnreadMessagesCount(MainActivity.this, new Callback<MessagesCountResponse>() {
             @Override
             public void onSuccess(MessagesCountResponse result) {
-                setVisibilityForUnreadMessagesBadge(result.getMessagesCount() > 0 ? View.VISIBLE : View.INVISIBLE);
+                setVisibilityForUnreadMessagesBadge(result.getMessagesCount());
             }
 
             @Override
@@ -113,12 +153,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void setVisibilityForUnreadMessagesBadge(int count) {
+        int visibility = count > 0 ? View.VISIBLE : View.INVISIBLE;
 
-    private void setVisibilityForUnreadMessagesBadge(int visibility) {
-        badge1ImageView.setVisibility(visibility);
-        badge2ImageView.setVisibility(visibility);
-        badge3ImageView.setVisibility(visibility);
-        badge4ImageView.setVisibility(visibility);
+        badge1View.setVisibility(visibility);
+        badge2View.setVisibility(visibility);
+        badge3View.setVisibility(visibility);
+        badge4View.setVisibility(visibility);
+
+        String countString = String.valueOf(count);
+
+        badge1TextView.setText(countString);
+        badge2TextView.setText(countString);
+        badge3TextView.setText(countString);
+        badge4TextView.setText(countString);
     }
 
     @Override
@@ -133,11 +181,9 @@ public class MainActivity extends AppCompatActivity {
         updateUnreadMessages();
     }
 
-
     private BroadcastReceiver fcmBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            setVisibilityForUnreadMessagesBadge(View.VISIBLE);
             updateUnreadMessages();
         }
     };
