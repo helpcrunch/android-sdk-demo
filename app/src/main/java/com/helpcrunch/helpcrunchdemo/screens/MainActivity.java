@@ -1,4 +1,4 @@
-package com.helpcrunch.helpcrunchdemo;
+package com.helpcrunch.helpcrunchdemo.screens;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.helpcrunch.helpcrunchdemo.R;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
 import com.helpcrunch.library.core.HelpCrunchOptions;
@@ -57,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
             HelpCrunchOptions options = new HelpCrunchOptions()
                     .setDesign(design)
-                    .setRequestName(true);
+                    .setRequestName(false);
 
-            Intent intent = new Intent(MainActivity.this, ChatActivityInherited.class);
+            Intent intent = new Intent(MainActivity.this, ChatInheritedActivity.class);
 
             //  Optional. You cau also use showChatScreen(Context, HelpCrunchOptions)
             intent.putExtras(options.toBundle());

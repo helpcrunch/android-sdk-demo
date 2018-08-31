@@ -9,5 +9,5 @@
     <string name="all_fields_are_empty">All fields are empty</string>
     <string name="data_saved">User data is saved</string>
     <string name="something_wrong">Something went wrong. Try later.</string>
-    <string name="title_activity_design">DesignActivity</string>
+
 </resources>

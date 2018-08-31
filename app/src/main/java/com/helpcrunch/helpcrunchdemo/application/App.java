@@ -1,12 +1,17 @@
-package com.helpcrunch.helpcrunchdemo;
+package com.helpcrunch.helpcrunchdemo.application;
 
 import android.app.Application;
 
+import com.helpcrunch.helpcrunchdemo.R;
 import com.helpcrunch.library.core.HelpCrunch;
 import com.helpcrunch.library.core.HelpCrunchOptions;
 import com.helpcrunch.library.ui.design.HelpCrunchDesign;
 
-public class HelpCrunchApplication extends Application {
+public class App extends Application {
+    private static final String ORGANISATION = "mobile";
+    private static final int APP_ID = 2889;
+    private static final String SECRET = "BT4na/0/fHk6d1jtg0qKiK5GoxXf1/GgP0ay0ps2UiWJPfdPeUDFUYwnIjBFO49oilOKx+EMg2Tw+BJsS/hI6g==";
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -19,9 +24,9 @@ public class HelpCrunchApplication extends Application {
 
         HelpCrunch.initializeWithOptions(
                 this,
-                "mobile",
-                2889,
-                "BT4na/0/fHk6d1jtg0qKiK5GoxXf1/GgP0ay0ps2UiWJPfdPeUDFUYwnIjBFO49oilOKx+EMg2Tw+BJsS/hI6g==",
+                ORGANISATION,
+                APP_ID,
+                SECRET,
                 options
         );
     }
