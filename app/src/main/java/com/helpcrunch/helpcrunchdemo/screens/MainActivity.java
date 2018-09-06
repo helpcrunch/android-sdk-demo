@@ -141,10 +141,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void updateUnreadMessages() {
-        HelpCrunch.getUnreadMessagesCount(MainActivity.this, new Callback<MessagesCountResponse>() {
+        HelpCrunch.getUnreadMessagesCount(MainActivity.this, new Callback<Integer>() {
             @Override
-            public void onSuccess(MessagesCountResponse result) {
-                setVisibilityForUnreadMessagesBadge(result.getMessagesCount());
+            public void onSuccess(Integer result) {
+                setVisibilityForUnreadMessagesBadge(result);
             }
 
             @Override
