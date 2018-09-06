@@ -9,7 +9,6 @@ import com.helpcrunch.library.ui.HelpCrunchChatFragment;
 import com.helpcrunch.library.ui.design.HelpCrunchDesign;
 
 public class PlainChatActivity extends AppCompatActivity {
-    private HelpCrunchChatFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +20,10 @@ public class PlainChatActivity extends AppCompatActivity {
         bundle.putInt(HelpCrunchChatExtraKeys.DESIGN, HelpCrunchDesign.MODERN);
         bundle.putBoolean(HelpCrunchChatExtraKeys.TOOLBAR_VISIBILITY, false);
 
-        mFragment = HelpCrunchChatFragment.newInstance(getIntent().getExtras());
+        HelpCrunchChatFragment fragment = HelpCrunchChatFragment.newInstance(getIntent().getExtras());
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, mFragment)
+                .replace(R.id.fragment_container, fragment)
                 .commit();
     }
 }

@@ -26,5 +26,4 @@
     <string name="helpcrunch_permissions_ok">OK</string>
     <string name="helpcrunch_permissions_cancel">Cancel</string>
     <string name="helpcrunch_permissions_content">Allow file system access to improve file sharing</string>
-
 </resources>
