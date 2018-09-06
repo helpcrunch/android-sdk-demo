@@ -13,7 +13,6 @@ import com.helpcrunch.helpcrunchdemo.R;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
 import com.helpcrunch.library.core.HelpCrunchOptions;
-import com.helpcrunch.library.model.MessagesCountResponse;
 import com.helpcrunch.library.ui.HelpCrunchChatExtraKeys;
 import com.helpcrunch.library.ui.design.HelpCrunchButton;
 import com.helpcrunch.library.ui.design.HelpCrunchDesign;

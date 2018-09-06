@@ -10,4 +10,21 @@
     <string name="data_saved">User data is saved</string>
     <string name="something_wrong">Something went wrong. Try later.</string>
 
+    <!--HelpCrunch localize-->
+    <string name="helpcrunch_message_hint">Type message</string>
+    <string name="helpcrunch_enter_name">Enter your name</string>
+    <string name="helpcrunch_notification_title" translatable="false">HelpCrunch</string>
+    <string name="helpcrunch_dialog_label" translatable="false">HelpCrunch</string>
+    <string name="new_message">New message</string>
+    <string name="helpcrunch_empty_message">Could you please enter your message?</string>
+    <string name="helpcrunch_empty_user_name">Username is empty</string>
+    <string name="help_crunch_ok">OK</string>
+    <string name="helpcrunch_messages_get_error"><![CDATA[Unable to get messages. Please check your network connection and <b><u>try again</u></b>]]></string>
+    <string name="helpcrunch_messages_send_error"><![CDATA[Your message was not sent. Please check your network connection and <b><u>try again</u></b>]]></string>
+    <string name="helpcrunch_user_update_error"><![CDATA[Your user was not updated. Please check your network connection and <b><u>try again</u></b>]]></string>
+    <string name="helpcrunch_chat_welcome_message">"Your suggestions, ideas or complaints greatly help us. We'll get back to you pretty soon!"</string>
+    <string name="helpcrunch_permissions_ok">OK</string>
+    <string name="helpcrunch_permissions_cancel">Cancel</string>
+    <string name="helpcrunch_permissions_content">Allow file system access to improve file sharing</string>
+
 </resources>
