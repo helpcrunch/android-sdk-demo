@@ -42,7 +42,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:design:28.0.0'
 
-    implementation 'com.helpcrunch:helpcrunch-sdk:1.4.6'
+    implementation 'com.helpcrunch:helpcrunch-sdk:1.4.7'
 
 }
 
