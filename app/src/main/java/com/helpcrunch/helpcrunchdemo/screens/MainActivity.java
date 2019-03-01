@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             HelpCrunchDesign design = new HelpCrunchDesign()
                     .setToolbarImage(R.drawable.ic_hc_image)
                     .setToolbarVisible(true)
+                    .setCustomerAvatarVisible(false)
                     .setActionBackButton(backButton)
                     .setActionAttachmentButton(attachmentsButton)
                     .setActionSendButton(sendButton)
