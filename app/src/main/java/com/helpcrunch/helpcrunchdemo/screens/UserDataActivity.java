@@ -3,6 +3,7 @@ package com.helpcrunch.helpcrunchdemo.screens;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -28,13 +29,15 @@ public class UserDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_data);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         nameEditText = findViewById(R.id.nameEditText);
         emailEditText = findViewById(R.id.emailEditText);
         phoneEditText = findViewById(R.id.phoneEditText);
         userIdEditText = findViewById(R.id.userIdEditText);
         User currentUser = HelpCrunch.getStorage(this).loadUser();
-        
-        if(currentUser != null) {
+
+        if (currentUser != null) {
             nameEditText.setText(currentUser.getName());
             emailEditText.setText(currentUser.getEmail());
             phoneEditText.setText(currentUser.getPhone());
@@ -57,6 +60,7 @@ public class UserDataActivity extends AppCompatActivity {
                             .withPhone(phoneEditText.getText().toString())
                             .withUserID(registerUserId)
                             .withCustomData(customData)
+                            .withOrganization("My organization")
                             .build();
 
                     HelpCrunch.updateUser(UserDataActivity.this, registerUser, new Callback<User>() {
@@ -77,5 +81,14 @@ public class UserDataActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

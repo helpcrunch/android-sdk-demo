@@ -3,6 +3,7 @@ package com.helpcrunch.helpcrunchdemo.screens;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -26,6 +27,9 @@ public class CustomUserDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_user_data);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         final EditText customKey1 = findViewById(R.id.field1EditText);
         final EditText customKey2 = findViewById(R.id.field2EditText);
         final EditText customKey3 = findViewById(R.id.field3EditText);
@@ -84,6 +88,14 @@ public class CustomUserDataActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void addData(Map<String, Object> customData, String key, String object) {
         if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(object)) {
