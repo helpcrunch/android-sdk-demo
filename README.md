@@ -1,10 +1,11 @@
-### Helpcrunch Android SDK Demo [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/helpcrunch-sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/helpcrunch-sdk)
-
-
+### Helpcrunch Android SDK Demo 
 This SDK can be added to **Android**, **Flutter** or **React Native** projects to start a live chat from a mobile application.
 
 #### Maven repository:
 https://mvnrepository.com/artifact/com.helpcrunch/helpcrunch-sdk
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/helpcrunch-sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/helpcrunch-sdk)
+
 
 ### Prerequisites
 Java 8, Kotlin
