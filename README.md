@@ -45,18 +45,18 @@ also you can set up option if user name is mandatory
 C. If you want to update customer info - just call
 
 ```
-            HelpCrunch.updateUser(c);
+        HelpCrunch.updateUser(c);
 ```
 
 user data could be created like this:
 
 ```
-                  User c = new UserBuilder()
-                    .withName(mNameEdit.getText().toString())
-                    .withUserID(mIdEdit.getText().toString())
-                    .withEmail(mEmailEdit.getText().toString())
-                    .withCustomData(custom)
-                    .build();
+        User c = new UserBuilder()
+             .withName(mNameEdit.getText().toString())
+             .withUserID(mIdEdit.getText().toString())
+             .withEmail(mEmailEdit.getText().toString())
+             .withCustomData(custom)
+             .build();
 ```
 
 All fields are optional. Custom data could be created like this:
