@@ -1,3 +1,5 @@
+![](https://helpcrunch.com/img/layout/menu/logo.svg)
+
 ### Helpcrunch Android SDK Demo 
 This SDK can be added to **Android**, **Flutter** or **React Native** projects to start a live chat from a mobile application.
 
