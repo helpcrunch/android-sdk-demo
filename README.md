@@ -29,7 +29,7 @@ A. Import library in aar format manually into your project
 B. Initialize HelpCrunch by calling the following in the oncreate() method of your application 
 ```
 
-        HelpCrunch.initialize(AppContext, ORGANISATION, APPID, APPSECRET, PUSHID);
+        HelpCrunch.initialize(AppContext, ORGANISATION, APPID, APPSECRET);
 
 ```
 
@@ -39,7 +39,7 @@ also you can set up option if user name is mandatory
 ```
         HelpCrunch.Options opts = new HelpCrunch.Options();
         opts.requestName = true;
-        HelpCrunch.initializeWithOptions(this, ORGANISATION, APP_ID, SECRET, PUSH_ID, opts);
+        HelpCrunch.initializeWithOptions(this, ORGANISATION, APP_ID, SECRET, opts);
 ```
 
 C. If you want to update customer info - just call
