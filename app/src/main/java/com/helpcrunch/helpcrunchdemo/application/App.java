@@ -5,6 +5,8 @@ import android.app.Application;
 import com.helpcrunch.helpcrunchdemo.R;
 import com.helpcrunch.library.core.HelpCrunch;
 import com.helpcrunch.library.core.HelpCrunchOptions;
+import com.helpcrunch.library.model.User;
+import com.helpcrunch.library.model.UserBuilder;
 import com.helpcrunch.library.ui.design.HelpCrunchDesign;
 
 public class App extends Application {
@@ -22,12 +24,18 @@ public class App extends Application {
                 .setNotificationsChannelTitle("My super company")
                 .setNotificationsLargeIconBgColor(R.color.colorAccent);
 
+        User user = new UserBuilder()
+                .withEmail("al@g.day")
+                .withName("Test Demo")
+                .build();
+
         HelpCrunch.initializeWithOptions(
                 this,
                 ORGANISATION,
                 APP_ID,
                 SECRET,
-                options
+                options,
+                user
         );
     }
 }
