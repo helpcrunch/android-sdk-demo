@@ -51,7 +51,7 @@
     </ScrollView>
 
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/saveUserDataButton"
         style="@style/Button">
 
@@ -61,6 +61,6 @@
             android:layout_height="wrap_content"
             android:text="Save"/>
 
-    </RelativeLayout>
+    </FrameLayout>
 
 </LinearLayout>

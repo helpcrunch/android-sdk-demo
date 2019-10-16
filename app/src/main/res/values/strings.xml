@@ -6,6 +6,7 @@
     <string name="app_demo_phone">phone</string>
     <string name="app_demo_user_id">user id</string>
     <string name="name_is_empty">Name is empty</string>
+    <string name="error_id_is_empty">ID is empty</string>
     <string name="all_fields_are_empty">All fields are empty</string>
     <string name="data_saved">User data is saved</string>
     <string name="something_wrong">Something went wrong. Try later.</string>

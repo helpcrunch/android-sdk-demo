@@ -6,7 +6,7 @@
             <item android:bottom="4dp" android:left="4dp" android:right="4dp" android:top="4dp">
                 <shape android:shape="rectangle">
                     <corners android:bottomLeftRadius="30dp" android:bottomRightRadius="30dp" android:radius="60dp" android:topLeftRadius="30dp" android:topRightRadius="30dp" />
-                    <solid android:color="@color/colorDarkAccent" />
+                    <solid android:color="#C03617" />
                     <padding android:bottom="0dp" android:left="0dp" android:right="0dp" android:top="0dp" />
                     <size android:width="110dp" android:height="40dp" />
                 </shape>
@@ -14,13 +14,13 @@
         </layer-list>
 
     </item>
-    <item android:state_focused="true">
+    <item android:state_enabled="false">
 
         <layer-list>
             <item android:bottom="4dp" android:left="4dp" android:right="4dp" android:top="4dp">
                 <shape android:shape="rectangle">
                     <corners android:bottomLeftRadius="30dp" android:bottomRightRadius="30dp" android:radius="60dp" android:topLeftRadius="30dp" android:topRightRadius="30dp" />
-                    <solid android:color="@color/colorDarkAccent" />
+                    <solid android:color="#D37C67" />
                     <padding android:bottom="0dp" android:left="0dp" android:right="0dp" android:top="0dp" />
                     <size android:width="110dp" android:height="40dp" />
                 </shape>
@@ -35,7 +35,7 @@
             <item android:bottom="4dp" android:left="4dp" android:right="4dp" android:top="4dp">
                 <shape android:shape="rectangle">
                     <corners android:bottomLeftRadius="30dp" android:bottomRightRadius="30dp" android:radius="60dp" android:topLeftRadius="30dp" android:topRightRadius="30dp" />
-                    <solid android:color="@color/colorAccent" />
+                    <solid android:color="#E4411C" />
                     <padding android:bottom="0dp" android:left="0dp" android:right="0dp" android:top="0dp" />
                     <size android:width="110dp" android:height="40dp" />
                 </shape>

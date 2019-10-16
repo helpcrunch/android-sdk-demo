@@ -1,21 +1,21 @@
 package com.helpcrunch.helpcrunchdemo.screens;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.helpcrunch.helpcrunchdemo.R;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.model.User;
-import com.helpcrunch.library.model.UserBuilder;
-import com.helpcrunch.library.utils.HCViewUtils;
+import com.helpcrunch.library.models.remote.HCUser;
+import com.helpcrunch.library.utils.extensions.ContextKt;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class UserDataActivity extends AppCompatActivity {
 
@@ -35,7 +35,11 @@ public class UserDataActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailEditText);
         phoneEditText = findViewById(R.id.phoneEditText);
         userIdEditText = findViewById(R.id.userIdEditText);
-        User currentUser = HelpCrunch.getStorage(this).loadUser();
+// ============================================= Before v2.0 =============================================
+//        HCUser currentUser = HelpCrunch.getStorage(this).loadUser();
+// ========================================================================================================
+
+        HCUser currentUser = HelpCrunch.getUser();
 
         if (currentUser != null) {
             nameEditText.setText(currentUser.getName());
@@ -43,51 +47,82 @@ public class UserDataActivity extends AppCompatActivity {
             phoneEditText.setText(currentUser.getPhone());
             userIdEditText.setText(currentUser.getUserId());
         }
-        findViewById(R.id.saveUserDataButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String username = nameEditText.getText().toString();
-                if (!TextUtils.isEmpty(username.trim())) {
 
-                    String registerUserId = userIdEditText.getText().toString();
+        findViewById(R.id.saveUserDataButton).setOnClickListener(view -> updateUserData());
+    }
 
-                    Map<String, Object> customData = new HashMap<String, Object>();
-                    customData.put("CUSTOM_TIME", System.currentTimeMillis());
+    private void updateUserData() {
+        final String username = nameEditText.getText().toString();
 
-                    User registerUser = new UserBuilder()
-                            .withName(username)
-                            .withEmail(emailEditText.getText().toString())
-                            .withPhone(phoneEditText.getText().toString())
-                            .withUserID(registerUserId)
-                            .withCustomData(customData)
-                            .withOrganization("My organization")
-                            .build();
+// ============================================= Before v2.0 =============================================
+//            Map<String, Object> customData = new HashMap<>();
+//            customData.put("CUSTOM_TIME", System.currentTimeMillis());
+//
+//            HCUser registerUser = new UserBuilder()
+//                    .withName(username)
+//                    .withEmail(emailEditText.getText().toString())
+//                    .withPhone(phoneEditText.getText().toString())
+//                    .withUserID(registerUserId)
+//                    .withCustomData(customData)
+//                    .withOrganization("My organization")
+//                    .build();
+//
+//            HelpCrunch.updateUser(UserDataActivity.this, registerUser, new Callback<HCUser>() {
+//                @Override
+//                public void onSuccess(HCUser result) {
+//                    HCViewUtils.toast(UserDataActivity.this, getString(R.string.data_saved));
+//
+//                }
+//
+//                @Override
+//                public void onError(Exception e) {
+//                    HCViewUtils.toast(UserDataActivity.this, getString(R.string.something_wrong));
+//
+//                }
+//            });
+//        } else {
+//            HCViewUtils.toast(UserDataActivity.this, getString(R.string.name_is_empty));
+//        }
+// ========================================================================================================
 
-                    HelpCrunch.updateUser(UserDataActivity.this, registerUser, new Callback<User>() {
-                        @Override
-                        public void onSuccess(User result) {
-                            HCViewUtils.toast(UserDataActivity.this, getString(R.string.data_saved));
+        if (!TextUtils.isEmpty(username.trim())) {
+            String registerUserId = userIdEditText.getText().toString();
 
-                        }
+            HashMap<String, Object> customData = new HashMap<>();
+            customData.put("CUSTOM_TIME", System.currentTimeMillis());
 
-                        @Override
-                        public void onError(Exception e) {
-                            HCViewUtils.toast(UserDataActivity.this, getString(R.string.something_wrong));
+            HCUser registerUser = new HCUser.Builder()
+                    .withName(username)
+                    .withEmail(emailEditText.getText().toString())
+                    .withPhone(phoneEditText.getText().toString())
+                    .withUserId(registerUserId)
+                    .withCustomData(customData)
+                    .withCompany("My organization")
+                    .build();
 
-                        }
-                    });
-                } else {
-                    HCViewUtils.toast(UserDataActivity.this, getString(R.string.name_is_empty));
+            HelpCrunch.updateUser(registerUser, new Callback<HCUser>() {
+                @Override
+                public void onSuccess(HCUser result) {
+                    ContextKt.toast(UserDataActivity.this, getString(R.string.data_saved));
+
                 }
-            }
-        });
+
+                @Override
+                public void onError(@NotNull String message) {
+                    ContextKt.toast(UserDataActivity.this, getString(R.string.something_wrong));
+                }
+
+            });
+        } else {
+            ContextKt.toast(UserDataActivity.this, getString(R.string.error_id_is_empty));
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-                this.finish();
-                return true;
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

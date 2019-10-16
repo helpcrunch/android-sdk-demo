@@ -5,33 +5,78 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.helpcrunch.helpcrunchdemo.R;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.core.HelpCrunchOptions;
-import com.helpcrunch.library.ui.HelpCrunchChatExtraKeys;
-import com.helpcrunch.library.ui.design.HelpCrunchButton;
-import com.helpcrunch.library.ui.design.HelpCrunchDesign;
-import com.helpcrunch.library.ui.design.MessageArea;
-import com.helpcrunch.library.utils.HCViewUtils;
+import com.helpcrunch.library.options.HCOptions;
+import com.helpcrunch.library.options.HCPreChatForm;
+import com.helpcrunch.library.options.design.HCMessageAreaTheme;
+import com.helpcrunch.library.options.design.HCTheme;
+import com.helpcrunch.library.options.files.FileExtension;
+import com.helpcrunch.library.utils.extensions.ContextKt;
+import com.helpcrunch.library.utils.extensions.ViewKt;
 
-import static com.helpcrunch.library.core.HelpCrunch.FCM_INTENT_ACTION_ID;
+import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
     private View badge1View;
-    private View badge2View;
-    private View badge3View;
-    private View badge4View;
 
     private TextView badge1TextView;
-    private TextView badge2TextView;
-    private TextView badge3TextView;
-    private TextView badge4TextView;
+
+    private BroadcastReceiver hcEventsBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            HelpCrunch.Event parcelableExtra = (HelpCrunch.Event) intent.getSerializableExtra(HelpCrunch.EVENT_TYPE);
+            HelpCrunch.Screen screen = (HelpCrunch.Screen) intent.getSerializableExtra(HelpCrunch.SCREEN_TYPE);
+
+            if (parcelableExtra == null) {
+                Log.w(HelpCrunch.EVENTS, "Can\'t receive data");
+                return;
+            }
+
+            switch (parcelableExtra) {
+                case FIRST_MESSAGE:
+                    Log.i(HelpCrunch.EVENTS, "First Message");
+                    break;
+                case SCREEN_CLOSED:
+                    if (screen != null) {
+                        Log.i(HelpCrunch.EVENTS, screen.toString() + " screen: closed");
+                    } else {
+                        Log.w(HelpCrunch.EVENTS, "Can\'t receive screen event");
+                    }
+                    break;
+                case SCREEN_OPENED:
+                    if (screen != null) {
+                        Log.i(HelpCrunch.EVENTS, screen.toString() + " screen: opened");
+                    } else {
+                        Log.w(HelpCrunch.EVENTS, "Can\'t receive screen event");
+                    }
+                    break;
+
+                case ON_IMAGE_URL:
+                case ON_FILE_URL:
+                case ON_ANY_OTHER_URL:
+                    String url = intent.getStringExtra(HelpCrunch.URL);
+                    Log.i(HelpCrunch.EVENTS, parcelableExtra.toString() + ": " + url);
+                    break;
+
+                case ON_UNREAD_COUNT_CHANGED:
+                    Log.i(HelpCrunch.EVENTS, "new unread message");
+                    updateUnreadMessages();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,152 +85,179 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
 
-        (findViewById(R.id.chatButton)).setOnClickListener(view -> HelpCrunch.showChatScreen(MainActivity.this));
-
-        (findViewById(R.id.anonimousChatButton)).setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putBoolean(HelpCrunchChatExtraKeys.REQUEST_NAME, false);
-            HelpCrunch.showChatScreen(MainActivity.this, bundle);
+        (findViewById(R.id.chatButton)).setOnClickListener(v -> {
+            checkSettingsOpenScreen();
+            clearBadge();
+            HelpCrunch.trackEvent("Event chat opened", "https://i.pinimg.com/originals/58/92/e7/5892e7f3cc64c8a912e2494a3ff77e08.jpg", "hehe");
         });
 
-        (findViewById(R.id.chatActivityButton)).setOnClickListener(view -> {
-            //Optional.
-            //  Set the necessary options to change the style.
-            HelpCrunchDesign design = new HelpCrunchDesign()
-                    .setToolbarTitle("SUPPORT");
+        (findViewById(R.id.chatCustomButton)).setOnClickListener(v -> openWithCustomSettings());
+        (findViewById(R.id.customUserDataButton)).setOnClickListener(v -> openCustomUserDataScreen());
+        (findViewById(R.id.userDataButton)).setOnClickListener(v -> openUserDataScreen());
+
+        (findViewById(R.id.userData)).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, UserDataActivity.class)));
+
+        findViewById(R.id.logoutButton).setOnClickListener(v -> logout());
 
 
-            HelpCrunchOptions options = new HelpCrunchOptions()
-                    .setDesign(design)
-                    .setRequestName(false);
+        TextView chatIdTV = findViewById(R.id.chat_id);
 
-            Intent intent = new Intent(MainActivity.this, ChatInheritedActivity.class);
+        chatIdTV.setText(HelpCrunch.getChatUrl());
+        chatIdTV.setOnClickListener(v -> {
+            String chatUrl = HelpCrunch.getChatUrl();
 
-            //  Optional. You cau also use showChatScreen(Context, HelpCrunchOptions)
-            intent.putExtras(options.toBundle());
-            startActivity(intent);
-
-        });
-
-        (findViewById(R.id.chatFragmentButton)).setOnClickListener(view -> startActivity(new Intent(MainActivity.this, PlainChatActivity.class)));
-
-        findViewById(R.id.changeUserDataButton).setOnClickListener(view -> startActivity(new Intent(MainActivity.this, UserDataActivity.class)));
-
-        findViewById(R.id.sendCustomDataButton).setOnClickListener(view -> startActivity(new Intent(MainActivity.this, CustomUserDataActivity.class)));
-
-        findViewById(R.id.logoutButton).setOnClickListener(view -> HelpCrunch.logout(MainActivity.this, new Callback<Void>() {
-            @Override
-            public void onSuccess(Void result) {
-                HCViewUtils.toast(MainActivity.this, "Success");
+            if (chatUrl != null) {
+                ContextKt.copyToClipboard(this, chatUrl, () -> {
+                    Toast.makeText(MainActivity.this, "Copied", Toast.LENGTH_SHORT).show();
+                    return null;
+                });
             }
-
-            @Override
-            public void onError(Exception e) {
-
-            }
-        }));
-
-        (findViewById(R.id.customDesignButton)).setOnClickListener(view -> {
-            //Optional.
-            //  Set the necessary options to change the style.
-            MessageArea messageArea = new MessageArea()
-                    .setAttachmentPopupTitle("Custom title")
-                    .setAttachmentPopupCameraText("Custom camera")
-                    .setAttachmentPopupGalleryText("Custom gallery")
-                    .setAttachmentsButtonVisible(true);
-
-            HelpCrunchButton backButton = new HelpCrunchButton();
-            backButton.setImageSrcRes(R.drawable.ic_arrow_back);
-
-            HelpCrunchButton attachmentsButton = new HelpCrunchButton();
-            attachmentsButton.setImageSrcRes(R.drawable.ic_attach_file);
-
-            HelpCrunchButton sendButton = new HelpCrunchButton();
-            sendButton.setImageSrcRes(R.drawable.ic_send);
-            sendButton.setBackgroundRes(R.drawable.bg_oval_red);
-
-            HelpCrunchDesign design = new HelpCrunchDesign()
-                    .setToolbarImage(R.drawable.ic_hc_image)
-                    .setToolbarVisible(true)
-                    .setCustomerAvatarVisible(false)
-                    .setActionBackButton(backButton)
-                    .setActionAttachmentButton(attachmentsButton)
-                    .setActionSendButton(sendButton)
-                    .setChatBackgroundRes(R.drawable.bg_chat)
-                    .setIncomingBubbleColor(R.color.colorIn)
-                    .setOutcomingBubbleColor(R.color.colorOut)
-                    .setMessageArea(messageArea);
-
-
-            HelpCrunchOptions options = new HelpCrunchOptions()
-                    .setDesign(design)
-                    .setRequestName(true);
-
-            HelpCrunch.showChatScreen(MainActivity.this, options);
         });
-
-        registerReceiver(fcmBroadcastReceiver, new IntentFilter(FCM_INTENT_ACTION_ID));
+        registerReceiver(hcEventsBroadcastReceiver, new IntentFilter(HelpCrunch.EVENTS));
     }
 
-    private void initViews() {
-        badge1View = findViewById(R.id.badge1View);
-        badge2View = findViewById(R.id.badge2View);
-        badge3View = findViewById(R.id.badge3View);
-        badge4View = findViewById(R.id.badge4View);
-
-        badge1TextView = findViewById(R.id.badge1TextView);
-        badge2TextView = findViewById(R.id.badge2TextView);
-        badge3TextView = findViewById(R.id.badge3TextView);
-        badge4TextView = findViewById(R.id.badge4TextView);
+    private void openCustomUserDataScreen() {
+        startActivity(new Intent(MainActivity.this, CustomUserDataActivity.class));
     }
 
 
-    private void updateUnreadMessages() {
-        HelpCrunch.getUnreadMessagesCount(MainActivity.this, new Callback<Integer>() {
-            @Override
-            public void onSuccess(Integer result) {
-                setVisibilityForUnreadMessagesBadge(result);
-            }
-
-            @Override
-            public void onError(Exception e) {
-
-            }
-        });
-    }
-
-    private void setVisibilityForUnreadMessagesBadge(int count) {
-        int visibility = count > 0 ? View.VISIBLE : View.INVISIBLE;
-
-        badge1View.setVisibility(visibility);
-        badge2View.setVisibility(visibility);
-        badge3View.setVisibility(visibility);
-        badge4View.setVisibility(visibility);
-
-        String countString = String.valueOf(count);
-
-        badge1TextView.setText(countString);
-        badge2TextView.setText(countString);
-        badge3TextView.setText(countString);
-        badge4TextView.setText(countString);
+    private void openUserDataScreen() {
+        startActivity(new Intent(MainActivity.this, UserDataActivity.class));
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(fcmBroadcastReceiver);
+        unregisterReceiver(hcEventsBroadcastReceiver);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         updateUnreadMessages();
+        findViewById(R.id.logoutButton).setEnabled(HelpCrunch.getUser() != null);
     }
 
-    private BroadcastReceiver fcmBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            updateUnreadMessages();
+    private void logout() {
+        findViewById(R.id.progress).setVisibility(View.VISIBLE);
+        findViewById(R.id.logoutButton).setEnabled(false);
+
+        HelpCrunch.logout(new Callback<Object>() {
+            @Override
+            public void onSuccess(Object result) {
+                ContextKt.demoToast(MainActivity.this, "Success");
+                clearBadge();
+                findViewById(R.id.progress).setVisibility(View.GONE);
+                findViewById(R.id.logoutButton).setEnabled(false);
+            }
+
+            @Override
+            public void onError(@NotNull String message) {
+                ContextKt.demoToast(MainActivity.this, message);
+                findViewById(R.id.progress).setVisibility(View.GONE);
+                findViewById(R.id.logoutButton).setEnabled(true);
+            }
+        });
+    }
+
+    private void clearBadge() {
+        badge1TextView.setText(null);
+        badge1View.setVisibility(View.INVISIBLE);
+    }
+
+    private void checkSettingsOpenScreen() {
+        HCTheme theme = new HCTheme.Builder(HCTheme.DEFAULT)
+                .build();
+
+        switch (((RadioGroup) findViewById(R.id.theme_group)).getCheckedRadioButtonId()) {
+            case R.id.light:
+                theme = new HCTheme.Builder(HCTheme.DEFAULT).build();
+                break;
+            case R.id.dark:
+                theme = new HCTheme.Builder(HCTheme.DARK).build();
+                break;
+            case R.id.custom:
+                HCMessageAreaTheme messageAreaTheme = new HCMessageAreaTheme.Builder()
+                        .setButtonType(HCMessageAreaTheme.ButtonType.TEXT)
+                        .build();
+
+                theme = new HCTheme.Builder(R.color.main_color, true)
+                        .setMessageAreaTheme(messageAreaTheme)
+                        .build();
+                break;
         }
-    };
+
+        HCOptions.Builder optionsBuilder = new HCOptions.Builder().setTheme(theme);
+
+        if (((Switch) findViewById(R.id.pre_chat_switch)).isChecked()) {
+            HCPreChatForm preChatForm = new HCPreChatForm.Builder()
+                    .withName(true, null)
+                    .withEmail(true)
+                    .withPhone(false, null)
+                    .build();
+
+            optionsBuilder.setPreChatForm(preChatForm);
+        }
+
+        HelpCrunch.showChatScreen(MainActivity.this, optionsBuilder.build());
+    }
+
+    private void openWithCustomSettings() {
+
+        HCMessageAreaTheme messageAreaTheme = new HCMessageAreaTheme.Builder()
+                .setButtonType(HCMessageAreaTheme.ButtonType.TEXT)
+                .build();
+
+        HCTheme theme = new HCTheme.Builder(R.color.send_bg_enable_color, true)
+                .setMessageAreaTheme(messageAreaTheme)
+                .build();
+
+        HCPreChatForm preChatForm = new HCPreChatForm.Builder()
+                .withName(true)
+                .withCompany(true)
+                .withEmail(true)
+                .withPhone(false)
+                .withField("customAttribute", "My custom", true)
+                .withField("customAttribute1", "Please enter something", true)
+                .build();
+
+        HCOptions options = new HCOptions.Builder()
+                .setTheme(theme)
+                .setPreChatForm(preChatForm)
+                .setFileExtensions(new FileExtension[]{
+                        new FileExtension("PDF", "pdf"),
+                        new FileExtension("IMAGES", new String[]{"jpg", "png"})
+                })
+                .build();
+
+        HelpCrunch.showChatScreen(MainActivity.this, options);
+    }
+
+    private void initViews() {
+        badge1View = findViewById(R.id.badge1View);
+
+        badge1TextView = findViewById(R.id.badge1TextView);
+    }
+
+    private void updateUnreadMessages() {
+        HelpCrunch.getUnreadMessagesCount(new Callback<Integer>() {
+            @Override
+            public void onSuccess(Integer result) {
+                setVisibilityForUnreadMessagesBadge(result);
+            }
+
+            @Override
+            public void onError(@NotNull String message) {
+                ContextKt.demoToast(MainActivity.this, message);
+            }
+        });
+    }
+
+    private void setVisibilityForUnreadMessagesBadge(int count) {
+        ViewKt.visibleOrInvisible(badge1View, count > 0);
+        String countString = String.valueOf(count);
+
+        badge1TextView.setText(countString);
+    }
+
 }

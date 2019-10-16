@@ -1,19 +1,20 @@
 package com.helpcrunch.helpcrunchdemo.screens;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.helpcrunch.helpcrunchdemo.R;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.model.User;
-import com.helpcrunch.library.model.UserBuilder;
-import com.helpcrunch.library.utils.HCViewUtils;
+import com.helpcrunch.library.models.remote.HCUser;
+import com.helpcrunch.library.utils.extensions.ContextKt;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,33 +43,59 @@ public class CustomUserDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Map<String, Object> customData = new HashMap<String, Object>();
+// ============================================= Before v2.0 =============================================
+//              Map<String, Object> customData = new HashMap<String, Object>();
+// ========================================================================================================
+
+                HashMap<String, Object> customData = new HashMap<>();
                 addData(customData, customKey1.getText().toString(), customData1.getText().toString());
                 addData(customData, customKey2.getText().toString(), customData2.getText().toString());
                 addData(customData, customKey3.getText().toString(), customData3.getText().toString());
 
-                HelpCrunch.updateUser(CustomUserDataActivity.this, new UserBuilder().withCustomData(customData).build(), new Callback<User>() {
+// ============================================= Before v2.0 =============================================
+//                HelpCrunch.updateUser(CustomUserDataActivity.this, new UserBuilder().withCustomData(customData).build(), new Callback<User>() {
+//                    @Override
+//                    public void onSuccess(User result) {
+//                        HCViewUtils.toast(CustomUserDataActivity.this, getString(R.string.data_saved));
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception e) {
+//                        HCViewUtils.toast(CustomUserDataActivity.this, getString(R.string.something_wrong));
+//                    }
+//                });
+// ========================================================================================================
+
+                HCUser user = new HCUser.Builder()
+                        .withCustomData(customData)
+                        .build();
+
+                HelpCrunch.updateUser(user, new Callback<HCUser>() {
                     @Override
-                    public void onSuccess(User result) {
-                        HCViewUtils.toast(CustomUserDataActivity.this, getString(R.string.data_saved));
+                    public void onSuccess(HCUser result) {
+                        ContextKt.toast(CustomUserDataActivity.this, getString(R.string.data_saved));
                     }
 
                     @Override
-                    public void onError(Exception e) {
-                        HCViewUtils.toast(CustomUserDataActivity.this, getString(R.string.something_wrong));
+                    public void onError(@NotNull String message) {
+                        ContextKt.toast(CustomUserDataActivity.this, getString(R.string.something_wrong));
                     }
                 });
             }
         });
 
-        User currentUser = HelpCrunch.getStorage(CustomUserDataActivity.this).loadUser();
+// ============================================= Before v2.0 =============================================
+//        User currentUser = HelpCrunch.getStorage(CustomUserDataActivity.this).loadUser();
+// ========================================================================================================
+
+        HCUser currentUser = HelpCrunch.getUser();
         if (currentUser == null) return;
 
         JSONObject customDataJsonObject = currentUser.getCustomDataJsonObject();
         if (customDataJsonObject == null) return;
 
-        for (Iterator<String> iter = customDataJsonObject.keys(); iter.hasNext(); ) {
-            String customKey = iter.next();
+        for (Iterator<String> iterator = customDataJsonObject.keys(); iterator.hasNext(); ) {
+            String customKey = iterator.next();
             try {
                 String customData = customDataJsonObject.getString(customKey);
                 if (i == 0) {
