@@ -3,7 +3,7 @@ package com.helpcrunch.helpcrunchdemo.application;
 import androidx.multidex.MultiDexApplication;
 
 import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.models.remote.HCUser;
+import com.helpcrunch.library.core.repository.models.user.HCUser;
 
 public class App extends MultiDexApplication {
     private static final String ORGANISATION = "mobile";

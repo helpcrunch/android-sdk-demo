@@ -85,44 +85,35 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
 
-        (findViewById(R.id.chatButton)).setOnClickListener(v -> {
+        findViewById(R.id.chatButton).setOnClickListener(v -> {
             checkSettingsOpenScreen();
             clearBadge();
-            HelpCrunch.trackEvent("Event chat opened", "https://i.pinimg.com/originals/58/92/e7/5892e7f3cc64c8a912e2494a3ff77e08.jpg", "hehe");
+            HelpCrunch.trackEvent("Event chat opened", "https://i.pinimg.com/originals/58/92/e7/5892e7f3cc64c8a912e2494a3ff77e08.jpg", "Say Cheese");
         });
 
-        (findViewById(R.id.chatCustomButton)).setOnClickListener(v -> openWithCustomSettings());
-        (findViewById(R.id.customUserDataButton)).setOnClickListener(v -> openCustomUserDataScreen());
-        (findViewById(R.id.userDataButton)).setOnClickListener(v -> openUserDataScreen());
+        findViewById(R.id.chatCustomButton).setOnClickListener(v -> openWithCustomSettings());
+        findViewById(R.id.customUserDataButton).setOnClickListener(v -> openCustomUserDataScreen());
+        findViewById(R.id.userDataButton).setOnClickListener(v -> openUserDataScreen());
 
-        (findViewById(R.id.userData)).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, UserDataActivity.class)));
+        findViewById(R.id.userData).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, UserDataActivity.class)));
 
         findViewById(R.id.logoutButton).setOnClickListener(v -> logout());
 
+        findViewById(R.id.chat_id_container).setOnClickListener(v -> copyChatUrl());
 
-        TextView chatIdTV = findViewById(R.id.chat_id);
+        String version = "SDK: v" + HelpCrunch.getVersion();
 
-        chatIdTV.setText(HelpCrunch.getChatUrl());
-        chatIdTV.setOnClickListener(v -> {
-            String chatUrl = HelpCrunch.getChatUrl();
+        ((TextView) findViewById(R.id.version)).setText(version);
+        ((TextView) findViewById(R.id.chat_id)).setText(HelpCrunch.getChatUrl());
 
-            if (chatUrl != null) {
-                ContextKt.copyToClipboard(this, chatUrl, () -> {
-                    Toast.makeText(MainActivity.this, "Copied", Toast.LENGTH_SHORT).show();
-                    return null;
-                });
-            }
-        });
         registerReceiver(hcEventsBroadcastReceiver, new IntentFilter(HelpCrunch.EVENTS));
     }
 
-    private void openCustomUserDataScreen() {
-        startActivity(new Intent(MainActivity.this, CustomUserDataActivity.class));
-    }
-
-
-    private void openUserDataScreen() {
-        startActivity(new Intent(MainActivity.this, UserDataActivity.class));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUnreadMessages();
+        findViewById(R.id.logoutButton).setEnabled(HelpCrunch.getUser() != null);
     }
 
     @Override
@@ -131,11 +122,12 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(hcEventsBroadcastReceiver);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateUnreadMessages();
-        findViewById(R.id.logoutButton).setEnabled(HelpCrunch.getUser() != null);
+    private void openCustomUserDataScreen() {
+        startActivity(new Intent(MainActivity.this, CustomUserDataActivity.class));
+    }
+
+    private void openUserDataScreen() {
+        startActivity(new Intent(MainActivity.this, UserDataActivity.class));
     }
 
     private void logout() {
@@ -203,7 +195,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openWithCustomSettings() {
-
         HCMessageAreaTheme messageAreaTheme = new HCMessageAreaTheme.Builder()
                 .setButtonType(HCMessageAreaTheme.ButtonType.TEXT)
                 .build();
@@ -258,6 +249,17 @@ public class MainActivity extends AppCompatActivity {
         String countString = String.valueOf(count);
 
         badge1TextView.setText(countString);
+    }
+
+    private void copyChatUrl() {
+        String chatUrl = HelpCrunch.getChatUrl();
+
+        if (chatUrl != null) {
+            ContextKt.copyToClipboard(this, chatUrl, () -> {
+                Toast.makeText(MainActivity.this, "Copied", Toast.LENGTH_SHORT).show();
+                return null;
+            });
+        }
     }
 
 }

@@ -12,6 +12,15 @@
 		android:layout_marginTop="30dp"
 		app:srcCompat="@drawable/hc_branding_light" />
 
+	<TextView
+		android:id="@+id/version"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="10dp"
+		android:textSize="12dp"
+		tools:text="0.0.0.00" />
+
 	<ScrollView
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
@@ -66,20 +75,28 @@
 				android:layout_height="wrap_content"
 				android:text=" Enable pre-chat form" />
 
-			<TextView
-				android:layout_width="wrap_content"
+			<LinearLayout
+				android:id="@+id/chat_id_container"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
 				android:layout_marginStart="5dp"
-				android:layout_marginTop="20dp"
-				android:text="Chat ID"
-				android:textStyle="bold" />
+				android:background="?selectableItemBackground"
+				android:orientation="vertical">
 
-			<TextView
-				android:id="@+id/chat_id"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginStart="5dp"
-				tools:text="0.0.0.00" />
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Chat ID"
+					android:textStyle="bold" />
+
+				<TextView
+					android:id="@+id/chat_id"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					tools:text="0.0.0.00" />
+
+			</LinearLayout>
 		</LinearLayout>
 	</ScrollView>
 
@@ -87,7 +104,6 @@
 		android:id="@+id/chatCustomButton"
 		style="@style/Button"
 		android:layout_marginStart="20dp"
-
 		android:layout_marginEnd="20dp"
 		android:visibility="gone">
 
@@ -125,7 +141,7 @@
 			style="@style/Text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Change user data" />
+			android:text="@string/change_user_data" />
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:layout_width="24dp"
@@ -145,7 +161,7 @@
 			style="@style/Text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Change custom user data" />
+			android:text="@string/change_custom_user_data" />
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:layout_width="24dp"
@@ -175,15 +191,17 @@
 			android:text="Launch Chat" />
 
 		<androidx.appcompat.widget.AppCompatImageView
-			android:layout_width="45dp"
-			android:layout_height="45dp"
+			android:layout_width="18dp"
+			android:layout_height="18dp"
 			android:layout_gravity="center_vertical|end"
-			android:layout_marginEnd="10dp"
-			app:srcCompat="@drawable/ic_logo" />
+			android:layout_marginTop="1dp"
+			android:layout_marginEnd="20dp"
+			app:srcCompat="@drawable/ic_favicon" />
 
 		<FrameLayout
 			android:id="@+id/badge1View"
 			style="@style/Indicator"
+			android:layout_marginEnd="15dp"
 			android:visibility="invisible">
 
 			<TextView

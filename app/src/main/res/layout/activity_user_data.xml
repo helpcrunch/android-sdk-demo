@@ -1,66 +1,84 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:padding="20dp">
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:padding="20dp">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
 
-        <LinearLayout
-            android:id="@+id/registration_form"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+		<LinearLayout
+			android:id="@+id/registration_form"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/nameEditText"
-                style="@style/Widget.AppCompat.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/app_demo_name"/>
+			<EditText
+				android:id="@+id/nameEditText"
+				style="@style/Widget.AppCompat.EditText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/app_demo_name" />
 
-            <EditText
-                android:id="@+id/emailEditText"
-                style="@style/Widget.AppCompat.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/app_demo_email"
-                android:inputType="textEmailAddress"/>
+			<EditText
+				android:id="@+id/emailEditText"
+				style="@style/Widget.AppCompat.EditText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/app_demo_email"
+				android:inputType="textEmailAddress" />
 
-            <EditText
-                android:id="@+id/phoneEditText"
-                style="@style/Widget.AppCompat.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/app_demo_phone"
-                android:inputType="phone"/>
+			<EditText
+				android:id="@+id/phoneEditText"
+				style="@style/Widget.AppCompat.EditText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/app_demo_phone"
+				android:inputType="phone" />
 
-            <EditText
-                android:id="@+id/userIdEditText"
-                style="@style/Widget.AppCompat.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/app_demo_user_id"
-                android:inputType="text"
-                android:maxLines="1"/>
+			<EditText
+				android:id="@+id/userIdEditText"
+				style="@style/Widget.AppCompat.EditText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/app_demo_user_id"
+				android:inputType="text"
+				android:maxLines="1" />
 
-        </LinearLayout>
-    </ScrollView>
+			<EditText
+				android:id="@+id/companyEditText"
+				style="@style/Widget.AppCompat.EditText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/app_demo_company"
+				android:inputType="text"
+				android:maxLines="1" />
 
+		</LinearLayout>
+	</ScrollView>
 
-    <FrameLayout
-        android:id="@+id/saveUserDataButton"
-        style="@style/Button">
+	<FrameLayout
+		android:id="@+id/saveUserDataButton"
+		style="@style/Button">
 
-        <TextView
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save"/>
+		<TextView
+			style="@style/Text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Save" />
 
-    </FrameLayout>
+		<ProgressBar
+			android:id="@+id/progress"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_gravity="center_vertical|end"
+			android:layout_marginEnd="15dp"
+			android:visibility="gone"
+			tools:visibility="visible" />
+
+	</FrameLayout>
 
 </LinearLayout>
