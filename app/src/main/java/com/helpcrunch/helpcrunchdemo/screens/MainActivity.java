@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.helpcrunch.helpcrunchdemo.R;
+import com.helpcrunch.helpcrunchdemo.design.CustomTheme;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
 import com.helpcrunch.library.options.HCOptions;
@@ -168,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.dark:
                 theme = new HCTheme.Builder(HCTheme.DARK).build();
                 break;
-            case R.id.custom:
+            case R.id.custom_color:
                 HCMessageAreaTheme messageAreaTheme = new HCMessageAreaTheme.Builder()
                         .setButtonType(HCMessageAreaTheme.ButtonType.TEXT)
                         .build();
@@ -176,6 +177,9 @@ public class MainActivity extends AppCompatActivity {
                 theme = new HCTheme.Builder(R.color.main_color, true)
                         .setMessageAreaTheme(messageAreaTheme)
                         .build();
+                break;
+            case R.id.custom:
+                theme = CustomTheme.getDesign();
                 break;
         }
 

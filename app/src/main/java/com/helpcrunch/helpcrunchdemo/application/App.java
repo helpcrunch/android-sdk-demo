@@ -15,8 +15,11 @@ public class App extends MultiDexApplication {
         super.onCreate();
 
         HCUser user = new HCUser.Builder()
-                .withEmail("al@g.day")
-                .withName("Test Demo")
+                .withName("Lorem User")
+                .withEmail("lorem.user@dolor.sit")
+                .withUserId("u123a")
+                .withCompany("Example Organization")
+                .withPhone("+4580209020")
                 .build();
 
         HelpCrunch.initialize(

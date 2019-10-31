@@ -16,4 +16,16 @@
     <color name="main_color">#e68127</color>
     <color name="send_bg_enable_color">#6564FE</color>
 
+    <color name="avatar_placeholder_color">#6665FF</color>
+    <color name="incoming_bubble_color">#73649A</color>
+    <color name="outoming_bubble_color">#463E68</color>
+    <color name="toolbar_color">#383353</color>
+    <color name="background_color">#383353</color>
+    <color name="welcome_messages_background_color">#2E294D</color>
+    <color name="toolbar_outline_color">#39FFFFFF</color>
+    <color name="statusbar_color">#383353</color>
+    <color name="toolbar_icon_color">#383353</color>
+    <color name="send_bg_disable_color">#8E8EFF</color>
+    <color name="system_snack_text_color">#ff1d1d26</color>
+
 </resources>

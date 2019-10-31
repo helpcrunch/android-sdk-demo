@@ -33,7 +33,7 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
 
-    implementation 'com.helpcrunch:sdk:2.0.0-beta8'
+    implementation 'com.helpcrunch:sdk:2.0.0-beta11'
 }
 
 apply plugin: 'com.google.gms.google-services'
