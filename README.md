@@ -86,7 +86,7 @@ C. Open Chat Screen calling `showChatScreen(Context context)` method:
 
 ## Documentation
 
-The documentation is available in our Knowledge Base located at [this link](https://docs.helpcrunch.com/developers).
+The documentation is available in our Knowledge Base located at [this link](https://docs.helpcrunch.com/android-sdk).
 
 ## License
 
