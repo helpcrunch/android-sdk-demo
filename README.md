@@ -1,5 +1,4 @@
-
-![HelpCrunch](https://helpcrunch.com/img/layout/menu/logo.svg)
+ <a href="https://helpcrunch.com/"><img src="https://helpcrunch.com/img/layout/menu/logo.svg" width="400" height="90" alt="HelpCrunch"></a>
 
 ### Helpcrunch Android SDK Demo
 A perfect live chat, email automation and a super-intuitive help desk in one smart customer communication platform.
@@ -22,11 +21,11 @@ This SDK can be added to **Android**, **Flutter** or **React Native** projects t
 
 ## Requirements
  - Java 8/Kotlin
- - Min Android SDK >= 19
+ - Min Android API - Android 4.4 KitKat (API 19)
 
 ## Migration guide
 
-If your application currently uses v1.x SDK it is important that you migrate to Android SDK v2.x so that your application will get newest important features/ You can update update your App with our [migration giude](https://helpcrunch.helpcrunch.com/knowledge-base/articles/245).
+If your application currently uses v1.x SDK it is important that you migrate to Android SDK v2.x so that your application will get newest important features. You can update update your App with our [migration giude](https://helpcrunch.helpcrunch.com/knowledge-base/articles/245).
 
 ## Demo Installation
 1. Clone or download repository
