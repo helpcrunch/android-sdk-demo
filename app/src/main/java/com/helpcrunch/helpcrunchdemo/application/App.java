@@ -5,6 +5,11 @@ import androidx.multidex.MultiDexApplication;
 import com.helpcrunch.library.core.HelpCrunch;
 import com.helpcrunch.library.core.repository.models.user.HCUser;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class App extends MultiDexApplication {
     private static final String ORGANISATION = "mobile";
     private static final int APP_ID = 2889;
@@ -14,13 +19,7 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
 
-        HCUser user = new HCUser.Builder()
-                .withName("Lorem User")
-                .withEmail("lorem.user@dolor.sit")
-                .withUserId("u123a")
-                .withCompany("Example Organization")
-                .withPhone("+4580209020")
-                .build();
+        HCUser user = getTestUser();
 
         HelpCrunch.initialize(
                 this,
@@ -29,5 +28,20 @@ public class App extends MultiDexApplication {
                 SECRET,
                 user
         );
+    }
+
+    @NotNull
+    public static HCUser getTestUser() {
+        Map<String, String> customData = new HashMap<>();
+        customData.put("time", String.valueOf(System.currentTimeMillis()));
+
+        return new HCUser.Builder()
+                .withName("John Doe")
+                .withEmail("john.doe@any.com")
+                .withUserId("test_user_android")
+                .withCompany("Lorem Ipsum")
+                .withPhone("+44 (203) 514-1245")
+                .withCustomData(customData)
+                .build();
     }
 }
