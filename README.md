@@ -17,7 +17,7 @@ This SDK can be added to **Android**, **Flutter** or **React Native** projects t
 - [License](#license)
 
 ##  Maven
-    implementation 'com.helpcrunch:sdk:2.0.0-beta(X)'
+    implementation 'com.helpcrunch:sdk:2.0.0-rc.(X)'
 
 ## Requirements
  - Java 8/Kotlin
