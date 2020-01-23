@@ -38,7 +38,6 @@ public class App extends MultiDexApplication {
         return new HCUser.Builder()
                 .withName("John Doe")
                 .withEmail("john.doe@any.com")
-                .withUserId("test_user_android")
                 .withCompany("Lorem Ipsum")
                 .withPhone("+44 (203) 514-1245")
                 .withCustomData(customData)

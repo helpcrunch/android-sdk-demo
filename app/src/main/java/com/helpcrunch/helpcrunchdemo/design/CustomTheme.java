@@ -57,7 +57,7 @@ public class CustomTheme {
 
         HCMessageAreaTheme messageAreaTheme = new HCMessageAreaTheme.Builder()
                 .setButtonType(HCMessageAreaTheme.ButtonType.TEXT)
-                .setButtonTextColor(android.R.color.white)
+                .setButtonTextColor(android.R.color.holo_red_dark)
                 .setAttachmentsIcon(R.drawable.ic_attach_file)
                 .setButtonSendBackgroundSelector(R.drawable.button_send)
                 .setButtonIcon(R.drawable.ic_arrow_upward)
@@ -68,7 +68,7 @@ public class CustomTheme {
                 .setMessageMenuBackgroundColor(R.color.statusbar_color)
                 .setMessageMenuSummaryTextColor(android.R.color.white)
                 .setMessageMenuIconColor(R.color.toolbar_icon_color)
-                .setMessageMenuTextColor(android.R.color.white)
+                .setMessageMenuTextColor(android.R.color.black)
                 .build();
 
         HCSystemAlertsTheme systemAlerts = new HCSystemAlertsTheme.Builder()
