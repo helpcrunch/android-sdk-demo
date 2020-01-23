@@ -16,9 +16,20 @@ This SDK can be added to **Android**, **Flutter** or **React Native** projects t
 - [Documentation](#documentation)
 - [License](#license)
 
-##  Maven
+##  Gradle
+Add it in your root build.gradle at the end of repositories:
+```groovy
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+```
+Add the dependency
+```groovy
     implementation 'com.helpcrunch:sdk:2.0.0-rc.(X)'
-
+```
 ## Requirements
  - Java 8/Kotlin
  - Min Android API - Android 4.4 KitKat (API 19)
@@ -78,7 +89,9 @@ All fields are optional. Custom data could be created like this:
 C. Open Chat Screen calling `showChatScreen(Context context)` method:
 
     Helpcrunch.showChatScreen(Context context)
-
+## SVG support 
+If you want to support SVG images in the chat you just need to generate Glide API. 
+More information about Glide's generated API you can find at [this link](https://bumptech.github.io/glide/doc/generatedapi.html "link").
 ## Pro Guard
 
     -keep class com.helpcrunch.** { *; }
