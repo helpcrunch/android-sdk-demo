@@ -8,7 +8,7 @@ This SDK can be added to **Android**, **Flutter** or **React Native** projects t
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/sdk) [![Platform](https://img.shields.io/badge/platforms-Android-green.svg)]() [![Languages](https://img.shields.io/badge/languages-Kotlin-F18E33.svg)]()  [![Apache License](http://img.shields.io/badge/license-APACHE2-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 ## Sample Apk
-<a href="https://github.com/helpcrunch/android-sdk-demo/blob/master/app/release/app-release.apk?raw=true"><img src="https://icons-for-free.com/iconfiles/png/512/file+download+24px-131985219323992544.png" width="22" height="22" alt="HelpCrunch"></a>  [Download](https://github.com/helpcrunch/android-sdk-demo/blob/master/app/release/app-release.apk?raw=true) sample apk
+[Download](https://github.com/helpcrunch/android-sdk-demo/blob/master/app/release/app-release.apk?raw=true) sample apk
 
 ## Contents
 
