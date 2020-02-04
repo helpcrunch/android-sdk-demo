@@ -42,7 +42,7 @@ implementation 'com.helpcrunch:sdk:2.0.0-rc.(X)'
 
 ## Migration guide
 
-If your application currently uses v1.x SDK it is important that you migrate to Android SDK v2.x so that your application will get newest important features. You can update update your App with our [migration giude](https://helpcrunch.helpcrunch.com/knowledge-base/articles/245).
+If your application currently uses v1.x SDK it is important that you migrate to Android SDK v2.x so that your application will get newest important features. You can update update your App with our [migration giude](https://docs.helpcrunch.com/android-sdk/android-sdk2-migration-guide).
 
 ## Demo Installation
 1. Clone or download repository
