@@ -2,6 +2,7 @@ package com.helpcrunch.helpcrunchdemo.application;
 
 import androidx.multidex.MultiDexApplication;
 
+import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
 import com.helpcrunch.library.core.repository.models.user.HCUser;
 
