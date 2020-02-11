@@ -6,10 +6,14 @@ A perfect live chat, email automation and a super-intuitive help desk in one sma
 This SDK can be added to **Android**, **Flutter** or **React Native** projects to start a live chat from a mobile application.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/sdk) [![Platform](https://img.shields.io/badge/platforms-Android-green.svg)]() [![Languages](https://img.shields.io/badge/languages-Kotlin-F18E33.svg)]()  [![Apache License](http://img.shields.io/badge/license-APACHE2-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0.html)
+
+## Sample Apk
+[Download](https://github.com/helpcrunch/android-sdk-demo/blob/master/app/release/app-release.apk?raw=true) sample apk
+
 ## Contents
 
 - [Requirements](#requirements)
-- [Maven repository](#maven)
+- [Gradle](#gradle)
 - [Migration Guide](#migration-guide)
 - [Demo Installation](#demo-installation)
 - [Simple Flow](#simple-flow)
@@ -30,7 +34,7 @@ allprojects {
 ```
 Add the dependency
 ```groovy
-    implementation 'com.helpcrunch:sdk:2.0.0-rc.(X)'
+implementation 'com.helpcrunch:sdk:2.0.0-rc.(X)'
 ```
 ## Requirements
  - Java 8/Kotlin
@@ -38,7 +42,7 @@ Add the dependency
 
 ## Migration guide
 
-If your application currently uses v1.x SDK it is important that you migrate to Android SDK v2.x so that your application will get newest important features. You can update update your App with our [migration giude](https://helpcrunch.helpcrunch.com/knowledge-base/articles/245).
+If your application currently uses v1.x SDK it is important that you migrate to Android SDK v2.x so that your application will get newest important features. You can update update your App with our [migration giude](https://docs.helpcrunch.com/android-sdk/android-sdk2-migration-guide).
 
 ## Demo Installation
 1. Clone or download repository
