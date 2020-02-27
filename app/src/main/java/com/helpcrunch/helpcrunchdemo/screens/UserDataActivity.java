@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -58,7 +59,7 @@ public class UserDataActivity extends AppCompatActivity {
 
     private void updateUserData() {
         if(HelpCrunch.getUser() == null){
-            ContextKt.demoToast(this, "There is no user yet");
+            Toast.makeText(this,"There is no user yet", Toast.LENGTH_SHORT).show();
 
             return;
         }

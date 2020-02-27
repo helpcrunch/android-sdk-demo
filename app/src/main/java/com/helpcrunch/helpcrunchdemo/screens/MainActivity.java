@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             HelpCrunch.Screen screen = (HelpCrunch.Screen) intent.getSerializableExtra(HelpCrunch.SCREEN_TYPE);
 
             if (parcelableExtra == null) {
-                Log.w(HelpCrunch.EVENTS, "Can\'t receive data");
+                Log.w(HelpCrunch.EVENTS, "Can't receive data");
                 return;
             }
 
@@ -54,14 +54,14 @@ public class MainActivity extends AppCompatActivity {
                     if (screen != null) {
                         Log.i(HelpCrunch.EVENTS, screen.toString() + " screen: closed");
                     } else {
-                        Log.w(HelpCrunch.EVENTS, "Can\'t receive screen event");
+                        Log.w(HelpCrunch.EVENTS, "Can't receive screen event");
                     }
                     break;
                 case SCREEN_OPENED:
                     if (screen != null) {
                         Log.i(HelpCrunch.EVENTS, screen.toString() + " screen: opened");
                     } else {
-                        Log.w(HelpCrunch.EVENTS, "Can\'t receive screen event");
+                        Log.w(HelpCrunch.EVENTS, "Can't receive screen event");
                     }
                     break;
 
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         HelpCrunch.logout(new Callback<Object>() {
             @Override
             public void onSuccess(Object result) {
-                ContextKt.demoToast(MainActivity.this, "Success");
+                Toast.makeText(MainActivity.this,"Success", Toast.LENGTH_SHORT).show();
                 clearBadge();
                 findViewById(R.id.progress).setVisibility(View.GONE);
                 findViewById(R.id.logoutButton).setEnabled(false);
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(@NotNull String message) {
-                ContextKt.demoToast(MainActivity.this, message);
+                Toast.makeText(MainActivity.this,message, Toast.LENGTH_SHORT).show();
                 findViewById(R.id.progress).setVisibility(View.GONE);
                 findViewById(R.id.logoutButton).setEnabled(true);
             }
@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(@NotNull String message) {
-                ContextKt.demoToast(MainActivity.this, message);
+                Toast.makeText(MainActivity.this,"Success", Toast.LENGTH_SHORT).show();
             }
         });
     }

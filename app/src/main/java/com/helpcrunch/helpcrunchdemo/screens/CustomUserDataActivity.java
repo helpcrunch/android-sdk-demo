@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -75,8 +76,7 @@ public class CustomUserDataActivity extends AppCompatActivity {
 
     private void saveCustomData() {
         if(HelpCrunch.getUser() == null){
-            ContextKt.demoToast(this, "There is no user yet");
-
+            Toast.makeText(this,"There is no user yet", Toast.LENGTH_SHORT).show();
             return;
         }
 
