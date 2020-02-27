@@ -23,7 +23,6 @@ public class App extends MultiDexApplication {
         HCUser user = getTestUser();
 
         HelpCrunch.initialize(
-                this,
                 ORGANISATION,
                 APP_ID,
                 SECRET,
