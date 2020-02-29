@@ -57,51 +57,53 @@ If your application currently uses v1.x SDK it is important that you migrate to 
 
 ## Simple flow:
 A. Initialize HelpCrunch by calling the following in the oncreate() method of your application
-
-    HelpCrunch.initialize(this, ORGANISATION, APP_ID, SECRET)
-
+```java
+ HelpCrunch.initialize(ORGANISATION, APP_ID, SECRET)
+```
 also you can set up option or user data
+```java
+ HCUser user = new HCUser.Builder()
+	.withEmail("test@user.data")
+	.withName("Test User")
+	.build();
 
-    HCUser user = new HCUser.Builder()
-            .withEmail("test@user.data")
-            .withName("Test User")
-            .build();
+HCOptions.Builder options = new HCOptions.Builder()
+	.setTheme(theme)
+	.build();
 
-    HCOptions.Builder options = new HCOptions.Builder()
-	        .setTheme(theme)
-	        .build();
-
-    HelpCrunch.initialize(this, ORGANISATION, APP_ID, SECRET, user, options)
-
+HelpCrunch.initialize(ORGANISATION, APP_ID, SECRET, user, options);
+```
 B. If you want to update customer info - just call
-
-      HelpCrunch.updateUser(user);
-
+```java
+HelpCrunch.updateUser(user);
+```
 user data could be created like this:
-
-    HCUser user = new HCUser.Builder()
-            .withName("username")
-            .withEmail("email")
-            .withPhone("phone")
-            .withUserId("registerUserId")
-            .withCustomData(customData)
-            .withCompany("organization")
-            .build();
-
+```java
+HCUser user = new HCUser.Builder()
+	.withName("username")
+	.withEmail("email")
+	.withPhone("phone")
+	.withUserId("registerUserId")
+	.withCustomData(customData)
+	.withCompany("organization")
+	.build();
+```
 All fields are optional. Custom data could be created like this:
-
-     HashMap customData = new HashMap();
-     customData.put("CUSTOM_TIME", System.currentTimeMillis());
+```java
+HashMap<String, Object> customData = new HashMap();
+customData.put("CUSTOM_TIME", System.currentTimeMillis());
+```
 C. Open Chat Screen calling `showChatScreen(Context context)` method:
-
-    Helpcrunch.showChatScreen(Context context)
+```java
+Helpcrunch.showChatScreen(context)
+```
 ## SVG support 
 If you want to support SVG images in the chat you just need to generate Glide API. 
 More information about Glide's generated API you can find at [this link](https://bumptech.github.io/glide/doc/generatedapi.html "link").
 ## Pro Guard
-
-    -keep class com.helpcrunch.** { *; }
-
+```java
+-keep class com.helpcrunch.** { *; }
+```
 ## Documentation
 
 The documentation is available in our Knowledge Base located at [this link](https://docs.helpcrunch.com/android-sdk).
