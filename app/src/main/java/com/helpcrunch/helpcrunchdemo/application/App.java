@@ -2,13 +2,10 @@ package com.helpcrunch.helpcrunchdemo.application;
 
 import androidx.multidex.MultiDexApplication;
 
+import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.core.repository.models.user.HCUser;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class App extends MultiDexApplication {
     public static final String ORGANIZATION = "mobile";
@@ -18,5 +15,7 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET);
     }
 }
