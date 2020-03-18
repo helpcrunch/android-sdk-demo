@@ -1,5 +1,6 @@
 package com.helpcrunch.helpcrunchdemo.screens;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -28,10 +29,14 @@ public class UserDataActivity extends AppCompatActivity {
     private EditText userIdEditText;
     private EditText companyEditText;
 
+    private boolean isForLaunch = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_data);
+
+        isForLaunch = getIntent().getBooleanExtra("isForLaunch", false);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.change_user_data);
@@ -54,31 +59,60 @@ public class UserDataActivity extends AppCompatActivity {
             companyEditText.setText(currentUser.getCompany());
         }
 
-        findViewById(R.id.saveUserDataButton).setOnClickListener(view -> updateUserData());
+        findViewById(R.id.saveUserDataButton).setOnClickListener(view -> {
+                    if (isForLaunch) {
+                        returnUserData();
+                    } else {
+                        updateUserData();
+                    }
+                }
+        );
+    }
+
+    private void returnUserData() {
+        final String username = nameEditText.getText().toString().trim();
+        final String email = emailEditText.getText().toString().trim();
+        final String phone = phoneEditText.getText().toString().trim();
+        final String company = companyEditText.getText().toString().trim();
+        final String registerUserId = userIdEditText.getText().toString().trim();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username);
+        bundle.putString("email", email);
+        bundle.putString("phone", phone);
+        bundle.putString("company", company);
+        bundle.putString("registerUserId", registerUserId);
+
+        Intent intent = new Intent();
+        intent.putExtras(bundle);
+
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     private void updateUserData() {
-        if(HelpCrunch.getUser() == null){
-            Toast.makeText(this,"There is no user yet", Toast.LENGTH_SHORT).show();
+        if (HelpCrunch.getUser() == null) {
+            Toast.makeText(this, "There is no user yet", Toast.LENGTH_SHORT).show();
 
             return;
         }
-
-        final String username = nameEditText.getText().toString();
+        final String username = nameEditText.getText().toString().trim();
+        final String email = emailEditText.getText().toString().trim();
+        final String phone = phoneEditText.getText().toString().trim();
+        final String company = companyEditText.getText().toString().trim();
+        final String registerUserId = userIdEditText.getText().toString().trim();
 
         if (!TextUtils.isEmpty(username.trim())) {
-            String registerUserId = userIdEditText.getText().toString();
-
             HashMap<String, Object> customData = new HashMap<>();
             customData.put("CUSTOM_TIME", System.currentTimeMillis());
 
             HCUser registerUser = new HCUser.Builder()
                     .withName(username)
-                    .withEmail(emailEditText.getText().toString())
-                    .withPhone(phoneEditText.getText().toString())
+                    .withEmail(email)
+                    .withPhone(phone)
                     .withUserId(registerUserId)
                     .withCustomData(customData)
-                    .withCompany(companyEditText.getText().toString())
+                    .withCompany(company)
                     .build();
 
             findViewById(R.id.progress).setVisibility(View.VISIBLE);

@@ -40,20 +40,20 @@
 				android:inputType="phone" />
 
 			<EditText
-				android:id="@+id/userIdEditText"
-				style="@style/Widget.AppCompat.EditText"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:hint="@string/app_demo_user_id"
-				android:inputType="text"
-				android:maxLines="1" />
-
-			<EditText
 				android:id="@+id/companyEditText"
 				style="@style/Widget.AppCompat.EditText"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:hint="@string/app_demo_company"
+				android:inputType="text"
+				android:maxLines="1" />
+
+			<EditText
+				android:id="@+id/userIdEditText"
+				style="@style/Widget.AppCompat.EditText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/app_demo_user_id"
 				android:inputType="text"
 				android:maxLines="1" />
 
@@ -73,6 +73,7 @@
 		<ProgressBar
 			android:id="@+id/progress"
 			android:layout_width="30dp"
+			android:theme="@style/ProgressBarTheme"
 			android:layout_height="30dp"
 			android:layout_gravity="center_vertical|end"
 			android:layout_marginEnd="15dp"

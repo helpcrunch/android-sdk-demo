@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:padding="20dp">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/logo"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="30dp"
+		app:srcCompat="@drawable/hc_branding_light" />
+
+	<TextView
+		android:id="@+id/version"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="10dp"
+		android:textSize="12dp"
+		tools:text="0.0.0.00" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_marginTop="30dp"
+		android:layout_marginBottom="30dp"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<EditText
+			android:id="@+id/organizationEditText"
+			style="@style/Widget.AppCompat.EditText"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="@string/app_demo_organization" />
+
+		<EditText
+			android:id="@+id/appIdEditText"
+			style="@style/Widget.AppCompat.EditText"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="@string/app_demo_app_id"
+			android:inputType="textEmailAddress" />
+
+		<EditText
+			android:id="@+id/secretEditText"
+			style="@style/Widget.AppCompat.EditText"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="@string/app_demo_secret"
+			android:inputType="phone" />
+
+		<LinearLayout
+			android:id="@+id/userContainerSet"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="20dp">
+
+			<LinearLayout
+				android:id="@+id/setUser"
+				android:layout_width="match_parent"
+				android:layout_height="48dp"
+				android:background="#A2A2B6"
+				android:foreground="?selectableItemBackground"
+				android:orientation="horizontal"
+				tools:targetApi="m">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:layout_width="18dp"
+					android:layout_height="18dp"
+					android:layout_gravity="center_vertical|end"
+					android:layout_marginStart="20dp"
+					android:tint="@android:color/white"
+					app:srcCompat="@drawable/ic_baseline_account_circle" />
+
+				<TextView
+					android:id="@+id/setUserText"
+					style="@style/Text"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="20dp"
+					android:text="Set user"
+					android:textColor="@android:color/white" />
+
+			</LinearLayout>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/userContainer"
+			android:layout_width="match_parent"
+			android:layout_height="60dp"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:padding="8dp"
+			android:visibility="gone"
+			tools:visibility="visible">
+
+			<com.helpcrunch.library.utils.views.avatar_view.HCAvatarView
+				android:id="@+id/avatar"
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				app:av_border_width="0dp"
+				app:av_avatar_gradient="true"
+				app:av_background_gradient="true" />
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_marginStart="8dp"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/name"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textColor="@android:color/black"
+					android:textSize="14sp"
+					android:textStyle="bold"
+					tools:text="Name Surname" />
+
+				<TextView
+					android:id="@+id/user_id"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="4dp"
+					android:textColor="@android:color/black"
+					android:textSize="12sp"
+					tools:text="mobile_123" />
+
+			</LinearLayout>
+		</LinearLayout>
+	</LinearLayout>
+
+	<FrameLayout
+		android:id="@+id/launch"
+		style="@style/Button">
+
+		<TextView
+			style="@style/Text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Launch" />
+
+		<ProgressBar
+			android:id="@+id/progress"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_gravity="center_vertical|end"
+			android:layout_marginEnd="15dp"
+			android:theme="@style/ProgressBarTheme"
+			android:visibility="gone"
+			tools:visibility="visible" />
+
+	</FrameLayout>
+
+</LinearLayout>

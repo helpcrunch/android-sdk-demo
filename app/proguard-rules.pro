@@ -26,6 +26,6 @@
 
 -keep, includedescriptorclasses class org.json.** { *; }
 -keep, includedescriptorclasses class io.socket.** { *; }
--keep class com.helpcrunch.** { *; }
+-keep class com.helpcrunch.**
 
 -ignorewarnings
