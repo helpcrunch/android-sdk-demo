@@ -24,8 +24,8 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep, includedescriptorclasses class org.json.** { *; }
--keep, includedescriptorclasses class io.socket.** { *; }
--keep class com.helpcrunch.**
+-keep, includedescriptorclasses class org.json.* { *; }
+-keep, includedescriptorclasses class io.socket.* { *; }
+-keep class com.helpcrunch.* { *; }
 
 -ignorewarnings

@@ -102,7 +102,7 @@ If you want to support SVG images in the chat you just need to generate Glide AP
 More information about Glide's generated API you can find at [this link](https://bumptech.github.io/glide/doc/generatedapi.html "link").
 ## Pro Guard
 ```java
--keep class com.helpcrunch.** { *; }
+-keep class com.helpcrunch.* { *; }
 ```
 ## Documentation
 
