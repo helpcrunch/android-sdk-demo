@@ -32,7 +32,7 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
 
-    implementation 'com.helpcrunch:sdk:2.0.2'
+    implementation 'com.helpcrunch:sdk:2.0.3'
 
     //Glide
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
