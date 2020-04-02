@@ -4,8 +4,8 @@ import androidx.multidex.MultiDexApplication;
 
 import com.helpcrunch.library.core.HelpCrunch;
 
-public class App extends MultiDexApplication {
-    public static final String ORGANIZATION = "mobile";
+class App extends MultiDexApplication {
+    public static final String ORGANISATION = "mobile";
     public static final int APP_ID = 2889;
     public static final String SECRET = "BT4na/0/fHk6d1jtg0qKiK5GoxXf1/GgP0ay0ps2UiWJPfdPeUDFUYwnIjBFO49oilOKx+EMg2Tw+BJsS/hI6g==";
 
@@ -13,6 +13,7 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
 
-        HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET);
+        HelpCrunch.initialize(ORGANISATION, APP_ID, SECRET);
+
     }
 }

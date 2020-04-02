@@ -1,14 +1,14 @@
 package com.helpcrunch.helpcrunchdemo.design;
 
 import com.helpcrunch.helpcrunchdemo.R;
-import com.helpcrunch.library.options.design.HCAvatarTheme;
-import com.helpcrunch.library.options.design.HCChatAreaTheme;
-import com.helpcrunch.library.options.design.HCMessageAreaTheme;
-import com.helpcrunch.library.options.design.HCNotificationsTheme;
-import com.helpcrunch.library.options.design.HCPreChatTheme;
-import com.helpcrunch.library.options.design.HCSystemAlertsTheme;
-import com.helpcrunch.library.options.design.HCTheme;
-import com.helpcrunch.library.options.design.HCToolbarAreaTheme;
+import com.helpcrunch.library.core.options.design.HCAvatarTheme;
+import com.helpcrunch.library.core.options.design.HCChatAreaTheme;
+import com.helpcrunch.library.core.options.design.HCMessageAreaTheme;
+import com.helpcrunch.library.core.options.design.HCNotificationsTheme;
+import com.helpcrunch.library.core.options.design.HCPreChatTheme;
+import com.helpcrunch.library.core.options.design.HCSystemAlertsTheme;
+import com.helpcrunch.library.core.options.design.HCTheme;
+import com.helpcrunch.library.core.options.design.HCToolbarAreaTheme;
 
 public class CustomTheme {
     public static HCTheme getDesign() {
@@ -49,6 +49,7 @@ public class CustomTheme {
                 .setTimeTextColor(android.R.color.white)
                 .setProgressViewsColor(android.R.color.white)
                 .setBackgroundColor(R.color.background_color)
+                .setFabDownBackgroundRes(R.drawable.bg_bottom_fab)
                 .setFabIconRes(R.drawable.ic_arrow_downward)
                 .setBrandingType(HCChatAreaTheme.Branding.DARK)
                 .setAvatarTheme(avatarTheme)
@@ -56,7 +57,7 @@ public class CustomTheme {
 
         HCMessageAreaTheme messageAreaTheme = new HCMessageAreaTheme.Builder()
                 .setButtonType(HCMessageAreaTheme.ButtonType.TEXT)
-                .setButtonTextColorStateList(android.R.color.holo_red_dark)
+                .setButtonTextColor(android.R.color.holo_red_dark)
                 .setAttachmentsIcon(R.drawable.ic_attach_file)
                 .setButtonSendBackgroundSelector(R.drawable.button_send)
                 .setButtonIcon(R.drawable.ic_arrow_upward)
@@ -77,6 +78,8 @@ public class CustomTheme {
                 .setWelcomeMessageBackgroundColor(R.color.welcome_messages_background_color)
                 .setWelcomeMessageTextColor(android.R.color.white)
                 .setWarningDialogsHeaderColor(R.color.hc_color_bg_button_enabled_dark)
+                .setDialogAcceptButtonDrawableRes(R.drawable.bg_btn_accept)
+                .setDialogCancelButtonDrawableRes(R.drawable.bg_btn_cancel)
                 .build();
 
         HCToolbarAreaTheme toolbarAreaTheme = new HCToolbarAreaTheme.Builder()

@@ -18,11 +18,9 @@ import com.helpcrunch.helpcrunchdemo.R;
 import com.helpcrunch.helpcrunchdemo.design.CustomTheme;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.options.HCOptions;
-import com.helpcrunch.library.options.HCPreChatForm;
-import com.helpcrunch.library.options.design.HCMessageAreaTheme;
-import com.helpcrunch.library.options.design.HCTheme;
-import com.helpcrunch.library.options.files.FileExtension;
+import com.helpcrunch.library.core.options.*;
+import com.helpcrunch.library.core.options.design.*;
+import com.helpcrunch.library.core.options.files.FileExtension;
 
 import org.jetbrains.annotations.NotNull;
 
