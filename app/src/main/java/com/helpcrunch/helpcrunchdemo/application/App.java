@@ -2,10 +2,7 @@ package com.helpcrunch.helpcrunchdemo.application;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
-
-import org.jetbrains.annotations.NotNull;
 
 public class App extends MultiDexApplication {
     public static final String ORGANIZATION = "mobile";

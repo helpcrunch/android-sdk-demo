@@ -32,10 +32,7 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
 
-    implementation 'com.helpcrunch:sdk:2.0.3'
-
-    //Glide
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'com.helpcrunch:sdk:3.0.0-s.21-SNAPSHOT'
 }
 
 apply plugin: 'com.google.gms.google-services'

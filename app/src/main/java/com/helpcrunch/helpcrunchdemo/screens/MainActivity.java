@@ -18,14 +18,11 @@ import com.helpcrunch.helpcrunchdemo.R;
 import com.helpcrunch.helpcrunchdemo.design.CustomTheme;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.core.repository.models.user.HCUser;
 import com.helpcrunch.library.options.HCOptions;
 import com.helpcrunch.library.options.HCPreChatForm;
 import com.helpcrunch.library.options.design.HCMessageAreaTheme;
 import com.helpcrunch.library.options.design.HCTheme;
 import com.helpcrunch.library.options.files.FileExtension;
-import com.helpcrunch.library.utils.extensions.ContextKt;
-import com.helpcrunch.library.utils.extensions.ViewKt;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -101,12 +98,10 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.logoutButton).setOnClickListener(v -> logout());
 
-        findViewById(R.id.chat_id_container).setOnClickListener(v -> copyChatUrl());
 
         String version = "SDK: v" + HelpCrunch.getVersion();
 
         ((TextView) findViewById(R.id.version)).setText(version);
-        ((TextView) findViewById(R.id.chat_id)).setText(HelpCrunch.getChatUrl());
 
         registerReceiver(hcEventsBroadcastReceiver, new IntentFilter(HelpCrunch.EVENTS));
     }
@@ -139,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         HelpCrunch.logout(new Callback<Object>() {
             @Override
             public void onSuccess(Object result) {
-                Toast.makeText(MainActivity.this,"Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
                 clearBadge();
                 findViewById(R.id.progress).setVisibility(View.GONE);
                 findViewById(R.id.logoutButton).setEnabled(false);
@@ -147,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(@NotNull String message) {
-                Toast.makeText(MainActivity.this,message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
                 findViewById(R.id.progress).setVisibility(View.GONE);
                 findViewById(R.id.logoutButton).setEnabled(true);
             }
@@ -244,26 +239,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(@NotNull String message) {
-                Toast.makeText(MainActivity.this,"Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void setVisibilityForUnreadMessagesBadge(int count) {
-        ViewKt.visibleOrInvisible(badge1View, count > 0);
+        badge1View.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
         String countString = String.valueOf(count);
 
         badge1TextView.setText(countString);
     }
 
-    private void copyChatUrl() {
-        String chatUrl = HelpCrunch.getChatUrl();
-
-        if (chatUrl != null) {
-            ContextKt.copyToClipboard(this, chatUrl, () -> {
-                Toast.makeText(MainActivity.this, "Copied", Toast.LENGTH_SHORT).show();
-                return null;
-            });
-        }
-    }
 }

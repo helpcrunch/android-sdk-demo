@@ -80,29 +80,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:text=" Enable pre-chat form" />
-
-			<LinearLayout
-				android:id="@+id/chat_id_container"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginStart="5dp"
-				android:layout_marginTop="10dp"
-				android:background="?selectableItemBackground"
-				android:orientation="vertical">
-
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Chat ID"
-					android:textStyle="bold" />
-
-				<TextView
-					android:id="@+id/chat_id"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					tools:text="0.0.0.00" />
-
-			</LinearLayout>
 		</LinearLayout>
 	</ScrollView>
 
