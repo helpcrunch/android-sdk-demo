@@ -24,6 +24,10 @@ import com.helpcrunch.library.core.options.files.FileExtension;
 
 import org.jetbrains.annotations.NotNull;
 
+import static com.helpcrunch.helpcrunchdemo.application.App.APP_ID;
+import static com.helpcrunch.helpcrunchdemo.application.App.ORGANIZATION;
+import static com.helpcrunch.helpcrunchdemo.application.App.SECRET;
+
 public class MainActivity extends AppCompatActivity {
 
     private View badge1View;

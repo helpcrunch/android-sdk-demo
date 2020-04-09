@@ -3,9 +3,14 @@ package com.helpcrunch.helpcrunchdemo.application;
 import androidx.multidex.MultiDexApplication;
 
 import com.helpcrunch.library.core.HelpCrunch;
+import com.helpcrunch.library.core.models.user.HCUser;
 
-class App extends MultiDexApplication {
-    public static final String ORGANISATION = "mobile";
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
+
+public class App extends MultiDexApplication {
+    public static final String ORGANIZATION = "mobile";
     public static final int APP_ID = 2889;
     public static final String SECRET = "BT4na/0/fHk6d1jtg0qKiK5GoxXf1/GgP0ay0ps2UiWJPfdPeUDFUYwnIjBFO49oilOKx+EMg2Tw+BJsS/hI6g==";
 
@@ -13,7 +18,18 @@ class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
 
-        HelpCrunch.initialize(ORGANISATION, APP_ID, SECRET);
-
+        HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET, getMyUser());
     }
+
+
+    @NotNull
+    public static HCUser getMyUser() {
+        return new HCUser.Builder()
+                .withName("Alex")
+                .withEmail("gooday@cherrypiestudio.com")
+                .withUserId("helpcrunch_2774")
+                .withCompany("helpcrunch")
+                .build();
+    }
+
 }

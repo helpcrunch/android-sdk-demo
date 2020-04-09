@@ -29,7 +29,7 @@ allprojects {
             url "https://maven.google.com"
         }
         maven {
-            url 'http://192.168.1.8:8081/repository/maven-snapshots/'
+            url 'http://192.168.1.6:8081/repository/maven-snapshots/'
         }
         google()
     }
