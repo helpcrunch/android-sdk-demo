@@ -20,7 +20,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
-
 public class UserDataActivity extends AppCompatActivity {
 
     private EditText nameEditText;
@@ -107,10 +106,10 @@ public class UserDataActivity extends AppCompatActivity {
             customData.put("CUSTOM_TIME", System.currentTimeMillis());
 
             HCUser registerUser = new HCUser.Builder()
+                    .withUserId(registerUserId)
                     .withName(username)
                     .withEmail(email)
                     .withPhone(phone)
-                    .withUserId(registerUserId)
                     .withCustomData(customData)
                     .withCompany(company)
                     .build();

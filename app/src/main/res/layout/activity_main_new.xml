@@ -8,7 +8,7 @@
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="45dp"
 		android:layout_marginTop="30dp"
 		app:srcCompat="@drawable/hc_branding_light" />
 
@@ -17,7 +17,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center_horizontal"
-		android:layout_marginTop="10dp"
+		android:layout_marginTop="20dp"
 		android:textSize="12dp"
 		tools:text="0.0.0.00" />
 

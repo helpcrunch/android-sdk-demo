@@ -34,7 +34,7 @@ allprojects {
 ```
 Add the dependency
 ```groovy
-implementation 'com.helpcrunch:sdk:2.0.0-rc.(X)'
+implementation 'com.helpcrunch:sdk:2.0.x'
 ```
 ## Requirements
  - Java 8/Kotlin
@@ -56,7 +56,7 @@ If your application currently uses v1.x SDK it is important that you migrate to 
 9. Click **"Finish"**
 
 ## Simple flow:
-A. Initialize HelpCrunch by calling the following in the oncreate() method of your application
+A. Initialize HelpCrunch by calling the following in the onCreate() method of your application
 ```java
  HelpCrunch.initialize(ORGANISATION, APP_ID, SECRET)
 ```
@@ -93,9 +93,9 @@ All fields are optional. Custom data could be created like this:
 HashMap<String, Object> customData = new HashMap();
 customData.put("CUSTOM_TIME", System.currentTimeMillis());
 ```
-C. Open Chat Screen calling `showChatScreen(Context context)` method:
+C. Open Chat Screen calling `showChatScreen()` method:
 ```java
-Helpcrunch.showChatScreen(context)
+Helpcrunch.showChatScreen()
 ```
 ## SVG support 
 If you want to support SVG images in the chat you just need to generate Glide API. 
