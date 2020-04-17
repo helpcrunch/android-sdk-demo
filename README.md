@@ -93,9 +93,9 @@ All fields are optional. Custom data could be created like this:
 HashMap<String, Object> customData = new HashMap();
 customData.put("CUSTOM_TIME", System.currentTimeMillis());
 ```
-C. Open Chat Screen calling `showChatScreen()` method:
+C. Open Chat Screen calling `showChatScreen(context)` method:
 ```java
-Helpcrunch.showChatScreen()
+Helpcrunch.showChatScreen(context)
 ```
 ## SVG support 
 If you want to support SVG images in the chat you just need to generate Glide API. 
