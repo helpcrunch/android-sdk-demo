@@ -11,9 +11,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.UUID;
 
 public class App extends MultiDexApplication {
-    public static final String ORGANIZATION = "hunk";
-    public static final int APP_ID = 6209;
-    public static final String SECRET =  "e8NVS11RwC7v6R4QzDC/+yetiLI9PVgEEfauE8sTWP+iTdsa+/5+hHKlbEpSziiXTpjq4Nsue0e/JEII9FztRA==";
+    public static final String ORGANIZATION = "domain";
+    public static final int APP_ID = 0;
+    public static final String SECRET =  "token";
 
     @Override
     public void onCreate() {
