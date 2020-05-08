@@ -25,10 +25,10 @@ public class App extends MultiDexApplication {
     @NotNull
     public static HCUser getMyUser() {
         return new HCUser.Builder()
-                .withName("Alex")
-                .withEmail("gooday@cherrypiestudio.com")
-                .withUserId("helpcrunch_2774")
-                .withCompany("helpcrunch")
+                .withName("Name")
+                .withEmail("email@email.com")
+                .withUserId("someId_1")
+                .withCompany("company name")
                 .build();
     }
 
