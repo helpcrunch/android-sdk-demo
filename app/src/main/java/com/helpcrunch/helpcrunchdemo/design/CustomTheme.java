@@ -49,7 +49,7 @@ public class CustomTheme {
                 .setTimeTextColor(android.R.color.white)
                 .setProgressViewsColor(android.R.color.white)
                 .setBackgroundColor(R.color.background_color)
-                .setFabDownBackgroundRes(R.drawable.bg_bottom_fab)
+                .setFabDownBackgroundColor(R.color.incoming_bubble_color)
                 .setFabIconRes(R.drawable.ic_arrow_downward)
                 .setBrandingType(HCChatAreaTheme.Branding.DARK)
                 .setAvatarTheme(avatarTheme)
@@ -57,7 +57,6 @@ public class CustomTheme {
 
         HCMessageAreaTheme messageAreaTheme = new HCMessageAreaTheme.Builder()
                 .setButtonType(HCMessageAreaTheme.ButtonType.TEXT)
-                .setButtonTextColor(android.R.color.holo_red_dark)
                 .setAttachmentsIcon(R.drawable.ic_attach_file)
                 .setButtonSendBackgroundSelector(R.drawable.button_send)
                 .setButtonIcon(R.drawable.ic_arrow_upward)
@@ -73,13 +72,11 @@ public class CustomTheme {
 
         HCSystemAlertsTheme systemAlerts = new HCSystemAlertsTheme.Builder()
                 .setDialogsHeaderColor(R.color.statusbar_color)
-                .setToastsBackgroundDrawableRes(R.drawable.hc_toast_default)
+                .setToastsBackgroundColor(android.R.color.white)
                 .setToastsTextColor(R.color.system_snack_text_color)
                 .setWelcomeMessageBackgroundColor(R.color.welcome_messages_background_color)
                 .setWelcomeMessageTextColor(android.R.color.white)
                 .setWarningDialogsHeaderColor(R.color.hc_color_bg_button_enabled_dark)
-                .setDialogAcceptButtonDrawableRes(R.drawable.bg_btn_accept)
-                .setDialogCancelButtonDrawableRes(R.drawable.bg_btn_cancel)
                 .build();
 
         HCToolbarAreaTheme toolbarAreaTheme = new HCToolbarAreaTheme.Builder()

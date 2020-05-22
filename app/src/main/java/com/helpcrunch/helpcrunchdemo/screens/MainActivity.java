@@ -157,15 +157,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkSettingsOpenScreen() {
-        HCTheme theme = new HCTheme.Builder(HCTheme.DEFAULT)
+        HCTheme theme = new HCTheme.Builder(HCTheme.Type.DEFAULT)
                 .build();
 
         switch (((RadioGroup) findViewById(R.id.theme_group)).getCheckedRadioButtonId()) {
             case R.id.light:
-                theme = new HCTheme.Builder(HCTheme.DEFAULT).build();
+                theme = new HCTheme.Builder(HCTheme.Type.DEFAULT).build();
                 break;
             case R.id.dark:
-                theme = new HCTheme.Builder(HCTheme.DARK).build();
+                theme = new HCTheme.Builder(HCTheme.Type.DARK).build();
                 break;
             case R.id.custom_color:
                 HCMessageAreaTheme messageAreaTheme = new HCMessageAreaTheme.Builder()
