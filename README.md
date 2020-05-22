@@ -17,8 +17,7 @@ This SDK can be added to **Android**, **Flutter** or **React Native** projects t
 - [Migration Guide](#migration-guide)
 - [Demo Installation](#demo-installation)
 - [Simple Flow](#simple-flow)
-- [SVG support](#svg-support)
-- [Pro Guard](#pro-guard)
+- [Pro Guard](#r8--proguard)
 - [Documentation](#documentation)
 - [License](#license)
 
