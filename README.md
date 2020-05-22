@@ -5,7 +5,7 @@ A perfect live chat, email automation and a super-intuitive help desk in one sma
 
 This SDK can be added to **Android**, **Flutter** or **React Native** projects to start a live chat from a mobile application.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/sdk) [![Platform](https://img.shields.io/badge/platforms-Android-green.svg)]() [![Languages](https://img.shields.io/badge/languages-Kotlin-F18E33.svg)]()  [![Apache License](http://img.shields.io/badge/license-APACHE2-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/chat-sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/chat-sdk) [![Platform](https://img.shields.io/badge/platforms-Android-green.svg)]() [![Languages](https://img.shields.io/badge/languages-Kotlin-F18E33.svg)]()  [![Apache License](http://img.shields.io/badge/license-APACHE2-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 ## Sample Apk
 [Download](https://github.com/helpcrunch/android-sdk-demo/blob/master/app/release/app-release.apk?raw=true) sample apk
@@ -34,7 +34,7 @@ allprojects {
 ```
 Add the dependency
 ```groovy
-implementation 'com.helpcrunch:sdk:2.0.0-rc.(X)'
+implementation 'com.helpcrunch:sdk:3.0.0-beta.(X)'
 ```
 ## Requirements
  - Java 8/Kotlin
@@ -56,7 +56,7 @@ If your application currently uses v1.x SDK it is important that you migrate to 
 9. Click **"Finish"**
 
 ## Simple flow:
-A. Initialize HelpCrunch by calling the following in the oncreate() method of your application
+A. Initialize HelpCrunch by calling the following in the onCreate() method of your application
 ```java
  HelpCrunch.initialize(ORGANISATION, APP_ID, SECRET)
 ```
@@ -71,7 +71,7 @@ HCOptions.Builder options = new HCOptions.Builder()
 	.setTheme(theme)
 	.build();
 
-HelpCrunch.initialize(ORGANISATION, APP_ID, SECRET, user, options);
+HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET, user, options);
 ```
 B. If you want to update customer info - just call
 ```java
@@ -97,13 +97,9 @@ C. Open Chat Screen calling `showChatScreen(Context context)` method:
 ```java
 Helpcrunch.showChatScreen(context)
 ```
-## SVG support 
-If you want to support SVG images in the chat you just need to generate Glide API. 
-More information about Glide's generated API you can find at [this link](https://bumptech.github.io/glide/doc/generatedapi.html "link").
-## Pro Guard
-```java
--keep class com.helpcrunch.* { *; }
-```
+## R8 / Proguard
+HelpCrunch SDK is fully compatible with R8 out of the box and doesn't require adding any extra rules.
+
 ## Documentation
 
 The documentation is available in our Knowledge Base located at [this link](https://docs.helpcrunch.com/android-sdk).
