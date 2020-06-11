@@ -41,7 +41,7 @@ implementation 'com.helpcrunch:chat-sdk:3.0.0-beta.(X)'
 
 ## Migration guide
 
-If your application currently uses v1.x SDK it is important that you migrate to Android SDK v2.x so that your application will get newest important features. You can update update your App with our [migration giude](https://docs.helpcrunch.com/android-sdk/android-sdk2-migration-guide).
+If your application currently uses v1.x SDK it is important that you migrate to Android SDK v2.x so that your application will get newest important features. You can update update your App with our [migration giude](https://docs.helpcrunch.com/android-sdk/migrate-from-the-android-sdk2-to-sdk3).
 
 ## Demo Installation
 1. Clone or download repository
