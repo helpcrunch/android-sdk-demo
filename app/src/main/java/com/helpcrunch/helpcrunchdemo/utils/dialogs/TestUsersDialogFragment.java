@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.helpcrunch.helpcrunchdemo.R;
 import com.helpcrunch.helpcrunchdemo.utils.dialogs.adapters.TestUsersAdapter;
-import com.helpcrunch.library.core.repository.models.user.HCUser;
+import com.helpcrunch.library.core.models.user.HCUser;
 
 import java.util.ArrayList;
 

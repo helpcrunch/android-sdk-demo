@@ -15,8 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.helpcrunch.helpcrunchdemo.R;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.core.repository.models.user.HCUser;
-import com.helpcrunch.library.utils.extensions.ContextKt;
+import com.helpcrunch.library.core.models.user.HCUser;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -95,14 +94,14 @@ public class CustomUserDataActivity extends AppCompatActivity {
         HelpCrunch.updateUser(user, new Callback<HCUser>() {
             @Override
             public void onSuccess(HCUser result) {
-                ContextKt.toast(CustomUserDataActivity.this, getString(R.string.data_saved));
+                Toast.makeText(CustomUserDataActivity.this,  getString(R.string.data_saved), Toast.LENGTH_SHORT).show();
                 findViewById(R.id.progress).setVisibility(View.GONE);
                 findViewById(R.id.saveUserDataButton).setEnabled(true);
             }
 
             @Override
             public void onError(@NotNull String message) {
-                ContextKt.toast(CustomUserDataActivity.this, getString(R.string.something_wrong));
+                Toast.makeText(CustomUserDataActivity.this,  getString(R.string.something_wrong), Toast.LENGTH_SHORT).show();
                 findViewById(R.id.progress).setVisibility(View.GONE);
                 findViewById(R.id.saveUserDataButton).setEnabled(true);
             }

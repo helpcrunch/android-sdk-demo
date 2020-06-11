@@ -13,8 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.helpcrunch.helpcrunchdemo.R;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.core.repository.models.user.HCUser;
-import com.helpcrunch.library.utils.extensions.ContextKt;
+import com.helpcrunch.library.core.models.user.HCUser;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -120,21 +119,21 @@ public class UserDataActivity extends AppCompatActivity {
             HelpCrunch.updateUser(registerUser, new Callback<HCUser>() {
                 @Override
                 public void onSuccess(HCUser result) {
-                    ContextKt.toast(UserDataActivity.this, getString(R.string.data_saved));
+                    Toast.makeText(UserDataActivity.this, getString(R.string.data_saved), Toast.LENGTH_SHORT).show();
                     findViewById(R.id.progress).setVisibility(View.GONE);
                     findViewById(R.id.saveUserDataButton).setEnabled(true);
                 }
 
                 @Override
                 public void onError(@NotNull String message) {
-                    ContextKt.toast(UserDataActivity.this, getString(R.string.something_wrong));
+                    Toast.makeText(UserDataActivity.this, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show();
                     findViewById(R.id.progress).setVisibility(View.GONE);
                     findViewById(R.id.saveUserDataButton).setEnabled(true);
                 }
 
             });
         } else {
-            ContextKt.toast(UserDataActivity.this, getString(R.string.error_id_is_empty));
+            Toast.makeText(UserDataActivity.this, getString(R.string.error_id_is_empty), Toast.LENGTH_SHORT).show();
         }
     }
 
