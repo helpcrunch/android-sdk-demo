@@ -33,7 +33,7 @@ allprojects {
 ```
 Add the dependency
 ```groovy
-implementation 'com.helpcrunch:sdk:3.0.0-beta.(X)'
+implementation 'com.helpcrunch:chat-sdk:3.0.0-beta.(X)'
 ```
 ## Requirements
  - Java 8/Kotlin

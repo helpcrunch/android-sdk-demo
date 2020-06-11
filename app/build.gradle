@@ -32,7 +32,7 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
 
-    implementation 'com.helpcrunch:chat-sdk:3.0.0-beta.01'
+    implementation 'com.helpcrunch:chat-sdk:3.0.0-beta.03'
 }
 
 apply plugin: 'com.google.gms.google-services'
