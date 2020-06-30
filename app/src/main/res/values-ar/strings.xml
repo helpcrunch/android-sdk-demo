@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!--Chat Form-->
+	<string name="hc_waiting_message">Searching for a free agent. \nPlease hold on.</string>
+	<string name="hc_offline_message">عذرًا ، نحن بلا إنترنت الآن 🙈 لا تتردد في إرسال جميع أسئلتك أو تفاصيل الاتصال أو التعليقات هنا ، وسنرد عليك في أقرب وقت ممكن 😇</string>
+	<string name="hc_message_hint">اكتب رسالة</string>
+	<string name="hc_department_picker_hint">Choose a department</string>
+	<string name="hc_copied">Copied</string>
+	<string name="hc_menu_copy">Copy</string>
+	<string name="hc_menu_open">Open</string>
+	<string name="hc_sent_at">at</string>
+	<string name="hc_permissions_ok">OK</string>
+	<string name="hc_permissions_cancel">Cancel</string>
+	<string name="hc_permissions_content">Allow file system and camera access to improve file sharing</string>
+	<string name="hc_messages_updating">Updating…</string>
+	<string name="hc_button_send">إرسال</string>
+	<string name="hc_more_agents">and %d more</string>
+	<string name="hc_menu_view_image">View image</string>
+	<string name="hc_new_chat_arrived">New chat has arrived</string>
+
+	<!--Chats-->
+	<string name="hc_support_team">%s Team</string>
+	<string name="hc_support_team_placeholder">Support Team</string>
+	<string name="hc_error_no_chats_found">No chats found</string>
+
+	<!--Chat-->
+	<string name="hc_attachment_video">Video</string>
+	<string name="hc_attachment_file">File</string>
+	<string name="hc_attachment_image">Image</string>
+
+	<plurals name="hc_typing">
+		<item quantity="zero">typing…</item>
+		<item quantity="one">is typing…</item>
+		<item quantity="two">are typing…</item>
+		<item quantity="few">are typing…</item>
+		<item quantity="many">are typing…</item>
+		<item quantity="other">are typing…</item>
+	</plurals>
+
+	<string name="hc_download_file_title">Download file?</string>
+	<string name="hc_download_ok">Yes</string>
+	<string name="hc_download_no">No</string>
+	<string name="hc_download_loading_complete">Loading is complete 👌\nSaved to Downloads folder👌</string>
+	<string name="hc_loading">Loading…</string>
+
+	<!--Tech-->
+	<string name="hc_you">You</string>
+	<string name="hc_someone">Someone</string>
+	<string name="hc_tech_client">client</string>
+	<string name="hc_tech_chat_rated_poor">Poor</string>
+	<string name="hc_tech_chat_rated_average">Average</string>
+	<string name="hc_tech_chat_rated_great">Great</string>
+	<string name="hc_tech_chat_rating_sent">Please rate this chat</string>
+	<string name="hc_tech_chat_rating_sent_push">Please rate this chat</string>
+	<string name="hc_tech_chat_rated">Chat rated %s</string>
+	<string name="hc_tech_chat_marked_by">Chat marked %s by %s</string>
+	<string name="hc_tech_chat_marked_as">Chat marked %s</string>
+	<string name="hc_tech_someone_closed_chat">%s closed this chat</string>
+
+	<!--Agent-->
+
+	<string name="hc_closed">Closed</string>
+	<string name="hc_chat_closed">This chat is closed</string>
+
+	<string-array name="hc_chat_statuses">
+		<item>New</item>
+		<item>Open</item>
+		<item>Pending</item>
+		<item>On-hold</item>
+		<item>Closed</item>
+	</string-array>
+
+	<!--Notifications-->
+	<string name="hc_notification_channel_text">Allow Support messages notifications</string>
+
+	<!--Pre-Chat Form-->
+	<string name="hc_pre_chat_message">Usually we respond immediately. If not, you can expect a reply within a few hours. Please kindly introduce yourself.</string>
+	<string name="hc_pre_chat_continue">Continue</string>
+	<string name="hc_pre_chat_name">Name</string>
+	<string name="hc_pre_chat_email">Email</string>
+	<string name="hc_pre_chat_company">Company</string>
+	<string name="hc_pre_chat_phone_number">Phone number</string>
+	<string name="hc_pre_chat_error_required">%s is required</string>
+	<string name="hc_pre_chat_error_pattern">%s is not valid</string>
+
+	<!--In App Errors -->
+	<string name="hc_error_no_internet_connection">Please, check your internet connection</string>
+	<string name="hc_error_handler_unknown">Something went wrong. Please try again later</string>
+	<string name="hc_error_chat_deleted">This chat was removed by agent. You\'ll be logged out</string>
+	<string name="hc_error_file_size">You can\'t send files bigger than 16 MB.</string>
+	<string name="hc_error_file_cant_open">Can\'t open this file</string>
+	<string name="hc_error_no_camera_exists">No Application exists for camera!</string>
+
+	<!--File Picker-->
+	<string name="hc_permission_file_picker_rationale">Storage permission is needed to access files.</string>
+	<string name="hc_no_files_found">No files found</string>
+	<string name="hc_attachments_title_text" formatted="false">(%d/%d)</string>
+	<string name="hc_attachments_num" formatted="false">%d</string>
+	<string name="hc_picker_title">Select an option</string>
+	<string name="hc_select_photo_text">Select a media</string>
+	<string name="hc_select_doc_text">Select a document</string>
+	<string name="hc_videos">Videos</string>
+	<string name="hc_images">Images</string>
+	<string name="hc_all_photos">All Photos</string>
+	<string name="hc_all_videos">All Videos</string>
+	<string name="hc_all_files">All Files</string>
+	<string name="hc_done">Done</string>
+	<string name="hc_menu_item_photo">Photo</string>
+	<string name="hc_download">Download</string>
+	<string name="hc_downloading">Downloading…</string>
+	<string name="hc_menu_item_file">File</string>
+	<string name="hc_share">Share…</string>
+	<string name="hc_debug">Debug</string>
+	<string name="hc_send_intent_title">Send to:</string>
+
+	<!--Rating View-->
+	<string name="hc_rating_title">How do you rate your customer service experience?</string>
+	<string name="hc_chat_rating_values_poor">Poor</string>
+	<string name="hc_chat_rating_values_average">Average</string>
+	<string name="hc_chat_rating_values_great">Great</string>
+	<string name="hc_view_article">View article</string>
+
+</resources>
