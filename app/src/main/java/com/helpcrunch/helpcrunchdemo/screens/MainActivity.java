@@ -4,29 +4,36 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.helpcrunch.helpcrunchdemo.R;
-import com.helpcrunch.helpcrunchdemo.design.CustomTheme;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.core.options.*;
-import com.helpcrunch.library.core.options.design.*;
+import com.helpcrunch.library.core.models.user.HCUser;
+import com.helpcrunch.library.core.options.HCOptions;
+import com.helpcrunch.library.core.options.HCPreChatForm;
+import com.helpcrunch.library.core.options.design.HCMessageAreaTheme;
+import com.helpcrunch.library.core.options.design.HCTheme;
 import com.helpcrunch.library.core.options.files.FileExtension;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import static com.helpcrunch.helpcrunchdemo.application.App.APP_ID;
-import static com.helpcrunch.helpcrunchdemo.application.App.ORGANIZATION;
-import static com.helpcrunch.helpcrunchdemo.application.App.SECRET;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,18 +41,34 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView badge1TextView;
 
+    private RadioGroup themeRadioGroup;
+
+    private CheckBox defaultOptionsCheckBox;
+    private Switch preChatSwitch;
+
+
+    private BroadcastReceiver hcStateBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            HelpCrunch.State state = (HelpCrunch.State) intent.getSerializableExtra(HelpCrunch.STATE_TYPE);
+
+            ((TextView) findViewById(R.id.state)).setText(getStateString(state == null ? HelpCrunch.State.IDLE : state));
+        }
+    };
+
     private BroadcastReceiver hcEventsBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            HelpCrunch.Event parcelableExtra = (HelpCrunch.Event) intent.getSerializableExtra(HelpCrunch.EVENT_TYPE);
+            HelpCrunch.Event event = (HelpCrunch.Event) intent.getSerializableExtra(HelpCrunch.EVENT_TYPE);
             HelpCrunch.Screen screen = (HelpCrunch.Screen) intent.getSerializableExtra(HelpCrunch.SCREEN_TYPE);
+            HashMap<String, String> data = (HashMap<String, String>) intent.getSerializableExtra(HelpCrunch.EVENT_DATA);
 
-            if (parcelableExtra == null) {
+            if (event == null) {
                 Log.w(HelpCrunch.EVENTS, "Can't receive data");
                 return;
             }
 
-            switch (parcelableExtra) {
+            switch (event) {
                 case FIRST_MESSAGE:
                     Log.i(HelpCrunch.EVENTS, "First Message");
                     break;
@@ -58,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case SCREEN_OPENED:
                     if (screen != null) {
-                        Log.i(HelpCrunch.EVENTS, screen.toString() + " screen: opened");
+                        Log.i(HelpCrunch.EVENTS, screen.toString() + " screen: opened, data: " + (data == null ? "null" : data.toString()));
                     } else {
                         Log.w(HelpCrunch.EVENTS, "Can't receive screen event");
                     }
@@ -67,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 case ON_IMAGE_URL:
                 case ON_FILE_URL:
                 case ON_ANY_OTHER_URL:
-                    String url = intent.getStringExtra(HelpCrunch.URL);
-                    Log.i(HelpCrunch.EVENTS, parcelableExtra.toString() + ": " + url);
+                    Log.i(HelpCrunch.EVENTS, "Url opened. data: " + (data == null ? "null" : data.toString()));
+
                     break;
 
                 case ON_UNREAD_COUNT_CHANGED:
@@ -89,23 +112,68 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.chatButton).setOnClickListener(v -> {
             checkSettingsOpenScreen();
             clearBadge();
-            HelpCrunch.trackEvent("Event chat opened", "https://i.pinimg.com/originals/58/92/e7/5892e7f3cc64c8a912e2494a3ff77e08.jpg", "Say Cheese");
+            HelpCrunch.trackEvent(
+                    "Event chat opened",
+                    "https://i.pinimg.com/originals/58/92/e7/5892e7f3cc64c8a912e2494a3ff77e08.jpg",
+                    "Say Cheese");
         });
 
         findViewById(R.id.chatCustomButton).setOnClickListener(v -> openWithCustomSettings());
         findViewById(R.id.customUserDataButton).setOnClickListener(v -> openCustomUserDataScreen());
         findViewById(R.id.userDataButton).setOnClickListener(v -> openUserDataScreen());
+        findViewById(R.id.sendMessageButton).setOnClickListener(v -> openSendMessageScreen());
 
         findViewById(R.id.userData).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, UserDataActivity.class)));
 
         findViewById(R.id.logoutButton).setOnClickListener(v -> logout());
 
-
         String version = "SDK: v" + HelpCrunch.getVersion();
 
         ((TextView) findViewById(R.id.version)).setText(version);
 
+        ((TextView) findViewById(R.id.state)).setText(getStateString(HelpCrunch.getState()));
+
         registerReceiver(hcEventsBroadcastReceiver, new IntentFilter(HelpCrunch.EVENTS));
+        registerReceiver(hcStateBroadcastReceiver, new IntentFilter(HelpCrunch.STATE));
+    }
+
+    private CharSequence getStateString(HelpCrunch.State state) {
+        SpannableString stateStr = null;
+
+        switch (state) {
+
+            case IDLE:
+                stateStr = getStateSpannableString("Idle", Color.GRAY);
+                break;
+            case READY:
+                stateStr = getStateSpannableString("Ready", Color.MAGENTA);
+                break;
+            case LOADING:
+                stateStr = getStateSpannableString("Loading...", Color.LTGRAY);
+                break;
+            case ERROR_BLOCKED_USER:
+                stateStr = getStateSpannableString("User is blocked", Color.RED);
+                break;
+            case ERROR_INITIALIZATION:
+                stateStr = getStateSpannableString("Initialization error", Color.RED);
+                break;
+            case ERROR_UNKNOWN:
+                stateStr = getStateSpannableString("Error unknown", Color.RED);
+                break;
+            case HIDDEN:
+                stateStr = getStateSpannableString("Hidden", Color.GRAY);
+                break;
+        }
+
+        return stateStr;
+    }
+
+    @NotNull
+    private SpannableString getStateSpannableString(String idle, @ColorInt int color) {
+        SpannableString stateStr;
+        stateStr = new SpannableString(idle);
+        stateStr.setSpan(new ForegroundColorSpan(color), 0, stateStr.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        return stateStr;
     }
 
     @Override
@@ -119,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(hcEventsBroadcastReceiver);
+        unregisterReceiver(hcStateBroadcastReceiver);
     }
 
     private void openCustomUserDataScreen() {
@@ -127,6 +196,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void openUserDataScreen() {
         startActivity(new Intent(MainActivity.this, UserDataActivity.class));
+    }
+
+    private void openSendMessageScreen() {
+        startActivity(new Intent(MainActivity.this, SendMessageActivity.class));
     }
 
     private void logout() {
@@ -140,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
                 clearBadge();
                 findViewById(R.id.progress).setVisibility(View.GONE);
                 findViewById(R.id.logoutButton).setEnabled(false);
+                defaultOptionsCheckBox.setChecked(false);
             }
 
             @Override
@@ -157,6 +231,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkSettingsOpenScreen() {
+        if (defaultOptionsCheckBox.isChecked()) {
+            showChat(null);
+            return;
+        }
+
         HCTheme theme = new HCTheme.Builder(HCTheme.Type.DEFAULT)
                 .build();
 
@@ -167,33 +246,31 @@ public class MainActivity extends AppCompatActivity {
             case R.id.dark:
                 theme = new HCTheme.Builder(HCTheme.Type.DARK).build();
                 break;
-            case R.id.custom_color:
+            case R.id.custom:
                 HCMessageAreaTheme messageAreaTheme = new HCMessageAreaTheme.Builder()
                         .setButtonType(HCMessageAreaTheme.ButtonType.TEXT)
                         .build();
 
-                theme = new HCTheme.Builder(R.color.main_color, true)
+                theme = new HCTheme.Builder(R.color.main_color)
                         .setMessageAreaTheme(messageAreaTheme)
                         .build();
                 break;
-            case R.id.custom:
-                theme = CustomTheme.getDesign();
-                break;
         }
 
-        HCOptions.Builder optionsBuilder = new HCOptions.Builder().setTheme(theme);
+        HCOptions.Builder optionsBuilder = new HCOptions.Builder()
+                .setTheme(theme);
 
-        if (((Switch) findViewById(R.id.pre_chat_switch)).isChecked()) {
+        if (preChatSwitch.isChecked()) {
             HCPreChatForm preChatForm = new HCPreChatForm.Builder()
                     .withName(true, null)
                     .withEmail(true)
-                    .withPhone(false, null)
+                    .withPhone(false)
                     .build();
 
             optionsBuilder.setPreChatForm(preChatForm);
         }
 
-        HelpCrunch.showChatScreen(MainActivity.this, optionsBuilder.build());
+        showChat(optionsBuilder.build());
     }
 
     private void openWithCustomSettings() {
@@ -218,22 +295,80 @@ public class MainActivity extends AppCompatActivity {
                 .setTheme(theme)
                 .setPreChatForm(preChatForm)
                 .setFileExtensions(new FileExtension[]{
-                        new FileExtension("PDF", "pdf"),
-                        new FileExtension("IMAGES", new String[]{"jpg", "png"})
+
                 })
                 .build();
 
-        HelpCrunch.showChatScreen(MainActivity.this, options);
+        showChat(options);
+    }
+
+    private void showChat(@Nullable HCOptions options) {
+        View progress = findViewById(R.id.progress_open);
+        View logo = findViewById(R.id.logo_btn);
+        View chatButton = findViewById(R.id.chatButton);
+        progress.setVisibility(View.VISIBLE);
+        logo.setVisibility(View.GONE);
+        chatButton.setEnabled(false);
+
+        HelpCrunch.showChatScreen(options, new Callback<Object>() {
+            @Override
+            public void onError(@NotNull String message) {
+                if (message.equals("user_blocked")) {
+                    HCUser user = HelpCrunch.getUser();
+
+
+                    if (user != null) {
+                        String messageText = "You are a very bad person, " + user.getName() + ".\nPlease, uninstall the application.";
+
+                        Toast.makeText(MainActivity.this, messageText, Toast.LENGTH_SHORT).show();
+                    }
+                } else if (message.equals("cant_open_chat")) {
+                    Toast.makeText(MainActivity.this, "Can't open chat. Something is wrong", Toast.LENGTH_SHORT).show();
+                }
+
+                progress.setVisibility(View.GONE);
+                logo.setVisibility(View.VISIBLE);
+                chatButton.setEnabled(true);
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                progress.setVisibility(View.GONE);
+                logo.setVisibility(View.VISIBLE);
+                chatButton.setEnabled(true);
+            }
+        });
     }
 
     private void initViews() {
-        badge1View = findViewById(R.id.badge1View);
+        badge1View = findViewById(R.id.badge_view);
+        badge1TextView = findViewById(R.id.badge_tv);
+        themeRadioGroup = findViewById(R.id.theme_group);
+        defaultOptionsCheckBox = findViewById(R.id.default_options);
+        defaultOptionsCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            setThemeControlEnabled(!isChecked);
+        });
+        preChatSwitch = findViewById(R.id.pre_chat_switch);
 
-        badge1TextView = findViewById(R.id.badge1TextView);
+        defaultOptionsCheckBox.setChecked(HelpCrunch.getUser() != null);
+    }
+
+    private void setThemeControlEnabled(boolean isEnabled) {
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("isEnabled", isEnabled);
+
+        HelpCrunch.trackEvent("OptionsChanged", data);
+
+        themeRadioGroup.setEnabled(isEnabled);
+        preChatSwitch.setEnabled(isEnabled);
+
+        for (int i = 0; i < themeRadioGroup.getChildCount(); i++) {
+            themeRadioGroup.getChildAt(i).setEnabled(isEnabled);
+        }
     }
 
     private void updateUnreadMessages() {
-        HelpCrunch.getUnreadMessagesCount(new Callback<Integer>() {
+        HelpCrunch.getUnreadChatsCount(new Callback<Integer>() {
             @Override
             public void onSuccess(Integer result) {
                 setVisibilityForUnreadMessagesBadge(result);
@@ -241,16 +376,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(@NotNull String message) {
-                Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void setVisibilityForUnreadMessagesBadge(int count) {
-        badge1View.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
+        badge1View.setVisibility(count > 0 ? View.VISIBLE : View.INVISIBLE);
         String countString = String.valueOf(count);
 
         badge1TextView.setText(countString);
     }
-
 }

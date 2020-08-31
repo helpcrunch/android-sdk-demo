@@ -26,6 +26,11 @@
         <activity android:name=".screens.UserDataActivity"/>
         <activity android:name=".screens.CustomUserDataActivity"/>
 
+        <activity
+            android:name=".screens.SendMessageActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

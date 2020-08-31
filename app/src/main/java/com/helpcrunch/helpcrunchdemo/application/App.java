@@ -21,7 +21,6 @@ public class App extends MultiDexApplication {
         HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET, getMyUser());
     }
 
-
     @NotNull
     public static HCUser getMyUser() {
         return new HCUser.Builder()

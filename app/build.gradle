@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 
 android {
@@ -30,9 +33,9 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.multidex:multidex:2.0.1'
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 
-    implementation 'com.helpcrunch:chat-sdk:3.0.0-beta.04'
+    implementation 'com.helpcrunch:chat-sdk:3.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

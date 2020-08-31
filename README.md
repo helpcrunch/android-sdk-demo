@@ -20,7 +20,7 @@ This SDK can be added to **Android**, **Flutter** or **React Native** projects t
 - [Pro Guard](#r8--proguard)
 - [Documentation](#documentation)
 - [License](#license)
-
+    
 ##  Gradle
 Add it in your root build.gradle at the end of repositories:
 ```groovy
@@ -33,7 +33,7 @@ allprojects {
 ```
 Add the dependency
 ```groovy
-implementation 'com.helpcrunch:chat-sdk:3.0.0-beta.(X)'
+implementation 'com.helpcrunch:chat-sdk:3.x.x'
 ```
 ## Requirements
  - Java 8/Kotlin
