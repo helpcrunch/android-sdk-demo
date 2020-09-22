@@ -35,7 +35,9 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
-    implementation 'com.helpcrunch:chat-sdk:3.0.1'
+    implementation ('com.helpcrunch:chat-sdk:3.0.4'){
+        exclude group: "androidx.emoji", module: "emoji-bundled"
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'
