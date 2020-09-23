@@ -19,23 +19,7 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
 
-//        HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET, getMyUser());
-
-        HCUser user = new HCUser.Builder().withUserId("87082229922").build();
-        HCTheme theme = new HCTheme.Builder(HCTheme.Type.DEFAULT).build();
-        HCOptions options = new HCOptions.Builder().setTheme(theme).build();
-        HelpCrunch.initialize("apprekassa", 1, "h3ZRtcPhr0p3ynZ/YySIbcUvqcFM+hpoMOkb9GtOUL1jttVkVBkDScgrtcCkvioKAmtihcwG9UVIczbMeITpBw==",
-                user, options, new Callback<Object>() {
-                    @Override
-                    public void onSuccess(Object result) {
-//                        callbackContext.success(0);
-                    }
-
-                    @Override
-                    public void onError(@NotNull String message) {
-//                        callbackContext.error(message);
-                    }
-                });
+        HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET, getMyUser());
     }
 
     @NotNull
