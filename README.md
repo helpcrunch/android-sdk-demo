@@ -1,11 +1,16 @@
- <a href="https://helpcrunch.com/"><img src="https://helpcrunch.com/img/layout/menu/logo.svg" width="400" height="90" alt="HelpCrunch"></a>
+ <a href="https://helpcrunch.com/"><p align="center"><img alt="flow" width="600" src="https://helpcrunch.com/img/layout/menu/logo.svg"></p></a>
+
+<p align=center>
+<a href="https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/chat-sdk"><img alt="Maven Central" src="https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/chat-sdk/badge.svg" /></a>
+<img alt="Platform" src="https://img.shields.io/badge/platforms-Android-green.svg" />
+<img alt="Languages" src="https://img.shields.io/badge/languages-Kotlin-F18E33.svg" />
+<a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img alt="Apache License" src="http://img.shields.io/badge/license-APACHE2-blue.svg?style=flat" /></a>
+</p>
 
 ### Helpcrunch Android SDK Demo
 A perfect live chat, email automation and a super-intuitive help desk in one smart customer communication platform.
 
-This SDK can be added to **Android**, **Flutter** or **React Native** projects to start a live chat from a mobile application.
-
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/chat-sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/chat-sdk) [![Platform](https://img.shields.io/badge/platforms-Android-green.svg)]() [![Languages](https://img.shields.io/badge/languages-Kotlin-F18E33.svg)]()  [![Apache License](http://img.shields.io/badge/license-APACHE2-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0.html)
+This SDK can be added to **Android**, **Flutter**, **Apache Cordova** or **React Native** projects to start a live chat from a mobile application.
 
 ## Sample Apk
 [Download](https://github.com/helpcrunch/android-sdk-demo/blob/master/app/release/app-release.apk?raw=true) sample apk
