@@ -40,6 +40,24 @@ Add the dependency
 ```groovy
 implementation 'com.helpcrunch:chat-sdk:3.x.x'
 ```
+
+This library uses [Java 8 bytecode](https://developer.android.com/studio/write/java8-support), so you will need to enable it in your project as well:
+
+```gradle
+android {
+    ...
+    // For Java projects
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // For Kotlin projects
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+```
+
 ## Requirements
  - Java 8/Kotlin
  - Min Android API - Android 4.4 KitKat (API 19)
