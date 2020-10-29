@@ -5,11 +5,11 @@ apply plugin: 'kotlin-android-extensions'
 
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         applicationId "com.helpcrunch.hcdemolibrary"
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 3
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -35,7 +35,7 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
-    implementation ('com.helpcrunch:chat-sdk:3.0.7-beta.04'){
+    implementation ('com.helpcrunch:chat-sdk:3.0.7-rc.01'){
         //Exclude the emoji-bundled to reduce the size of the application.
         //In this case, only system emoji will be used.
         exclude group: "androidx.emoji", module: "emoji-bundled"

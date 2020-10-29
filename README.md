@@ -61,10 +61,12 @@ android {
 ## Requirements
  - Java 8/Kotlin
  - Min Android API - Android 4.4 KitKat (API 19)
+ - (Optional) Version **OkHttp** is strictly **3.12.12** for support  Android 4.4
+ - (Optional) Version **OkHttp Logging Interceptor** is strictly **3.12.12** for support  Android 4.4
 
 ## Migration guide
 
-If your application currently uses v1.x SDK it is important that you migrate to Android SDK v2.x so that your application will get newest important features. You can update update your App with our [migration giude](https://docs.helpcrunch.com/android-sdk/migrate-from-the-android-sdk2-to-sdk3).
+If your application currently uses v2.x SDK it is important that you migrate to Android SDK v3.x so that your application will get newest important features. You can update update your App with our [migration guide](https://docs.helpcrunch.com/android-sdk/migrate-from-the-android-sdk2-to-sdk3).
 
 ## Demo Installation
 1. Clone or download repository
