@@ -35,7 +35,7 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
-    implementation ('com.helpcrunch:chat-sdk:3.0.7-rc.01'){
+    implementation ('com.helpcrunch:chat-sdk:3.0.7'){
         //Exclude the emoji-bundled to reduce the size of the application.
         //In this case, only system emoji will be used.
         exclude group: "androidx.emoji", module: "emoji-bundled"
