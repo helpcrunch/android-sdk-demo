@@ -28,8 +28,17 @@
 
         <activity
             android:name=".screens.SendMessageActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:windowSoftInputMode="stateHidden"/>
+
+        <!--==================================================================================-->
+
+        <service android:name=".notifications.MessagingService">
+            <intent-filter android:priority="9991">
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!--==================================================================================-->
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -40,6 +49,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
         </provider>
+
+        <!--==================================================================================-->
+
     </application>
 
 </manifest>

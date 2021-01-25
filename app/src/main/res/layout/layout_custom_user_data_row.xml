@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:orientation="horizontal">
+	android:orientation="horizontal"
+	tools:ignore="HardcodedText">
 
-	<EditText
+	<androidx.appcompat.widget.AppCompatEditText
 		android:id="@+id/key"
 		style="@style/Widget.AppCompat.EditText"
 		android:layout_width="match_parent"
@@ -17,7 +18,7 @@
 		android:maxLines="1"
 		android:scrollHorizontally="true" />
 
-	<EditText
+	<androidx.appcompat.widget.AppCompatEditText
 		android:id="@+id/value"
 		style="@style/Widget.AppCompat.EditText"
 		android:layout_width="match_parent"
@@ -25,9 +26,9 @@
 		android:layout_marginLeft="10dp"
 		android:layout_marginRight="10dp"
 		android:layout_weight="1"
-		tools:text="adasdasd\basdasd"
 		android:hint="data"
 		android:maxLines="1"
-		android:scrollHorizontally="true" />
+		android:scrollHorizontally="true"
+		tools:text="adasdasd\basdasd" />
 
 </LinearLayout>

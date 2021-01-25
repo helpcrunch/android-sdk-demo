@@ -1,6 +1,5 @@
 package com.helpcrunch.helpcrunchdemo.screens;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -27,14 +26,10 @@ public class UserDataActivity extends AppCompatActivity {
     private EditText userIdEditText;
     private EditText companyEditText;
 
-    private boolean isForLaunch = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_data);
-
-        isForLaunch = getIntent().getBooleanExtra("isForLaunch", false);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.change_user_data);
@@ -57,35 +52,27 @@ public class UserDataActivity extends AppCompatActivity {
             companyEditText.setText(currentUser.getCompany());
         }
 
-        findViewById(R.id.saveUserDataButton).setOnClickListener(view -> {
-                    if (isForLaunch) {
-                        returnUserData();
-                    } else {
-                        updateUserData();
-                    }
-                }
-        );
+        findViewById(R.id.save_user_data_button).setOnClickListener(view -> updateUserData());
+
+        findViewById(R.id.logout_button).setOnClickListener(view -> logout());
     }
 
-    private void returnUserData() {
-        final String username = nameEditText.getText().toString().trim();
-        final String email = emailEditText.getText().toString().trim();
-        final String phone = phoneEditText.getText().toString().trim();
-        final String company = companyEditText.getText().toString().trim();
-        final String registerUserId = userIdEditText.getText().toString().trim();
+    private void logout() {
+        setLogoutButtonParameters(View.VISIBLE, false);
 
-        Bundle bundle = new Bundle();
-        bundle.putString("username", username);
-        bundle.putString("email", email);
-        bundle.putString("phone", phone);
-        bundle.putString("company", company);
-        bundle.putString("registerUserId", registerUserId);
+        HelpCrunch.logout(new Callback<Object>() {
+            @Override
+            public void onSuccess(Object result) {
+                Toast.makeText(UserDataActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                setLogoutButtonParameters(View.GONE, false);
+            }
 
-        Intent intent = new Intent();
-        intent.putExtras(bundle);
-
-        setResult(RESULT_OK, intent);
-        finish();
+            @Override
+            public void onError(@NotNull String message) {
+                Toast.makeText(UserDataActivity.this, message, Toast.LENGTH_SHORT).show();
+                setLogoutButtonParameters(View.GONE, true);
+            }
+        });
     }
 
     private void updateUserData() {
@@ -94,6 +81,7 @@ public class UserDataActivity extends AppCompatActivity {
 
             return;
         }
+
         final String username = nameEditText.getText().toString().trim();
         final String email = emailEditText.getText().toString().trim();
         final String phone = phoneEditText.getText().toString().trim();
@@ -113,28 +101,34 @@ public class UserDataActivity extends AppCompatActivity {
                     .withCompany(company)
                     .build();
 
-            findViewById(R.id.progress).setVisibility(View.VISIBLE);
-            findViewById(R.id.saveUserDataButton).setEnabled(false);
+            setSaveUserDataButtonParameters(View.VISIBLE, false);
 
             HelpCrunch.updateUser(registerUser, new Callback<HCUser>() {
                 @Override
                 public void onSuccess(HCUser result) {
                     Toast.makeText(UserDataActivity.this, getString(R.string.data_saved), Toast.LENGTH_SHORT).show();
-                    findViewById(R.id.progress).setVisibility(View.GONE);
-                    findViewById(R.id.saveUserDataButton).setEnabled(true);
+                    setSaveUserDataButtonParameters(View.GONE, true);
                 }
 
                 @Override
                 public void onError(@NotNull String message) {
-                    Toast.makeText(UserDataActivity.this, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show();
-                    findViewById(R.id.progress).setVisibility(View.GONE);
-                    findViewById(R.id.saveUserDataButton).setEnabled(true);
+                    Toast.makeText(UserDataActivity.this, message, Toast.LENGTH_SHORT).show();
+                    setSaveUserDataButtonParameters(View.GONE, true);
                 }
-
             });
         } else {
             Toast.makeText(UserDataActivity.this, getString(R.string.error_id_is_empty), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void setSaveUserDataButtonParameters(int visible, boolean enabled) {
+        findViewById(R.id.save_user_data_button_progress).setVisibility(visible);
+        findViewById(R.id.save_user_data_button).setEnabled(enabled);
+    }
+
+    private void setLogoutButtonParameters(int visible, boolean enabled) {
+        findViewById(R.id.progress).setVisibility(visible);
+        findViewById(R.id.logout_button).setEnabled(enabled);
     }
 
     @Override

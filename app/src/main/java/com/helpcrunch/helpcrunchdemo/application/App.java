@@ -2,25 +2,23 @@ package com.helpcrunch.helpcrunchdemo.application;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.helpcrunch.library.core.Callback;
+import com.helpcrunch.library.core.ExtensionsKt;
 import com.helpcrunch.library.core.HelpCrunch;
 import com.helpcrunch.library.core.models.user.HCUser;
-import com.helpcrunch.library.core.options.HCOptions;
-import com.helpcrunch.library.core.options.design.HCTheme;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.security.cert.Extension;
+
+import static com.helpcrunch.library.core.HelpCrunch.showChatScreen;
+
 public class App extends MultiDexApplication {
+    //    public static final String ORGANIZATION = ""; //Organization name
+//    public static final int APP_ID = -1; //Application id
+//    public static final String SECRET = ""; //Application secret
     public static final String ORGANIZATION = "mobile";
     public static final int APP_ID = 2889;
     public static final String SECRET = "BT4na/0/fHk6d1jtg0qKiK5GoxXf1/GgP0ay0ps2UiWJPfdPeUDFUYwnIjBFO49oilOKx+EMg2Tw+BJsS/hI6g==";
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET, getMyUser());
-    }
 
     @NotNull
     public static HCUser getMyUser() {
@@ -32,4 +30,12 @@ public class App extends MultiDexApplication {
                 .build();
     }
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET, getMyUser());
+        // or
+        // HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET);
+    }
 }

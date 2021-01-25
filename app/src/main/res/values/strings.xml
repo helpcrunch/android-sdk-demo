@@ -16,83 +16,9 @@
     <string name="error_id_is_empty">ID is empty</string>
     <string name="change_user_data">User data</string>
     <string name="change_custom_user_data">Custom data</string>
-
-    <!--Chat  Form-->
-    <string name="hc_waiting_message">Searching for a free agent. Please hold on.</string>
-    <string name="hc_message_hint">Type message</string>
-    <string name="hc_select_image">Select image</string>
-    <string name="hc_copied">Copied</string>
-    <string name="hc_menu_copy">Copy</string>
-    <string name="hc_menu_open">Open</string>
-    <string name="hc_today">Today</string>
-    <string name="hc_yesterday">Yesterday</string>
-    <string name="hc_sent_at">at</string>
-    <string name="hc_permissions_ok">OK</string>
-    <string name="hc_permissions_cancel">Cancel</string>
-    <string name="hc_permissions_content">Allow file system and camera access to improve file sharing</string>
-    <string name="hc_messages_updating">Updating…</string>
-    <string name="hc_button_send">Send</string>
-    <string name="hc_more_agents">and %d more</string>
-    <string name="hc_menu_view_image">View image</string>
+    <string name="send_message">Send user message</string>
     <string name="send_message_hint">Send user message</string>
-
     <string name="send_message_button">Send text</string>
     <string name="force_new_chat">Force new chat</string>
-
-    <plurals name="hc_typing">
-        <item quantity="zero">typing…</item>
-        <item quantity="one">is typing…</item>
-        <item quantity="two">are typing…</item>
-        <item quantity="few">are typing…</item>
-        <item quantity="many">are typing…</item>
-        <item quantity="other">are typing…</item>
-    </plurals>
-
-    <!--Notifications-->
-    <string name="hc_default_notification_title">Help Crunch</string>
-    <string name="hc_notification_channel_text">Allow messages notifications</string>
-
-    <!--Pre-Chat Form-->
-    <string name="hc_pre_chat_message">Usually we respond immediately. If not, you can expect a reply within a few hours. Please kindly introduce yourself.</string>
-    <string name="hc_button_continue">Continue</string>
-    <string name="hc_pre_chat_name">Name</string>
-    <string name="hc_pre_chat_email">Email</string>
-    <string name="hc_pre_chat_company">Company</string>
-    <string name="hc_pre_chat_phone_number">Phone number</string>
-    <string name="hc_required_error">%s is required</string>
-    <string name="hc_pattern_error">%s does not valid</string>
-    <string name="send_message">Send user message</string>
-
-    <!-- In App Errors -->
-    <string name="hc_no_internet_connection_error">Please, check your internet connection</string>
-    <string name="hc_handler_server_error">Server error. Repeat the request after 5 seconds</string>
-    <string name="hc_handler_unknown_error">Something went wrong. Please try again later</string>
-    <string name="hc_chat_deleted_error">This chat was removed by agent. You\'ll be logged out</string>
-    <string name="hc_file_size_error">You can\'t send files bigger than 16 MB.</string>
-    <string name="hc_file_cant_open_error">Can\'t open this file</string>
-    <string name="hc_image_load_error">Can\'t load image</string>
-    <string name="hc_no_camera_exists_error">No Application exists for camera!</string>
-
-    <!--File Picker-->
-    <string name="hc_permission_file_picker_rationale">Storage permission is needed to access files.</string>
-    <string name="hc_no_files_found">No files found</string>
-    <string name="hc_attachments_title_text" formatted="false">(%d/%d)</string>
-    <string name="hc_attachments_num" formatted="false">%d</string>
-    <string name="hc_picker_title">Select an option</string>
-    <string name="hc_select_photo_text">Select a media</string>
-    <string name="hc_select_doc_text">Select a document</string>
-    <string name="hc_videos">Videos</string>
-    <string name="hc_images">Images</string>
-    <string name="hc_all_photos">All Photos</string>
-    <string name="hc_all_videos">All Videos</string>
-    <string name="hc_all_files">All Files</string>
-    <string name="hc_done">Done</string>
-    <string name="hc_menu_item_photo">Photo</string>
-    <string name="hc_download">Download</string>
-    <string name="hc_downloading">Downloading…</string>
-    <string name="hc_downloaded">Downloaded</string>
-    <string name="hc_menu_item_file">File</string>
-    <string name="hc_share">Share…</string>
-    <string name="hc_send_intent_title">Send to:</string>
 
 </resources>

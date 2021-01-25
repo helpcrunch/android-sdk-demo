@@ -29,14 +29,7 @@ public class CustomUserDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_user_data);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.change_custom_user_data);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
-        findViewById(R.id.saveUserDataButton).setOnClickListener(view -> {
-            saveCustomData();
-        });
+        initViews();
 
         fillData();
     }
@@ -58,6 +51,16 @@ public class CustomUserDataActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void initViews() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.change_custom_user_data);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        findViewById(R.id.save_user_data_button).setOnClickListener(view -> {
+            saveCustomData();
+        });
+    }
 
     private void fillData() {
         HCUser currentUser = HelpCrunch.getUser();
@@ -74,8 +77,8 @@ public class CustomUserDataActivity extends AppCompatActivity {
     }
 
     private void saveCustomData() {
-        if(HelpCrunch.getUser() == null){
-            Toast.makeText(this,"There is no user yet", Toast.LENGTH_SHORT).show();
+        if (HelpCrunch.getUser() == null) {
+            Toast.makeText(this, "There is no user yet", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -84,26 +87,22 @@ public class CustomUserDataActivity extends AppCompatActivity {
 
         getNewData(customData, form);
 
-        HCUser user = new HCUser.Builder()
-                .withCustomData(customData)
-                .build();
+        HCUser user = HelpCrunch.getUser();
+        user.setCustomData(customData);
 
-        findViewById(R.id.progress).setVisibility(View.VISIBLE);
-        findViewById(R.id.saveUserDataButton).setEnabled(false);
+        setUserDataButtonParameters(View.VISIBLE, false);
 
         HelpCrunch.updateUser(user, new Callback<HCUser>() {
             @Override
             public void onSuccess(HCUser result) {
-                Toast.makeText(CustomUserDataActivity.this,  getString(R.string.data_saved), Toast.LENGTH_SHORT).show();
-                findViewById(R.id.progress).setVisibility(View.GONE);
-                findViewById(R.id.saveUserDataButton).setEnabled(true);
+                Toast.makeText(CustomUserDataActivity.this, getString(R.string.data_saved), Toast.LENGTH_SHORT).show();
+                setUserDataButtonParameters(View.GONE, true);
             }
 
             @Override
             public void onError(@NotNull String message) {
-                Toast.makeText(CustomUserDataActivity.this,  getString(R.string.something_wrong), Toast.LENGTH_SHORT).show();
-                findViewById(R.id.progress).setVisibility(View.GONE);
-                findViewById(R.id.saveUserDataButton).setEnabled(true);
+                Toast.makeText(CustomUserDataActivity.this, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show();
+                setUserDataButtonParameters(View.GONE, true);
             }
         });
     }
@@ -136,5 +135,10 @@ public class CustomUserDataActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(object)) {
             customData.put(key, object);
         }
+    }
+
+    private void setUserDataButtonParameters(int visible, boolean enabled) {
+        findViewById(R.id.save_user_data_button_progress).setVisibility(visible);
+        findViewById(R.id.save_user_data_button).setEnabled(enabled);
     }
 }

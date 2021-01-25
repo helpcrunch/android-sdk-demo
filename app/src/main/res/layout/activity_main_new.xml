@@ -4,7 +4,8 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	tools:ignore="HardcodedText">
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/logo"
@@ -19,7 +20,7 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="center_horizontal"
 		android:layout_marginTop="20dp"
-		android:textSize="12dp"
+		android:textSize="12sp"
 		tools:text="0.0.0.00" />
 
 	<ScrollView
@@ -76,7 +77,7 @@
 				android:layout_weight="1"
 				android:background="?android:attr/listDivider" />
 
-			<Switch
+			<com.google.android.material.switchmaterial.SwitchMaterial
 				android:id="@+id/pre_chat_switch"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -94,24 +95,22 @@
 				<androidx.appcompat.widget.AppCompatTextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="SDK status"
+					android:text="SDK status:"
 					android:textStyle="bold" />
 
 				<androidx.appcompat.widget.AppCompatTextView
 					android:id="@+id/state"
-					android:layout_width="wrap_content"
+					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginStart="12dp"
-					tools:text="0.0.0.00" />
+					tools:text="Idle" />
 
 			</LinearLayout>
 
 			<FrameLayout
-				android:id="@+id/chatCustomButton"
-				style="@style/Button"
-				android:layout_marginStart="20dp"
-				android:layout_marginEnd="20dp"
-				android:visibility="gone">
+				android:visibility="gone"
+				android:id="@+id/chat_custom_button"
+				style="@style/Button">
 
 				<androidx.appcompat.widget.AppCompatTextView
 					style="@style/Text"
@@ -138,14 +137,15 @@
 			</FrameLayout>
 
 			<LinearLayout
-				android:layout_marginTop="30dp"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:layout_marginTop="30dp"
 				android:layout_marginBottom="8dp"
+				android:baselineAligned="false"
 				android:orientation="horizontal">
 
 				<FrameLayout
-					android:id="@+id/userDataButton"
+					android:id="@+id/user_data_button"
 					style="@style/Button"
 					android:layout_marginEnd="8dp"
 					android:layout_marginBottom="0dp"
@@ -168,7 +168,7 @@
 				</FrameLayout>
 
 				<FrameLayout
-					android:id="@+id/customUserDataButton"
+					android:id="@+id/custom_user_data_button"
 					style="@style/Button"
 					android:layout_marginStart="8dp"
 					android:layout_marginBottom="0dp"
@@ -193,7 +193,7 @@
 			</LinearLayout>
 
 			<FrameLayout
-				android:id="@+id/sendMessageButton"
+				android:id="@+id/send_message_button"
 				style="@style/Button"
 				android:layout_marginBottom="0dp">
 
@@ -222,7 +222,7 @@
 				android:background="?android:attr/listDivider" />
 
 			<FrameLayout
-				android:id="@+id/chatButton"
+				android:id="@+id/chat_button"
 				style="@style/Button">
 
 				<androidx.appcompat.widget.AppCompatTextView
@@ -263,7 +263,7 @@
 			</FrameLayout>
 
 			<FrameLayout
-				android:id="@+id/logoutButton"
+				android:id="@+id/logout_button"
 				style="@style/Button.Logout">
 
 				<androidx.appcompat.widget.AppCompatTextView

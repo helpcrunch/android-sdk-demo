@@ -3,7 +3,8 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	tools:ignore="HardcodedText">
 
 	<ScrollView
 		android:layout_width="match_parent"
@@ -20,7 +21,7 @@
 	</ScrollView>
 
 	<FrameLayout
-		android:id="@+id/saveUserDataButton"
+		android:id="@+id/save_user_data_button"
 		style="@style/Button"
 		android:layout_margin="20dp">
 
@@ -31,7 +32,7 @@
 			android:text="Save" />
 
 		<ProgressBar
-			android:id="@+id/progress"
+			android:id="@+id/save_user_data_button_progress"
 			android:layout_width="30dp"
 			android:layout_height="30dp"
 			android:layout_gravity="center_vertical|end"

@@ -13,13 +13,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.helpcrunch.helpcrunchdemo.R;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
@@ -37,17 +37,7 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    private View badge1View;
-
-    private TextView badge1TextView;
-
-    private RadioGroup themeRadioGroup;
-
-    private CheckBox defaultOptionsCheckBox;
-    private Switch preChatSwitch;
-
-
-    private BroadcastReceiver hcStateBroadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver hcStateBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             HelpCrunch.State state = (HelpCrunch.State) intent.getSerializableExtra(HelpCrunch.STATE_TYPE);
@@ -55,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.state)).setText(getStateString(state == null ? HelpCrunch.State.IDLE : state));
         }
     };
-
-    private BroadcastReceiver hcEventsBroadcastReceiver = new BroadcastReceiver() {
+    private View badge1View;
+    private TextView badge1TextView;
+    private final BroadcastReceiver hcEventsBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             HelpCrunch.Event event = (HelpCrunch.Event) intent.getSerializableExtra(HelpCrunch.EVENT_TYPE);
@@ -101,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+    private RadioGroup themeRadioGroup;
+    private CheckBox defaultOptionsCheckBox;
+    private SwitchMaterial preChatSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
 
-        findViewById(R.id.chatButton).setOnClickListener(v -> {
+        findViewById(R.id.chat_button).setOnClickListener(v -> {
             checkSettingsOpenScreen();
             clearBadge();
             HelpCrunch.trackEvent(
@@ -118,14 +112,14 @@ public class MainActivity extends AppCompatActivity {
                     "Say Cheese");
         });
 
-        findViewById(R.id.chatCustomButton).setOnClickListener(v -> openWithCustomSettings());
-        findViewById(R.id.customUserDataButton).setOnClickListener(v -> openCustomUserDataScreen());
-        findViewById(R.id.userDataButton).setOnClickListener(v -> openUserDataScreen());
-        findViewById(R.id.sendMessageButton).setOnClickListener(v -> openSendMessageScreen());
+        findViewById(R.id.chat_custom_button).setOnClickListener(v -> openWithCustomSettings());
+        findViewById(R.id.custom_user_data_button).setOnClickListener(v -> openCustomUserDataScreen());
+        findViewById(R.id.user_data_button).setOnClickListener(v -> openUserDataScreen());
+        findViewById(R.id.send_message_button).setOnClickListener(v -> openSendMessageScreen());
 
         findViewById(R.id.userData).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, UserDataActivity.class)));
 
-        findViewById(R.id.logoutButton).setOnClickListener(v -> logout());
+        findViewById(R.id.logout_button).setOnClickListener(v -> logout());
 
         String version = "SDK: v" + HelpCrunch.getVersion();
 
@@ -146,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 stateStr = getStateSpannableString("Idle", Color.GRAY);
                 break;
             case READY:
-                stateStr = getStateSpannableString("Ready", Color.MAGENTA);
+                stateStr = getStateSpannableString("Ready", Color.GREEN);
                 break;
             case LOADING:
                 stateStr = getStateSpannableString("Loading...", Color.LTGRAY);
@@ -169,9 +163,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @NotNull
-    private SpannableString getStateSpannableString(String idle, @ColorInt int color) {
+    private SpannableString getStateSpannableString(String state, @ColorInt int color) {
         SpannableString stateStr;
-        stateStr = new SpannableString(idle);
+        stateStr = new SpannableString(state);
         stateStr.setSpan(new ForegroundColorSpan(color), 0, stateStr.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         return stateStr;
     }
@@ -180,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateUnreadMessages();
-        findViewById(R.id.logoutButton).setEnabled(HelpCrunch.getUser() != null);
+        findViewById(R.id.logout_button).setEnabled(HelpCrunch.getUser() != null);
     }
 
     @Override
@@ -190,37 +184,23 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(hcStateBroadcastReceiver);
     }
 
-    private void openCustomUserDataScreen() {
-        startActivity(new Intent(MainActivity.this, CustomUserDataActivity.class));
-    }
-
-    private void openUserDataScreen() {
-        startActivity(new Intent(MainActivity.this, UserDataActivity.class));
-    }
-
-    private void openSendMessageScreen() {
-        startActivity(new Intent(MainActivity.this, SendMessageActivity.class));
-    }
-
     private void logout() {
-        findViewById(R.id.progress).setVisibility(View.VISIBLE);
-        findViewById(R.id.logoutButton).setEnabled(false);
+
+        setLogoutButtonParameters(View.VISIBLE, false);
 
         HelpCrunch.logout(new Callback<Object>() {
             @Override
             public void onSuccess(Object result) {
                 Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
                 clearBadge();
-                findViewById(R.id.progress).setVisibility(View.GONE);
-                findViewById(R.id.logoutButton).setEnabled(false);
                 defaultOptionsCheckBox.setChecked(false);
+                setLogoutButtonParameters(View.GONE, false);
             }
 
             @Override
             public void onError(@NotNull String message) {
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-                findViewById(R.id.progress).setVisibility(View.GONE);
-                findViewById(R.id.logoutButton).setEnabled(true);
+                setLogoutButtonParameters(View.GONE, true);
             }
         });
     }
@@ -303,12 +283,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showChat(@Nullable HCOptions options) {
-        View progress = findViewById(R.id.progress_open);
-        View logo = findViewById(R.id.logo_btn);
-        View chatButton = findViewById(R.id.chatButton);
-        progress.setVisibility(View.VISIBLE);
-        logo.setVisibility(View.GONE);
-        chatButton.setEnabled(false);
+        setChatScreenButtonParameters(View.GONE, View.VISIBLE, false);
 
         HelpCrunch.showChatScreen(options, new Callback<Object>() {
             @Override
@@ -326,16 +301,12 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Can't open chat. Something is wrong", Toast.LENGTH_SHORT).show();
                 }
 
-                progress.setVisibility(View.GONE);
-                logo.setVisibility(View.VISIBLE);
-                chatButton.setEnabled(true);
+                setChatScreenButtonParameters(View.VISIBLE, View.GONE, true);
             }
 
             @Override
             public void onSuccess(Object result) {
-                progress.setVisibility(View.GONE);
-                logo.setVisibility(View.VISIBLE);
-                chatButton.setEnabled(true);
+                setChatScreenButtonParameters(View.VISIBLE, View.GONE, true);
             }
         });
     }
@@ -386,5 +357,28 @@ public class MainActivity extends AppCompatActivity {
         String countString = String.valueOf(count);
 
         badge1TextView.setText(countString);
+    }
+
+    private void setChatScreenButtonParameters(int logoVisible, int progressVisible, boolean buttonEnabled) {
+        findViewById(R.id.progress_open).setVisibility(progressVisible);
+        findViewById(R.id.logo_btn).setVisibility(logoVisible);
+        findViewById(R.id.chat_button).setEnabled(buttonEnabled);
+    }
+
+    private void setLogoutButtonParameters(int visible, boolean enabled) {
+        findViewById(R.id.progress).setVisibility(visible);
+        findViewById(R.id.logout_button).setEnabled(enabled);
+    }
+
+    private void openCustomUserDataScreen() {
+        startActivity(new Intent(MainActivity.this, CustomUserDataActivity.class));
+    }
+
+    private void openUserDataScreen() {
+        startActivity(new Intent(MainActivity.this, UserDataActivity.class));
+    }
+
+    private void openSendMessageScreen() {
+        startActivity(new Intent(MainActivity.this, SendMessageActivity.class));
     }
 }

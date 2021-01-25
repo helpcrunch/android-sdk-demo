@@ -12,6 +12,7 @@
 
     <color name="colorBlue">#4c82f8</color>
     <color name="colorDarkBlue">#365bac</color>
+    <color name="colorDarkBlueDisabled">#A2A6AE</color>
 
     <color name="main_color">#e68127</color>
     <color name="send_bg_enable_color">#6564FE</color>

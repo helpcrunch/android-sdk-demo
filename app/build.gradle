@@ -27,6 +27,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
@@ -35,11 +38,7 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
-    implementation ('com.helpcrunch:chat-sdk:3.0.7'){
-        //Exclude the emoji-bundled to reduce the size of the application.
-        //In this case, only system emoji will be used.
-        exclude group: "androidx.emoji", module: "emoji-bundled"
-    }
+    implementation('com.helpcrunch:chat-sdk:3.0.8-alpha.02')
 }
 
 apply plugin: 'com.google.gms.google-services'
