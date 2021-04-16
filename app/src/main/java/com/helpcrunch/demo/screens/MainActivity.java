@@ -1,4 +1,4 @@
-package com.helpcrunch.helpcrunchdemo.screens;
+package com.helpcrunch.demo.screens;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -19,8 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.switchmaterial.SwitchMaterial;
-import com.helpcrunch.helpcrunchdemo.R;
+import com.helpcrunch.demo.R;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
 import com.helpcrunch.library.core.models.user.HCUser;
@@ -37,6 +36,12 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
+    private View badge1View;
+    private TextView badge1TextView;
+
+    private RadioGroup themeRadioGroup;
+    private CheckBox defaultOptionsCheckBox;
+
     private final BroadcastReceiver hcStateBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -45,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.state)).setText(getStateString(state == null ? HelpCrunch.State.IDLE : state));
         }
     };
-    private View badge1View;
-    private TextView badge1TextView;
+
     private final BroadcastReceiver hcEventsBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -87,14 +91,19 @@ public class MainActivity extends AppCompatActivity {
 
                 case ON_UNREAD_COUNT_CHANGED:
                     Log.i(HelpCrunch.EVENTS, "new unread message");
-                    updateUnreadMessages();
+                    String unreadChatsCountStr = data.get(HelpCrunch.UNREAD_CHATS);
+                    if (unreadChatsCountStr != null) {
+                        setVisibilityForUnreadMessagesBadge(Integer.parseInt(unreadChatsCountStr));
+                    }
+
+                    break;
+                case CHAT_CREATED:
+                    Log.i(HelpCrunch.EVENTS, "Chat id: " + data.get("chat_id"));
+
                     break;
             }
         }
     };
-    private RadioGroup themeRadioGroup;
-    private CheckBox defaultOptionsCheckBox;
-    private SwitchMaterial preChatSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 stateStr = getStateSpannableString("Idle", Color.GRAY);
                 break;
             case READY:
-                stateStr = getStateSpannableString("Ready", Color.GREEN);
+                stateStr = getStateSpannableString("Ready", Color.parseColor("#4c82f8"));
                 break;
             case LOADING:
                 stateStr = getStateSpannableString("Loading...", Color.LTGRAY);
@@ -240,15 +249,11 @@ public class MainActivity extends AppCompatActivity {
         HCOptions.Builder optionsBuilder = new HCOptions.Builder()
                 .setTheme(theme);
 
-        if (preChatSwitch.isChecked()) {
-            HCPreChatForm preChatForm = new HCPreChatForm.Builder()
-                    .withName(true, null)
-                    .withEmail(true)
-                    .withPhone(false)
-                    .build();
+        HCPreChatForm preChatForm = new HCPreChatForm.Builder()
+                .withField("some key", "some value")
+                .build();
 
-            optionsBuilder.setPreChatForm(preChatForm);
-        }
+        optionsBuilder.setPreChatForm(preChatForm);
 
         showChat(optionsBuilder.build());
     }
@@ -263,10 +268,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         HCPreChatForm preChatForm = new HCPreChatForm.Builder()
-                .withName(true)
-                .withCompany(true)
-                .withEmail(true)
-                .withPhone(false)
                 .withField("customAttribute", "My custom", true)
                 .withField("customAttribute1", "Please enter something", true)
                 .build();
@@ -274,9 +275,6 @@ public class MainActivity extends AppCompatActivity {
         HCOptions options = new HCOptions.Builder()
                 .setTheme(theme)
                 .setPreChatForm(preChatForm)
-                .setFileExtensions(new FileExtension[]{
-
-                })
                 .build();
 
         showChat(options);
@@ -290,7 +288,6 @@ public class MainActivity extends AppCompatActivity {
             public void onError(@NotNull String message) {
                 if (message.equals("user_blocked")) {
                     HCUser user = HelpCrunch.getUser();
-
 
                     if (user != null) {
                         String messageText = "You are a very bad person, " + user.getName() + ".\nPlease, uninstall the application.";
@@ -319,7 +316,6 @@ public class MainActivity extends AppCompatActivity {
         defaultOptionsCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             setThemeControlEnabled(!isChecked);
         });
-        preChatSwitch = findViewById(R.id.pre_chat_switch);
 
         defaultOptionsCheckBox.setChecked(HelpCrunch.getUser() != null);
     }
@@ -331,7 +327,6 @@ public class MainActivity extends AppCompatActivity {
         HelpCrunch.trackEvent("OptionsChanged", data);
 
         themeRadioGroup.setEnabled(isEnabled);
-        preChatSwitch.setEnabled(isEnabled);
 
         for (int i = 0; i < themeRadioGroup.getChildCount(); i++) {
             themeRadioGroup.getChildAt(i).setEnabled(isEnabled);

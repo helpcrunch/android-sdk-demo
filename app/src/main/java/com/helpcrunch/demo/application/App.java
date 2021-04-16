@@ -1,21 +1,13 @@
-package com.helpcrunch.helpcrunchdemo.application;
+package com.helpcrunch.demo.application;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.helpcrunch.library.core.ExtensionsKt;
 import com.helpcrunch.library.core.HelpCrunch;
 import com.helpcrunch.library.core.models.user.HCUser;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.security.cert.Extension;
-
-import static com.helpcrunch.library.core.HelpCrunch.showChatScreen;
-
 public class App extends MultiDexApplication {
-    //    public static final String ORGANIZATION = ""; //Organization name
-//    public static final int APP_ID = -1; //Application id
-//    public static final String SECRET = ""; //Application secret
     public static final String ORGANIZATION = "mobile";
     public static final int APP_ID = 2889;
     public static final String SECRET = "BT4na/0/fHk6d1jtg0qKiK5GoxXf1/GgP0ay0ps2UiWJPfdPeUDFUYwnIjBFO49oilOKx+EMg2Tw+BJsS/hI6g==";

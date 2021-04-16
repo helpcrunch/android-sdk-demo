@@ -2,12 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 
 android {
     compileSdkVersion 30
     defaultConfig {
-        applicationId "com.helpcrunch.hcdemolibrary"
+        applicationId "com.helpcrunch.demo"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 3
@@ -30,15 +31,29 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //Multidex
     implementation 'androidx.multidex:multidex:2.0.1'
 
+    //AndroidX
     implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
 
-    implementation('com.helpcrunch:chat-sdk:3.0.8-alpha.02')
+    //Firebase
+    implementation 'com.google.firebase:firebase-messaging:21.1.0'
+
+    //Widgets
+    implementation 'com.github.TalbotGooday:AvatarView:0.0.2'
+
+    //HelpCrunch
+    implementation('com.helpcrunch:chat-sdk:3.0.8')
+
 }
 
 apply plugin: 'com.google.gms.google-services'

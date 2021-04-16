@@ -1,4 +1,4 @@
-package com.helpcrunch.helpcrunchdemo.screens;
+package com.helpcrunch.demo.screens;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,7 +23,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
-import com.helpcrunch.helpcrunchdemo.R;
+import com.helpcrunch.demo.R;
 import com.helpcrunch.library.core.HelpCrunch;
 
 import java.util.HashMap;

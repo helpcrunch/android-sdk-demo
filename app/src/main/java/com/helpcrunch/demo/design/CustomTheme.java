@@ -1,6 +1,6 @@
-package com.helpcrunch.helpcrunchdemo.design;
+package com.helpcrunch.demo.design;
 
-import com.helpcrunch.helpcrunchdemo.R;
+import com.helpcrunch.demo.R;
 import com.helpcrunch.library.core.options.design.HCAvatarTheme;
 import com.helpcrunch.library.core.options.design.HCChatAreaTheme;
 import com.helpcrunch.library.core.options.design.HCMessageAreaTheme;
@@ -63,7 +63,6 @@ public class CustomTheme {
                 .setBackgroundColor(R.color.background_color)
                 .setInputFieldTextColor(android.R.color.white)
                 .setInputFieldTextHintColor(R.color.hc_color_chats_text_hint_dark)
-                .setInputFieldBackgroundDrawableRes(R.drawable.bg_chat_field)
                 .setMessageMenuBackgroundColor(R.color.statusbar_color)
                 .setMessageMenuSummaryTextColor(android.R.color.white)
                 .setMessageMenuIconColor(R.color.toolbar_icon_color)

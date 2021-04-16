@@ -1,4 +1,4 @@
-package com.helpcrunch.helpcrunchdemo.screens;
+package com.helpcrunch.demo.screens;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.helpcrunch.helpcrunchdemo.R;
+import com.helpcrunch.demo.R;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
 import com.helpcrunch.library.core.models.user.HCUser;

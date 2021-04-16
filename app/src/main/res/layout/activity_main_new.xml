@@ -77,12 +77,6 @@
 				android:layout_weight="1"
 				android:background="?android:attr/listDivider" />
 
-			<com.google.android.material.switchmaterial.SwitchMaterial
-				android:id="@+id/pre_chat_switch"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:text=" Enable pre-chat form" />
-
 			<LinearLayout
 				android:id="@+id/chat_id_container"
 				android:layout_width="match_parent"
