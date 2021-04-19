@@ -13,8 +13,6 @@
 - [#26](https://github.com/helpcrunch/android-sdk-demo/issues/26) OutOfMemoryErrors in 3.0.8-alpha.02
 - [#28](https://github.com/helpcrunch/android-sdk-demo/issues/28) ConcurrentModificationException
 - [#25](https://github.com/helpcrunch/android-sdk-demo/issues/25) Can only download HTTP/HTTPS URIs
-
-
 ---
 
 ## v3.0.7 (09/11/2020)
@@ -62,11 +60,11 @@ Bug fixes and other improvements
 ---
 
 ## v2.0.0-rc.5 (11/02/2020)
-    * Bug with server time fixed
-    * Video parsing fixed
-    * Fixed tabs crash with different AndroidX appcompat versions
-    * Added the ability to disable the display of emoji and SVG images to reduce the size of the application
-    * Added image keyboard support
+* Bug with server time fixed
+* Video parsing fixed
+* Fixed tabs crash with different AndroidX appcompat versions
+* Added the ability to disable the display of emoji and SVG images to reduce the size of the application
+* Added image keyboard support
 ---
 
 ## v2.0.0-rc.3 (24/01/2020)
