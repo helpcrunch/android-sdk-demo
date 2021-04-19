@@ -33,10 +33,10 @@ The changelog is available [here](CHANGELOG.md)
 Add it in your root build.gradle at the end of repositories:
 ```groovy
 allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
+    repositories {
+        //...
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
 Add the dependency
@@ -64,8 +64,8 @@ android {
 ## Requirements
  - Java 8/Kotlin
  - Min Android API - Android 4.4 KitKat (API 19)
- - (Optional) Version **OkHttp** is strictly **3.12.12** for support  Android 4.4
- - (Optional) Version **OkHttp Logging Interceptor** is strictly **3.12.12** for support  Android 4.4
+ - Version **OkHttp** is strictly **3.12.12** for support  Android 4.4
+ - Version **OkHttp Logging Interceptor** is strictly **3.12.12** for support  Android 4.4
 
 ## Migration guide
 
@@ -95,7 +95,7 @@ also you can set up option or user data
 	.build();
 
 HCOptions.Builder options = new HCOptions.Builder()
-	.setTheme(theme)
+	.setTheme(/*some HCTheme*/)
 	.build();
 
 HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET, user, options);
@@ -111,7 +111,7 @@ HCUser user = new HCUser.Builder()
 	.withEmail("email")
 	.withPhone("phone")
 	.withUserId("registerUserId")
-	.withCustomData(customData)
+	.withCustomData(/*some Map<String, Object>*/)
 	.withCompany("organization")
 	.build();
 ```
