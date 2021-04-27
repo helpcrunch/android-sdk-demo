@@ -48,7 +48,7 @@ This library uses [Java 8 bytecode](https://developer.android.com/studio/write/j
 
 ```gradle
 android {
-    ...
+    //...
     // For Java projects
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -61,11 +61,26 @@ android {
 }
 ```
 
+We use the **OkHttp** and the **OkHttp Logging Interceptor** version **strictly 3.12.12** to support devices with Android SDK 19. If you are using a version above, then please downgrade the version **3.12.12** to avoid conflicts:
+
+```gradle
+implementation("com.squareup.okhttp3:okhttp") {
+    version {
+        strictly '3.12.12'
+    }
+}
+implementation("com.squareup.okhttp3:logging-interceptor") {
+    version {
+        strictly '3.12.12'
+    }
+}
+```
+
 ## Requirements
  - Java 8/Kotlin
  - Min Android API - Android 4.4 KitKat (API 19)
- - Version **OkHttp** is strictly **3.12.12** for support  Android 4.4
- - Version **OkHttp Logging Interceptor** is strictly **3.12.12** for support  Android 4.4
+ - Version **OkHttp** is **strictly 3.12.12** for support  Android 4.4
+ - Version **OkHttp Logging Interceptor** is **strictly 3.12.12** for support  Android 4.4
 
 ## Migration guide
 
