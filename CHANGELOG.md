@@ -1,5 +1,17 @@
 # Changelog
 
+## v3.0.9 - v.3.1.1 (04/05/2021)
+* Fab can now show the number of new incoming messages
+* The fab color will now depend on the main color if a custom theme is used and the fab settings are not added
+* The built-in file picker has been removed for all android versions.
+* Downloaded files are now saved to the public Downloads folder
+
+#### Bug Fixes:
+- Fixed looping of automatic scroll on new agent message
+- Fixed the initialization bug on Android 6.0
+- [#41](https://github.com/helpcrunch/android-sdk-demo/issues/41) Fatal Exception: com.google.android.gms.tasks.RuntimeExecutionException
+---
+
 ## v3.0.8 (17/04/2021)
 * Added functionality for previewing articles from the knowledge base
 * Support for sending files on Android 11
