@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.1.2 - v.3.1.3 (12/05/2021)
+* Bug fixes and improvements
+* Fixed compatibility with OkHttp 4.x versions
+---
+
 ## v3.0.9 - v.3.1.1 (04/05/2021)
 * Fab can now show the number of new incoming messages
 * The fab color will now depend on the main color if a custom theme is used and the fab settings are not added
