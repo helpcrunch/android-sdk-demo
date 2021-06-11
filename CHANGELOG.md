@@ -1,5 +1,17 @@
 # Changelog
 
+## v3.1.4 (11/06/2021)
+* Added the ability to display the knowledge base inside the SDK
+
+#### Bug Fixes:
+- [#44](https://github.com/helpcrunch/android-sdk-demo/issues/44) CLEARTEXT communication to ucarecdn.com not permitted by network security policy
+- [#43](https://github.com/helpcrunch/android-sdk-demo/issues/43) java.io.IOException: TOO_MANY_REGISTRATIONS
+- [#39](https://github.com/helpcrunch/android-sdk-demo/issues/39) OutOfMemoryError
+- [#48](https://github.com/helpcrunch/android-sdk-demo/issues/48) NullPointerException: view.findViewById(R.id.hc_progress_indicator) must not be null
+- [#47](https://github.com/helpcrunch/android-sdk-demo/issues/47) IllegalStateException: FragmentManager is already executing transactions
+- [#35](https://github.com/helpcrunch/android-sdk-demo/issues/35) IOException: SERVICE_NOT_AVAILABLE | AUTHENTICATION_FAILED | MISSING_INSTANCEID_SERVICE
+---
+
 ## v3.1.2 - v.3.1.3 (12/05/2021)
 * Bug fixes and improvements
 * Fixed compatibility with OkHttp 4.x versions
