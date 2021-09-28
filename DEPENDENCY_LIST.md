@@ -56,16 +56,16 @@ implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 // Koin
 implementation "io.insert-koin:koin-android:3.1.2"
 
-//Video
+// Video
 implementation('com.github.TalbotGooday:Android-Oembed-Video:0.2.1') {
     exclude group: 'androidx.appcompat', module: 'appcompat'
     exclude group: 'com.squareup.okhttp3', module: 'okhttp'
 }
 
-//Images
+// Images
 implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
-//Drawable
+// Drawable
 implementation 'com.github.duanhong169:drawabletoolbox:1.0.7'
 implementation 'com.github.TalbotGooday:AvatarView:0.0.5'
 
