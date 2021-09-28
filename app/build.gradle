@@ -51,6 +51,6 @@ dependencies {
     implementation 'com.github.TalbotGooday:AvatarView:0.0.5'
 
     //HelpCrunch
-    implementation('com.helpcrunch:chat-sdk:3.1.5')
+    implementation('com.helpcrunch:chat-sdk:3.1.6')
 }
 

@@ -1,11 +1,21 @@
 # Changelog
+## v3.1.6 (28/09/2021)
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+* Bug fixes and improvements
+
+#### Bug Fixes:
+- [#52](https://github.com/helpcrunch/android-sdk-demo/issues/52) SecurityException: Permission Denial (requires READ_EXTERNAL_STORAGE or grantUriPermission())
+- [#51](https://github.com/helpcrunch/android-sdk-demo/issues/51) NullPointerException
+- [#50](https://github.com/helpcrunch/android-sdk-demo/issues/50) NullPointerException
+---
+
 ## v3.1.5 (27/07/2021)
 * Updated third-party libraries
 * Bug fixes and improvements
+---
 
 ## v3.1.4 (11/06/2021)
 * Added the ability to display the knowledge base inside the SDK
----
 
 #### Bug Fixes:
 - [#44](https://github.com/helpcrunch/android-sdk-demo/issues/44) CLEARTEXT communication to ucarecdn.com not permitted by network security policy
