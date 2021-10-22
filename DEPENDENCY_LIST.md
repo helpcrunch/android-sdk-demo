@@ -45,6 +45,9 @@ implementation("io.noties.markwon:html:4.6.2")
 implementation("io.noties.markwon:inline-parser:4.6.2")
 implementation("io.noties.markwon:image:4.6.2")
 
+// Swipe
+implementation 'com.billy.android:smart-swipe:1.1.0'
+
 // Worker
 implementation "androidx.work:work-runtime-ktx:2.5.0"
 

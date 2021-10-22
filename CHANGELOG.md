@@ -1,4 +1,12 @@
 # Changelog
+## v3.1.7 (22/10/2021)
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+* Bug fixes and improvements
+
+#### Bug Fixes:
+- [#53](https://github.com/helpcrunch/android-sdk-demo/issues/53) IllegalStateException: Already resumed
+---
+
 ## v3.1.6 (28/09/2021)
 * Updated [third-party libraries](DEPENDENCY_LIST.md)
 * Bug fixes and improvements
