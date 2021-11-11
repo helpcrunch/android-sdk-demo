@@ -30,7 +30,5 @@ public class App extends MultiDexApplication {
         HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET, getMyUser());
         // or
         // HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET);
-
     }
-
 }

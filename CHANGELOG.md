@@ -1,4 +1,9 @@
 # Changelog
+## v3.1.8 (10/11/2021)
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+* Bug fixes and other improvements
+---
+
 ## v3.1.7 (22/10/2021)
 * Updated [third-party libraries](DEPENDENCY_LIST.md)
 * Bug fixes and improvements

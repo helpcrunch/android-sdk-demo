@@ -6,6 +6,7 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
+    buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.helpcrunch.demo"
         minSdkVersion 19
@@ -45,12 +46,14 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
 
     //Firebase
-    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+    implementation platform('com.google.firebase:firebase-bom:28.4.2')
+    implementation 'com.google.firebase:firebase-messaging'
+
 
     //Widgets
     implementation 'com.github.TalbotGooday:AvatarView:0.0.5'
 
     //HelpCrunch
-    implementation('com.helpcrunch:chat-sdk:3.1.7')
+    implementation('com.helpcrunch:chat-sdk:3.1.8')
 }
 
