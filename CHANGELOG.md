@@ -1,4 +1,10 @@
 # Changelog
+## v3.1.9 (12/11/2021)
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+* Default font changed to Google Sans
+* Bug fixes and other improvements
+---
+
 ## v3.1.8 (10/11/2021)
 * Updated [third-party libraries](DEPENDENCY_LIST.md)
 * Bug fixes and other improvements
