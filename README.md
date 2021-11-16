@@ -12,9 +12,6 @@ A perfect live chat, email automation and a super-intuitive help desk in one sma
 
 This SDK can be added to **Android**, **Flutter**, **Apache Cordova** or **React Native** projects to start a live chat from a mobile application.
 
-## Sample Apk
-[Download](https://github.com/helpcrunch/android-sdk-demo/blob/master/app/release/app-release.apk?raw=true) sample apk
-
 ## Changelog
 The changelog is available [here](CHANGELOG.md)
 
