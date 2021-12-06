@@ -1,4 +1,12 @@
 # Changelog
+## v3.2.1 (07/12/2021)
+* Added HTML messages support
+* Fixed crash loading chat when opening from notifications
+* Updated [localization example file](app/src/main/res/values/helpcrunch_strings.xml)
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+* Bug fixes and other improvements
+---
+
 ## v3.2.0 (15/11/2021)
 * Fixed bug with missing file messages
 * Bug fixes and other improvements

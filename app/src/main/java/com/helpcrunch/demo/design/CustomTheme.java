@@ -42,8 +42,6 @@ public class CustomTheme {
                 .setOutcomingBlockQuoteColor(R.color.hc_color_block_quote_outcoming_dark)
                 .setIncomingFileTextColor(R.color.hc_color_chats_text)
                 .setOutcomingFileTextColor(R.color.hc_color_chats_text)
-                .setIncomingFileIconBackgroundColor(android.R.color.white)
-                .setOutcomingFileIconBackgroundColor(android.R.color.white)
                 .setAuthorNameColor(android.R.color.white)
                 .setSystemMessageColor(android.R.color.white)
                 .setTimeTextColor(android.R.color.white)

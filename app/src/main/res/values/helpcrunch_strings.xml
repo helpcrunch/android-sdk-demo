@@ -17,12 +17,16 @@
 
 	<!--Chats list-->
 	<string name="hc_support_team">%s Team</string>
-	<string name="hc_error_no_chats_found">No chats found</string>
+	<string name="hc_no_chats_found_title">You have no chats</string>
+	<string name="hc_no_chats_found_subtitle">Start a new one</string>
+	<string name="hc_create_conversation_button">New conversation</string>
 
 	<!--Chat-->
+	<string name="hc_message_reply">"Reply"</string>
 	<string name="hc_attachment_video">Video</string>
 	<string name="hc_attachment_file">File</string>
 	<string name="hc_attachment_image">Image</string>
+	<string name="hc_attachment_location">Location</string>
 	<string name="hc_message_hint">Type message</string>
 
 	<plurals name="hc_typing">
@@ -38,6 +42,7 @@
 	<string name="hc_download_ok">Yes</string>
 	<string name="hc_download_no">No</string>
 	<string name="hc_download_loading_complete">Loading is complete 👌\nSaved to Downloads folder👌</string>
+	<string name="hc_sharing_error">Unable to share file</string>
 	<string name="hc_loading">Loading…</string>
 
 	<string name="hc_copied">Copied</string>
@@ -133,12 +138,27 @@
 
 	<!--Knowledge Base-->
 	<string name="hckb_written_by">Written by %s</string>
+	<string name="hckb_updated_at">Updated %s</string>
 	<string name="hckb_error_cant_open_article">Can\'t open the article</string>
 	<string name="hckb_hide_articles">Hide articles</string>
+	<string name="hckb_categories_title">Hello 👋 How can we help?</string>
+	<string name="hckb_action_search_articles_hint">Search articles</string>
+	<string name="hckb_no_articles_title">There are no articles</string>
+	<string name="hckb_no_articles_subtitle">We’re working on adding our help articles.\nYou’ll find them here very soon.</string>
+
+	<string name="hc_type_chat">Ask</string>
+	<string name="hc_type_kb">Search</string>
+	<string name="hc_draft_message">Draft:</string>
+	<string name="notifications_you">You</string>
 
 	<plurals name="hckb_see_all_articles_count">
 		<item quantity="one">See %d more article</item>
 		<item quantity="other">See all %d articles</item>
+	</plurals>
+
+	<plurals name="hckb_search_result">
+		<item quantity="one">%d result</item>
+		<item quantity="other">%d results</item>
 	</plurals>
 
 	<!--Time-->
@@ -149,4 +169,5 @@
 	<string name="hc_time_hours_ago">H</string>
 	<string name="hc_time_days_ago">D</string>
 	<string name="hc_time_week_ago">W</string>
+
 </resources>

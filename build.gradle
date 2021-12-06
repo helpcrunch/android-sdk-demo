@@ -7,7 +7,6 @@ buildscript {
             url 'https://maven.google.com'
         }
         mavenCentral()
-        jcenter()
 
         google()
     }
@@ -29,7 +28,6 @@ allprojects {
             url "https://oss.sonatype.org/content/repositories/snapshots/"
         }
         google()
-        jcenter()
     }
 }
 allprojects {
