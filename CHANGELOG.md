@@ -1,4 +1,9 @@
 # Changelog
+## v3.2.2 (15/12/2021)
+* Fixed wrong messages parsing
+* Fixed UI small bugs
+---
+
 ## v3.2.1 (07/12/2021)
 * Added HTML messages support
 * Fixed crash loading chat when opening from notifications
