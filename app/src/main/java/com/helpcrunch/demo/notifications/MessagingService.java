@@ -9,8 +9,6 @@ import com.helpcrunch.library.core.HelpCrunchExt;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
-
 /**
  * An example of resolving conflicts when using multiple services using the FCM
  */
