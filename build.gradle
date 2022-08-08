@@ -1,10 +1,11 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
-    ext.kotlin_version = '1.5.31'
+    ext.kotlin_version = '1.6.21'
     repositories {
         maven {
             url 'https://maven.google.com'
+        }
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
         }
         mavenCentral()
 
@@ -28,14 +29,6 @@ allprojects {
             url "https://oss.sonatype.org/content/repositories/snapshots/"
         }
         google()
-    }
-}
-allprojects {
-    // ...
-    repositories {
-        maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
     }
 }
 

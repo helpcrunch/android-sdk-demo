@@ -27,6 +27,7 @@
 	<string name="hc_attachment_file">File</string>
 	<string name="hc_attachment_image">Image</string>
 	<string name="hc_attachment_location">Location</string>
+	<string name="hc_attachment_article">Article</string>
 	<string name="hc_message_hint">Type message</string>
 
 	<plurals name="hc_typing">
@@ -169,5 +170,25 @@
 	<string name="hc_time_hours_ago">H</string>
 	<string name="hc_time_days_ago">D</string>
 	<string name="hc_time_week_ago">W</string>
+	<string name="hc_error_wrong_email">Enter an email</string>
+	<string name="hc_error_wrong_url">Enter a URL</string>
+	<string name="hc_error_wrong_phone">Enter a phone number</string>
+	<string name="hc_error_wrong_credit_card">Enter a credit card</string>
+	<string name="hc_bot_answer_yes">Yes</string>
+	<string name="hc_bot_answer_no">No</string>
 
+	<string-array name="hc_month">
+		<item>January</item>
+		<item>February</item>
+		<item>March</item>
+		<item>April</item>
+		<item>May</item>
+		<item>June</item>
+		<item>July</item>
+		<item>August</item>
+		<item>September</item>
+		<item>October</item>
+		<item>November</item>
+		<item>December</item>
+	</string-array>
 </resources>

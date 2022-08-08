@@ -57,9 +57,7 @@ public class CustomUserDataActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        findViewById(R.id.save_user_data_button).setOnClickListener(view -> {
-            saveCustomData();
-        });
+        findViewById(R.id.save_user_data_button).setOnClickListener(view -> saveCustomData());
     }
 
     private void fillData() {
@@ -88,6 +86,11 @@ public class CustomUserDataActivity extends AppCompatActivity {
         getNewData(customData, form);
 
         HCUser user = HelpCrunch.getUser();
+
+        if (user == null) {
+            user = new HCUser.Builder().build();
+        }
+
         user.setCustomData(customData);
 
         setUserDataButtonParameters(View.VISIBLE, false);

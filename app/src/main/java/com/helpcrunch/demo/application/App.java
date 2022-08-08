@@ -2,16 +2,24 @@ package com.helpcrunch.demo.application;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.helpcrunch.demo.design.CustomTheme;
 import com.helpcrunch.library.core.HelpCrunch;
 import com.helpcrunch.library.core.models.user.HCUser;
 
 import org.jetbrains.annotations.NotNull;
 
 public class App extends MultiDexApplication {
-    public static final String ORGANIZATION = "mobile";
-    public static final int APP_ID = 2889;
-    public static final String SECRET = "BT4na/0/fHk6d1jtg0qKiK5GoxXf1/GgP0ay0ps2UiWJPfdPeUDFUYwnIjBFO49oilOKx+EMg2Tw+BJsS/hI6g==";
+    public static final String ORGANIZATION = "org"; //your organization name
+    public static final int APP_ID = 0; // your app id
+    public static final String SECRET = "secret"; // your app secret
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET, getMyUser());
+        // or
+        // HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET);
+    }
 
     @NotNull
     public static HCUser getMyUser() {
@@ -21,14 +29,5 @@ public class App extends MultiDexApplication {
                 .withUserId("someId_1")
                 .withCompany("company name")
                 .build();
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET, getMyUser());
-        // or
-        // HelpCrunch.initialize(ORGANIZATION, APP_ID, SECRET);
     }
 }

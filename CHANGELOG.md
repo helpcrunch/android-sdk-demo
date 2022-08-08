@@ -1,10 +1,17 @@
 # Changelog
-## v3.2.3-rc-01 (12/03/2022)
+## v3.2.3 (08/08/2022)
+* Added chat-bot integration
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
 * Bug fixes and other improvements
 
 #### Bug Fixes:
-- [#55](https://github.com/helpcrunch/android-sdk-demo/issues/55) Crash when using notifications and unread message counter
+- [#59](https://github.com/helpcrunch/android-sdk-demo/issues/59) Unable to get provider HelpCrunchInitProvider: Missing type parameter
+- [#58](https://github.com/helpcrunch/android-sdk-demo/issues/58) NullPointerException
+- [#57](https://github.com/helpcrunch/android-sdk-demo/issues/57) Missing type parameter.
 - [#56](https://github.com/helpcrunch/android-sdk-demo/issues/56) Anonymous users created without details when using version 3.2.2, and replies are lost
+- [#55](https://github.com/helpcrunch/android-sdk-demo/issues/55) Crash when using notifications and unread message counter
+- [#49](https://github.com/helpcrunch/android-sdk-demo/issues/49) Not expose -flattenpackagehierarchy 'com.helpcrunch.library' to clients
+- 
 ---
 
 ## v3.2.2 (15/12/2021)

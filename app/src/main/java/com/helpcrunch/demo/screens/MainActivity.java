@@ -27,7 +27,6 @@ import com.helpcrunch.library.core.options.HCOptions;
 import com.helpcrunch.library.core.options.HCPreChatForm;
 import com.helpcrunch.library.core.options.design.HCMessageAreaTheme;
 import com.helpcrunch.library.core.options.design.HCTheme;
-import com.helpcrunch.library.core.options.files.FileExtension;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,12 +34,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-
-    private View badge1View;
-    private TextView badge1TextView;
-
-    private RadioGroup themeRadioGroup;
-    private CheckBox defaultOptionsCheckBox;
 
     private final BroadcastReceiver hcStateBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -50,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.state)).setText(getStateString(state == null ? HelpCrunch.State.IDLE : state));
         }
     };
-
+    private View badge1View;
+    private TextView badge1TextView;
     private final BroadcastReceiver hcEventsBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -69,14 +63,14 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case SCREEN_CLOSED:
                     if (screen != null) {
-                        Log.i(HelpCrunch.EVENTS, screen.toString() + " screen: closed");
+                        Log.i(HelpCrunch.EVENTS, screen + " screen: closed");
                     } else {
                         Log.w(HelpCrunch.EVENTS, "Can't receive screen event");
                     }
                     break;
                 case SCREEN_OPENED:
                     if (screen != null) {
-                        Log.i(HelpCrunch.EVENTS, screen.toString() + " screen: opened, data: " + (data == null ? "null" : data.toString()));
+                        Log.i(HelpCrunch.EVENTS, screen + " screen: opened, data: " + (data == null ? "null" : data.toString()));
                     } else {
                         Log.w(HelpCrunch.EVENTS, "Can't receive screen event");
                     }
@@ -104,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+    private RadioGroup themeRadioGroup;
+    private CheckBox defaultOptionsCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
