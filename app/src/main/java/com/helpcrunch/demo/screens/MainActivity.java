@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.helpcrunch.demo.R;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
+import com.helpcrunch.library.core.HelpCrunchExt;
 import com.helpcrunch.library.core.models.user.HCUser;
 import com.helpcrunch.library.core.options.HCOptions;
 import com.helpcrunch.library.core.options.HCPreChatForm;
@@ -223,6 +224,8 @@ public class MainActivity extends AppCompatActivity {
 
         HCTheme theme = new HCTheme.Builder(HCTheme.Type.DEFAULT)
                 .build();
+
+        HCOptions.createDefault();
 
         switch (((RadioGroup) findViewById(R.id.theme_group)).getCheckedRadioButtonId()) {
             case R.id.light:
