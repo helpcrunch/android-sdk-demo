@@ -1,5 +1,5 @@
 # Changelog
-## v3.2.6 (20/09/2022)
+## v3.2.6 (04/11/2022)
 * Bug fixes and other improvements
 
 #### Bug Fixes:
