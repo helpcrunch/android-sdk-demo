@@ -17,7 +17,7 @@ api "androidx.core:core-ktx:1.3.2"
 api "androidx.recyclerview:recyclerview:1.2.1"
 
 // Firebase
-api platform("com.google.firebase:firebase-bom:30.2.0")
+api platform("com.google.firebase:firebase-bom:30.4.1")
 api "com.google.firebase:firebase-messaging"
 
 // Gson
@@ -28,7 +28,7 @@ api "com.squareup.retrofit2:retrofit:2.9.0"
 api "com.squareup.retrofit2:converter-gson:2.9.0"
 api("com.squareup.okhttp3:okhttp:3.12.13")
 api("com.squareup.okhttp3:logging-interceptor:3.12.13")
-api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter
+api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
 api("com.localebro:okhttpprofiler:1.0.8")
 
 // Room
@@ -52,7 +52,7 @@ api("io.noties.markwon:inline-parser:4.6.2")
 api("io.noties.markwon:image:4.6.2")
 
 // Worker
-api 'androidx.work:work-runtime-ktx:2.7.1'
+api "androidx.work:work-runtime-ktx:2.7.1"
 
 // LiveData
 api "androidx.lifecycle:lifecycle-extensions:2.2.0"
@@ -61,23 +61,18 @@ api "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
 
 // Koin
 api "io.insert-koin:koin-android:3.1.5"
-
-// Video
+//Video
 api("com.github.TalbotGooday:Android-Oembed-Video:0.2.1") {
     exclude group: "androidx.appcompat", module: "appcompat"
     exclude group: "com.squareup.okhttp3", module: "okhttp"
 }
-
-// Images
+//Images
 api "com.github.chrisbanes:PhotoView:2.3.0"
-
-// Drawable
+//Drawable
 api "com.github.duanhong169:drawabletoolbox:1.0.7"
 api "com.github.TalbotGooday:AvatarView:0.1.1"
-
 // Socket
 api("io.socket:socket.io-client:1.0.0")
-
 // Coroutines
 api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
 ```
