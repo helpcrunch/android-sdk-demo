@@ -1,4 +1,13 @@
 # Changelog
+## v3.2.6 (20/09/2022)
+* Bug fixes and other improvements
+
+#### Bug Fixes:
+- Fixed chat updates for broadcast chats
+- Fixed messages text parser
+- Fixed KB loading 
+---
+
 ## v3.2.4-v3.2.5 (20/09/2022)
 * Bug fixes and other improvements
 
