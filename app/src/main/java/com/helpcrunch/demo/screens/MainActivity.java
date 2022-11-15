@@ -20,9 +20,9 @@ import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.helpcrunch.demo.R;
+import com.helpcrunch.demo.design.CustomTheme;
 import com.helpcrunch.library.core.Callback;
 import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.core.HelpCrunchExt;
 import com.helpcrunch.library.core.models.user.HCUser;
 import com.helpcrunch.library.core.options.HCOptions;
 import com.helpcrunch.library.core.options.HCPreChatForm;
@@ -168,14 +168,6 @@ public class MainActivity extends AppCompatActivity {
         return stateStr;
     }
 
-    @NotNull
-    private SpannableString getStateSpannableString(String state, @ColorInt int color) {
-        SpannableString stateStr;
-        stateStr = new SpannableString(state);
-        stateStr.setSpan(new ForegroundColorSpan(color), 0, stateStr.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        return stateStr;
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -235,13 +227,7 @@ public class MainActivity extends AppCompatActivity {
                 theme = new HCTheme.Builder(HCTheme.Type.DARK).build();
                 break;
             case R.id.custom:
-                HCMessageAreaTheme messageAreaTheme = new HCMessageAreaTheme.Builder()
-                        .setButtonType(HCMessageAreaTheme.ButtonType.TEXT)
-                        .build();
-
-                theme = new HCTheme.Builder(R.color.main_color)
-                        .setMessageAreaTheme(messageAreaTheme)
-                        .build();
+                theme = CustomTheme.getTheme();
                 break;
         }
 
@@ -249,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                 .setTheme(theme);
 
         HCPreChatForm preChatForm = new HCPreChatForm.Builder()
-                .withField("some key", "some value")
+                .withField("test_url", "My custom pre-chat field", true)
                 .build();
 
         optionsBuilder.setPreChatForm(preChatForm);
@@ -267,8 +253,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         HCPreChatForm preChatForm = new HCPreChatForm.Builder()
-                .withField("customAttribute", "My custom", true)
-                .withField("customAttribute1", "Please enter something", true)
+                .withField("test_url", "My custom pre-chat field", true)
                 .build();
 
         HCOptions options = new HCOptions.Builder()
@@ -374,5 +359,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void openSendMessageScreen() {
         startActivity(new Intent(MainActivity.this, SendMessageActivity.class));
+    }
+
+    @NotNull
+    private SpannableString getStateSpannableString(String state, @ColorInt int color) {
+        SpannableString stateStr;
+        stateStr = new SpannableString(state);
+        stateStr.setSpan(new ForegroundColorSpan(color), 0, stateStr.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        return stateStr;
     }
 }
