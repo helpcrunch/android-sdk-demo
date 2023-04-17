@@ -41,8 +41,8 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
 
     //AndroidX
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation "com.google.android.material:material:1.5.0"
 
     //Firebase
     implementation platform("com.google.firebase:firebase-bom:30.4.1")
@@ -51,6 +51,6 @@ dependencies {
     //Widgets
     implementation 'com.github.TalbotGooday:AvatarView:0.1.1'
     //HelpCrunch
-    implementation('com.helpcrunch:chat-sdk:3.2.6')
+    implementation('com.helpcrunch:chat-sdk:3.2.7')
 }
 

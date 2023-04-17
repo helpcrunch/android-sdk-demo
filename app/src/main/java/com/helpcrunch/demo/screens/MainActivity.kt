@@ -1,371 +1,321 @@
-package com.helpcrunch.demo.screens;
+package com.helpcrunch.demo.screens
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.util.Log;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.graphics.Color
+import android.os.Bundle
+import android.text.style.ForegroundColorSpan
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.annotation.ColorInt
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.text.buildSpannedString
+import androidx.core.text.inSpans
+import androidx.core.view.isVisible
+import com.helpcrunch.demo.R
+import com.helpcrunch.demo.databinding.ActivityMainNewBinding
+import com.helpcrunch.demo.design.CustomTheme
+import com.helpcrunch.library.core.Callback
+import com.helpcrunch.library.core.ERROR_CANT_OPEN_CHAT
+import com.helpcrunch.library.core.ERROR_USER_BLOCKED
+import com.helpcrunch.library.core.HelpCrunch
+import com.helpcrunch.library.core.HelpCrunch.getState
+import com.helpcrunch.library.core.HelpCrunch.getUnreadChatsCount
+import com.helpcrunch.library.core.HelpCrunch.getUser
+import com.helpcrunch.library.core.HelpCrunch.getVersion
+import com.helpcrunch.library.core.HelpCrunch.logout
+import com.helpcrunch.library.core.HelpCrunch.showChatScreen
+import com.helpcrunch.library.core.HelpCrunch.trackEvent
+import com.helpcrunch.library.core.options.HCOptions
+import com.helpcrunch.library.core.options.HCPreChatForm
+import com.helpcrunch.library.core.options.theme.HCMessageAreaTheme
+import com.helpcrunch.library.core.options.theme.HCTheme
 
-import androidx.annotation.ColorInt;
-import androidx.appcompat.app.AppCompatActivity;
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainNewBinding
 
-import com.helpcrunch.demo.R;
-import com.helpcrunch.demo.design.CustomTheme;
-import com.helpcrunch.library.core.Callback;
-import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.core.models.user.HCUser;
-import com.helpcrunch.library.core.options.HCOptions;
-import com.helpcrunch.library.core.options.HCPreChatForm;
-import com.helpcrunch.library.core.options.design.HCMessageAreaTheme;
-import com.helpcrunch.library.core.options.design.HCTheme;
+    private val hcStateBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val state = intent.getSerializableExtra(HelpCrunch.STATE_TYPE) as HelpCrunch.State?
+                ?: HelpCrunch.State.IDLE
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.HashMap;
-
-public class MainActivity extends AppCompatActivity {
-
-    private final BroadcastReceiver hcStateBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            HelpCrunch.State state = (HelpCrunch.State) intent.getSerializableExtra(HelpCrunch.STATE_TYPE);
-
-            ((TextView) findViewById(R.id.state)).setText(getStateString(state == null ? HelpCrunch.State.IDLE : state));
+            onChatStateChanged(state)
         }
-    };
-    private View badge1View;
-    private TextView badge1TextView;
-    private final BroadcastReceiver hcEventsBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            HelpCrunch.Event event = (HelpCrunch.Event) intent.getSerializableExtra(HelpCrunch.EVENT_TYPE);
-            HelpCrunch.Screen screen = (HelpCrunch.Screen) intent.getSerializableExtra(HelpCrunch.SCREEN_TYPE);
-            HashMap<String, String> data = (HashMap<String, String>) intent.getSerializableExtra(HelpCrunch.EVENT_DATA);
+    }
 
-            if (event == null) {
-                Log.w(HelpCrunch.EVENTS, "Can't receive data");
-                return;
+    private val hcEventsBroadcastReceiver: BroadcastReceiver = createHelpCrunchEventsReceiver()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainNewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        initViews()
+
+        registerReceiver(hcEventsBroadcastReceiver, IntentFilter(HelpCrunch.EVENTS))
+        registerReceiver(hcStateBroadcastReceiver, IntentFilter(HelpCrunch.STATE))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateUnreadMessages()
+        findViewById<View>(R.id.logout_button).isEnabled = getUser() != null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(hcEventsBroadcastReceiver)
+        unregisterReceiver(hcStateBroadcastReceiver)
+    }
+
+    private fun initViews() = with(binding) {
+        chatButton.setOnClickListener { handleOpenChatClicked() }
+        chatCustomButton.setOnClickListener { openWithCustomSettings() }
+        customUserDataButton.setOnClickListener { openCustomUserDataScreen() }
+        userDataButton.setOnClickListener { openUserDataScreen() }
+        sendMessageButton.setOnClickListener { openSendMessageScreen() }
+        userData.setOnClickListener {
+            openUserDataScreen()
+        }
+        logoutButton.setOnClickListener { logout() }
+        val versionText = "SDK: v ${getVersion()}"
+        version.text = versionText
+        state.text = getStateString(getState())
+    }
+
+    private fun getStateString(state: HelpCrunch.State): CharSequence {
+        return when (state) {
+            HelpCrunch.State.IDLE -> getStateSpannableString("Idle", Color.GRAY)
+            HelpCrunch.State.READY -> getStateSpannableString("Ready", Color.parseColor("#4c82f8"))
+            HelpCrunch.State.LOADING -> getStateSpannableString("Loading...", Color.LTGRAY)
+            HelpCrunch.State.ERROR_BLOCKED_USER -> getStateSpannableString(
+                "User is blocked",
+                Color.RED
+            )
+            HelpCrunch.State.ERROR_INITIALIZATION -> getStateSpannableString(
+                "Initialization error",
+                Color.RED
+            )
+            HelpCrunch.State.ERROR_UNKNOWN -> getStateSpannableString("Error unknown", Color.RED)
+            HelpCrunch.State.HIDDEN -> getStateSpannableString("Hidden", Color.GRAY)
+        }
+    }
+
+    private fun logout() {
+        setLogoutButtonParameters(View.VISIBLE, false)
+
+        logout(object : Callback<Any?>() {
+            override fun onSuccess(result: Any?) {
+                Toast.makeText(this@MainActivity, "Success", Toast.LENGTH_SHORT).show()
+                clearBadge()
+                setLogoutButtonParameters(View.GONE, false)
             }
 
-            switch (event) {
-                case FIRST_MESSAGE:
-                    Log.i(HelpCrunch.EVENTS, "First Message");
-                    break;
-                case SCREEN_CLOSED:
-                    if (screen != null) {
-                        Log.i(HelpCrunch.EVENTS, screen + " screen: closed");
-                    } else {
-                        Log.w(HelpCrunch.EVENTS, "Can't receive screen event");
-                    }
-                    break;
-                case SCREEN_OPENED:
-                    if (screen != null) {
-                        Log.i(HelpCrunch.EVENTS, screen + " screen: opened, data: " + (data == null ? "null" : data.toString()));
-                    } else {
-                        Log.w(HelpCrunch.EVENTS, "Can't receive screen event");
-                    }
-                    break;
-
-                case ON_IMAGE_URL:
-                case ON_FILE_URL:
-                case ON_ANY_OTHER_URL:
-                    Log.i(HelpCrunch.EVENTS, "Url opened. data: " + (data == null ? "null" : data.toString()));
-
-                    break;
-
-                case ON_UNREAD_COUNT_CHANGED:
-                    Log.i(HelpCrunch.EVENTS, "new unread message");
-                    String unreadChatsCountStr = data.get(HelpCrunch.UNREAD_CHATS);
-                    if (unreadChatsCountStr != null) {
-                        setVisibilityForUnreadMessagesBadge(Integer.parseInt(unreadChatsCountStr));
-                    }
-
-                    break;
-                case CHAT_CREATED:
-                    Log.i(HelpCrunch.EVENTS, "Chat id: " + data.get("chat_id"));
-
-                    break;
+            override fun onError(message: String) {
+                Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+                setLogoutButtonParameters(View.GONE, true)
             }
+        })
+    }
+
+    private fun clearBadge() = with(binding) {
+        badgeTv.text = null
+        badgeView.visibility = View.INVISIBLE
+    }
+
+    private fun checkSettingsOpenScreen() {
+        var theme = HCTheme.Builder(HCTheme.Type.DEFAULT)
+            .build()
+
+        when (binding.themeGroup.checkedRadioButtonId) {
+            R.id.light -> theme = HCTheme.Builder(
+                HCTheme.Type.DEFAULT
+            ).build()
+            R.id.dark -> theme = HCTheme.Builder(HCTheme.Type.DARK).build()
+            R.id.custom -> theme = CustomTheme.create(this)
         }
-    };
-    private RadioGroup themeRadioGroup;
-    private CheckBox defaultOptionsCheckBox;
+        val optionsBuilder = HCOptions.Builder()
+            .setTheme(theme)
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_new);
+        val preChatForm = HCPreChatForm.Builder()
+            .withField("test_url", "My custom pre-chat URL field", true)
+            .build()
 
-        initViews();
-
-        findViewById(R.id.chat_button).setOnClickListener(v -> {
-            checkSettingsOpenScreen();
-            clearBadge();
-            HelpCrunch.trackEvent(
-                    "Event chat opened",
-                    "https://i.pinimg.com/originals/58/92/e7/5892e7f3cc64c8a912e2494a3ff77e08.jpg",
-                    "Say Cheese");
-        });
-
-        findViewById(R.id.chat_custom_button).setOnClickListener(v -> openWithCustomSettings());
-        findViewById(R.id.custom_user_data_button).setOnClickListener(v -> openCustomUserDataScreen());
-        findViewById(R.id.user_data_button).setOnClickListener(v -> openUserDataScreen());
-        findViewById(R.id.send_message_button).setOnClickListener(v -> openSendMessageScreen());
-
-        findViewById(R.id.userData).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, UserDataActivity.class)));
-
-        findViewById(R.id.logout_button).setOnClickListener(v -> logout());
-
-        String version = "SDK: v" + HelpCrunch.getVersion();
-
-        ((TextView) findViewById(R.id.version)).setText(version);
-
-        ((TextView) findViewById(R.id.state)).setText(getStateString(HelpCrunch.getState()));
-
-        registerReceiver(hcEventsBroadcastReceiver, new IntentFilter(HelpCrunch.EVENTS));
-        registerReceiver(hcStateBroadcastReceiver, new IntentFilter(HelpCrunch.STATE));
+        optionsBuilder.setPreChatForm(preChatForm)
+        showChat(optionsBuilder.build())
     }
 
-    private CharSequence getStateString(HelpCrunch.State state) {
-        SpannableString stateStr = null;
+    private fun openWithCustomSettings() {
+        val brandColor = ContextCompat.getColor(this, R.color.send_bg_enable_color)
 
-        switch (state) {
+        val messageAreaTheme = HCMessageAreaTheme.Builder()
+            .setButtonType(HCMessageAreaTheme.ButtonType.TEXT)
+            .build()
 
-            case IDLE:
-                stateStr = getStateSpannableString("Idle", Color.GRAY);
-                break;
-            case READY:
-                stateStr = getStateSpannableString("Ready", Color.parseColor("#4c82f8"));
-                break;
-            case LOADING:
-                stateStr = getStateSpannableString("Loading...", Color.LTGRAY);
-                break;
-            case ERROR_BLOCKED_USER:
-                stateStr = getStateSpannableString("User is blocked", Color.RED);
-                break;
-            case ERROR_INITIALIZATION:
-                stateStr = getStateSpannableString("Initialization error", Color.RED);
-                break;
-            case ERROR_UNKNOWN:
-                stateStr = getStateSpannableString("Error unknown", Color.RED);
-                break;
-            case HIDDEN:
-                stateStr = getStateSpannableString("Hidden", Color.GRAY);
-                break;
-        }
+        val theme = HCTheme.Builder(brandColor, true)
+            .setMessageAreaTheme(messageAreaTheme)
+            .build()
 
-        return stateStr;
+        val preChatForm: HCPreChatForm = HCPreChatForm.Builder()
+            .withField("test_url", "My custom pre-chat URL field", true)
+            .build()
+
+        val options = HCOptions.Builder()
+            .setTheme(theme)
+            .setPreChatForm(preChatForm)
+            .build()
+
+        showChat(options)
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateUnreadMessages();
-        findViewById(R.id.logout_button).setEnabled(HelpCrunch.getUser() != null);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(hcEventsBroadcastReceiver);
-        unregisterReceiver(hcStateBroadcastReceiver);
-    }
-
-    private void logout() {
-
-        setLogoutButtonParameters(View.VISIBLE, false);
-
-        HelpCrunch.logout(new Callback<Object>() {
-            @Override
-            public void onSuccess(Object result) {
-                Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                clearBadge();
-                defaultOptionsCheckBox.setChecked(false);
-                setLogoutButtonParameters(View.GONE, false);
-            }
-
-            @Override
-            public void onError(@NotNull String message) {
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-                setLogoutButtonParameters(View.GONE, true);
-            }
-        });
-    }
-
-    private void clearBadge() {
-        badge1TextView.setText(null);
-        badge1View.setVisibility(View.INVISIBLE);
-    }
-
-    private void checkSettingsOpenScreen() {
-        if (defaultOptionsCheckBox.isChecked()) {
-            showChat(null);
-            return;
-        }
-
-        HCTheme theme = new HCTheme.Builder(HCTheme.Type.DEFAULT)
-                .build();
-
-        HCOptions.createDefault();
-
-        switch (((RadioGroup) findViewById(R.id.theme_group)).getCheckedRadioButtonId()) {
-            case R.id.light:
-                theme = new HCTheme.Builder(HCTheme.Type.DEFAULT).build();
-                break;
-            case R.id.dark:
-                theme = new HCTheme.Builder(HCTheme.Type.DARK).build();
-                break;
-            case R.id.custom:
-                theme = CustomTheme.getTheme();
-                break;
-        }
-
-        HCOptions.Builder optionsBuilder = new HCOptions.Builder()
-                .setTheme(theme);
-
-        HCPreChatForm preChatForm = new HCPreChatForm.Builder()
-                .withField("test_url", "My custom pre-chat field", true)
-                .build();
-
-        optionsBuilder.setPreChatForm(preChatForm);
-
-        showChat(optionsBuilder.build());
-    }
-
-    private void openWithCustomSettings() {
-        HCMessageAreaTheme messageAreaTheme = new HCMessageAreaTheme.Builder()
-                .setButtonType(HCMessageAreaTheme.ButtonType.TEXT)
-                .build();
-
-        HCTheme theme = new HCTheme.Builder(R.color.send_bg_enable_color, true)
-                .setMessageAreaTheme(messageAreaTheme)
-                .build();
-
-        HCPreChatForm preChatForm = new HCPreChatForm.Builder()
-                .withField("test_url", "My custom pre-chat field", true)
-                .build();
-
-        HCOptions options = new HCOptions.Builder()
-                .setTheme(theme)
-                .setPreChatForm(preChatForm)
-                .build();
-
-        showChat(options);
-    }
-
-    private void showChat(@Nullable HCOptions options) {
-        setChatScreenButtonParameters(View.GONE, View.VISIBLE, false);
-
-        HelpCrunch.showChatScreen(options, new Callback<Object>() {
-            @Override
-            public void onError(@NotNull String message) {
-                if (message.equals("user_blocked")) {
-                    HCUser user = HelpCrunch.getUser();
-
+    private fun showChat(options: HCOptions?) {
+        setChatScreenButtonParameters(View.GONE, View.VISIBLE, false)
+        showChatScreen(options, object : Callback<Any?>() {
+            override fun onError(message: String) {
+                if (message == ERROR_USER_BLOCKED) {
+                    val user = getUser()
                     if (user != null) {
-                        String messageText = "You are a very bad person, " + user.getName() + ".\nPlease, uninstall the application.";
-
-                        Toast.makeText(MainActivity.this, messageText, Toast.LENGTH_SHORT).show();
+                        val messageText = """
+                            You are a very bad person, ${user.name}.
+                            Please, uninstall the application.
+                            """.trimIndent()
+                        Toast.makeText(this@MainActivity, messageText, Toast.LENGTH_SHORT).show()
                     }
-                } else if (message.equals("cant_open_chat")) {
-                    Toast.makeText(MainActivity.this, "Can't open chat. Something is wrong", Toast.LENGTH_SHORT).show();
+                } else if (message == ERROR_CANT_OPEN_CHAT) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Can't open chat. Something is wrong",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-
-                setChatScreenButtonParameters(View.VISIBLE, View.GONE, true);
+                setChatScreenButtonParameters(View.VISIBLE, View.GONE, true)
             }
 
-            @Override
-            public void onSuccess(Object result) {
-                setChatScreenButtonParameters(View.VISIBLE, View.GONE, true);
+            override fun onSuccess(result: Any?) {
+                setChatScreenButtonParameters(View.VISIBLE, View.GONE, true)
             }
-        });
+        })
     }
 
-    private void initViews() {
-        badge1View = findViewById(R.id.badge_view);
-        badge1TextView = findViewById(R.id.badge_tv);
-        themeRadioGroup = findViewById(R.id.theme_group);
-        defaultOptionsCheckBox = findViewById(R.id.default_options);
-        defaultOptionsCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            setThemeControlEnabled(!isChecked);
-        });
-
-        defaultOptionsCheckBox.setChecked(HelpCrunch.getUser() != null);
+    private fun handleOpenChatClicked() {
+        checkSettingsOpenScreen()
+        clearBadge()
+        trackEvent(
+            "Event chat opened",
+            "https://i.pinimg.com/originals/58/92/e7/5892e7f3cc64c8a912e2494a3ff77e08.jpg",
+            "Say Cheese"
+        )
     }
 
-    private void setThemeControlEnabled(boolean isEnabled) {
-        HashMap<String, Object> data = new HashMap<>();
-        data.put("isEnabled", isEnabled);
+    private fun updateUnreadMessages() {
+        getUnreadChatsCount(object : Callback<Int>() {
+            override fun onSuccess(result: Int) {
+                setVisibilityForUnreadMessagesBadge(result)
+            }
 
-        HelpCrunch.trackEvent("OptionsChanged", data);
+            override fun onError(message: String) {
+                Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 
-        themeRadioGroup.setEnabled(isEnabled);
+    private fun setVisibilityForUnreadMessagesBadge(count: Int) = with(binding) {
+        badgeView.isVisible = count > 0
+        badgeTv.text = count.toString()
+    }
 
-        for (int i = 0; i < themeRadioGroup.getChildCount(); i++) {
-            themeRadioGroup.getChildAt(i).setEnabled(isEnabled);
+    private fun setChatScreenButtonParameters(
+        logoVisible: Int,
+        progressVisible: Int,
+        buttonEnabled: Boolean
+    ) = with(binding) {
+        progressOpen.visibility = progressVisible
+        logoBtn.visibility = logoVisible
+        chatButton.isEnabled = buttonEnabled
+    }
+
+    private fun setLogoutButtonParameters(visible: Int, enabled: Boolean) = with(binding) {
+        progress.visibility = visible
+        logoutButton.isEnabled = enabled
+    }
+
+    private fun openCustomUserDataScreen() {
+        startActivity(Intent(this@MainActivity, CustomUserDataActivity::class.java))
+    }
+
+    private fun openUserDataScreen() {
+        startActivity(Intent(this@MainActivity, UserDataActivity::class.java))
+    }
+
+    private fun openSendMessageScreen() {
+        startActivity(Intent(this@MainActivity, SendMessageActivity::class.java))
+    }
+
+    private fun getStateSpannableString(state: String, @ColorInt color: Int): CharSequence {
+        return buildSpannedString {
+            inSpans(ForegroundColorSpan(color)) {
+                append(state)
+            }
         }
     }
 
-    private void updateUnreadMessages() {
-        HelpCrunch.getUnreadChatsCount(new Callback<Integer>() {
-            @Override
-            public void onSuccess(Integer result) {
-                setVisibilityForUnreadMessagesBadge(result);
+    private fun createHelpCrunchEventsReceiver() = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val event: HelpCrunch.Event? =
+                intent.getSerializableExtra(HelpCrunch.EVENT_TYPE) as HelpCrunch.Event?
+            val screen: HelpCrunch.Screen? =
+                intent.getSerializableExtra(HelpCrunch.SCREEN_TYPE) as HelpCrunch.Screen?
+            val data =
+                intent.getSerializableExtra(HelpCrunch.EVENT_DATA) as HashMap<String, String>?
+            if (event == null) {
+                Log.w(HelpCrunch.EVENTS, "Can't receive data")
+                return
             }
-
-            @Override
-            public void onError(@NotNull String message) {
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+            when (event) {
+                HelpCrunch.Event.FIRST_MESSAGE -> Log.i(HelpCrunch.EVENTS, "First Message")
+                HelpCrunch.Event.SCREEN_CLOSED -> if (screen != null) {
+                    Log.i(HelpCrunch.EVENTS, "$screen screen: closed")
+                } else {
+                    Log.w(HelpCrunch.EVENTS, "Can't receive screen event")
+                }
+                HelpCrunch.Event.SCREEN_OPENED -> if (screen != null) {
+                    Log.i(
+                        HelpCrunch.EVENTS,
+                        screen.toString() + " screen: opened, data: " + (data?.toString() ?: "null")
+                    )
+                } else {
+                    Log.w(HelpCrunch.EVENTS, "Can't receive screen event")
+                }
+                HelpCrunch.Event.ON_IMAGE_URL,
+                HelpCrunch.Event.ON_FILE_URL,
+                HelpCrunch.Event.ON_ANY_OTHER_URL -> {
+                    Log.i(HelpCrunch.EVENTS, "Url opened. data: $data")
+                }
+                HelpCrunch.Event.ON_UNREAD_COUNT_CHANGED -> {
+                    Log.i(HelpCrunch.EVENTS, "new unread message")
+                    val unreadChatsCountStr = data!![HelpCrunch.UNREAD_CHATS]
+                    if (unreadChatsCountStr != null) {
+                        setVisibilityForUnreadMessagesBadge(unreadChatsCountStr.toInt())
+                    }
+                }
+                HelpCrunch.Event.CHAT_CREATED -> {
+                    Log.i(HelpCrunch.EVENTS, "Chat id: " + data!!["chat_id"])
+                }
+                HelpCrunch.Event.MESSAGE_SENDING -> {
+                    Log.i(HelpCrunch.EVENTS, "message sending...")
+                }
+                HelpCrunch.Event.ON_FIREBASE_NOTIFICATION -> {
+                    Log.i(HelpCrunch.EVENTS, "new firebase notification...")
+                }
             }
-        });
+        }
     }
 
-    private void setVisibilityForUnreadMessagesBadge(int count) {
-        badge1View.setVisibility(count > 0 ? View.VISIBLE : View.INVISIBLE);
-        String countString = String.valueOf(count);
-
-        badge1TextView.setText(countString);
-    }
-
-    private void setChatScreenButtonParameters(int logoVisible, int progressVisible, boolean buttonEnabled) {
-        findViewById(R.id.progress_open).setVisibility(progressVisible);
-        findViewById(R.id.logo_btn).setVisibility(logoVisible);
-        findViewById(R.id.chat_button).setEnabled(buttonEnabled);
-    }
-
-    private void setLogoutButtonParameters(int visible, boolean enabled) {
-        findViewById(R.id.progress).setVisibility(visible);
-        findViewById(R.id.logout_button).setEnabled(enabled);
-    }
-
-    private void openCustomUserDataScreen() {
-        startActivity(new Intent(MainActivity.this, CustomUserDataActivity.class));
-    }
-
-    private void openUserDataScreen() {
-        startActivity(new Intent(MainActivity.this, UserDataActivity.class));
-    }
-
-    private void openSendMessageScreen() {
-        startActivity(new Intent(MainActivity.this, SendMessageActivity.class));
-    }
-
-    @NotNull
-    private SpannableString getStateSpannableString(String state, @ColorInt int color) {
-        SpannableString stateStr;
-        stateStr = new SpannableString(state);
-        stateStr.setSpan(new ForegroundColorSpan(color), 0, stateStr.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        return stateStr;
+    private fun onChatStateChanged(state: HelpCrunch.State) {
+        binding.state.text = getStateString(state)
     }
 }

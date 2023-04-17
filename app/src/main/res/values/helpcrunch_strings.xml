@@ -162,6 +162,9 @@
 		<item quantity="other">%d results</item>
 	</plurals>
 
+	<string name="hckb_locale_picker">Language</string>
+	<string name="hckb_missing_locale_message">This article isn’t translated into %s. You may choose another language:</string>
+
 	<!--Time-->
 	<string name="hc_time_today">Today</string>
 	<string name="hc_time_yesterday">Yesterday</string>
@@ -170,6 +173,8 @@
 	<string name="hc_time_hours_ago">H</string>
 	<string name="hc_time_days_ago">D</string>
 	<string name="hc_time_week_ago">W</string>
+
+	<!-- Chat Bot-->
 	<string name="hc_error_wrong_email">Enter an email</string>
 	<string name="hc_error_wrong_url">Enter a URL</string>
 	<string name="hc_error_wrong_phone">Enter a phone number</string>

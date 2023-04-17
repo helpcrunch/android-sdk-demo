@@ -33,6 +33,7 @@ api("com.localebro:okhttpprofiler:1.0.8")
 
 // Room
 api "androidx.room:room-runtime:2.4.2"
+testImplementation 'org.junit.jupiter:junit-jupiter'
 kapt "androidx.room:room-compiler:2.4.2"
 api "androidx.room:room-ktx:2.4.2"
 
@@ -50,6 +51,7 @@ api("io.noties.markwon:core:4.6.2")
 api("io.noties.markwon:html:4.6.2")
 api("io.noties.markwon:inline-parser:4.6.2")
 api("io.noties.markwon:image:4.6.2")
+api("io.noties.markwon:linkify:4.6.2")
 
 // Worker
 api "androidx.work:work-runtime-ktx:2.7.1"
@@ -61,18 +63,23 @@ api "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
 
 // Koin
 api "io.insert-koin:koin-android:3.1.5"
+
 //Video
-api("com.github.TalbotGooday:Android-Oembed-Video:0.2.1") {
+api("com.github.TalbotGooday:Android-Oembed-Video:0.2.3") {
     exclude group: "androidx.appcompat", module: "appcompat"
     exclude group: "com.squareup.okhttp3", module: "okhttp"
 }
+
 //Images
 api "com.github.chrisbanes:PhotoView:2.3.0"
+
 //Drawable
 api "com.github.duanhong169:drawabletoolbox:1.0.7"
 api "com.github.TalbotGooday:AvatarView:0.1.1"
+
 // Socket
 api("io.socket:socket.io-client:1.0.0")
+
 // Coroutines
 api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
 ```

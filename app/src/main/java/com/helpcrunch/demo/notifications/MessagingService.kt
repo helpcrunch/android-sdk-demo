@@ -1,30 +1,22 @@
-package com.helpcrunch.demo.notifications;
+package com.helpcrunch.demo.notifications
 
-import androidx.annotation.NonNull;
-
-import com.google.firebase.messaging.FirebaseMessagingService;
-import com.google.firebase.messaging.RemoteMessage;
-import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.core.HelpCrunchExt;
-
-import org.jetbrains.annotations.NotNull;
+import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.firebase.messaging.RemoteMessage
+import com.helpcrunch.library.core.HelpCrunch.showNotification
+import com.helpcrunch.library.core.isHelpCrunchMessage
 
 /**
  * An example of resolving conflicts when using multiple services using the FCM
  */
-public class MessagingService extends FirebaseMessagingService {
-
-    @Override
-    public void onNewToken(@NonNull @NotNull String s) {
-        super.onNewToken(s);
+class MessagingService : FirebaseMessagingService() {
+    override fun onNewToken(s: String) {
+        super.onNewToken(s)
     }
 
-    @Override
-    public void onMessageReceived(@NonNull @NotNull RemoteMessage remoteMessage) {
-        super.onMessageReceived(remoteMessage);
-
-        if (HelpCrunchExt.isHelpCrunchMessage(remoteMessage)) {
-            HelpCrunch.showNotification(remoteMessage);
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        super.onMessageReceived(remoteMessage)
+        if (remoteMessage.isHelpCrunchMessage()) {
+            showNotification(remoteMessage)
         } else {
             //Do something yours
         }

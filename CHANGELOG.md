@@ -1,4 +1,9 @@
 # Changelog
+## v3.2.7 (24/04/2023)
+* Added the functionality of changing the language in the knowledge base 
+* Added the ability to set the chat color through the `int` color. 
+* Bug fixes and other improvements
+
 ## v3.2.6 (04/11/2022)
 * Bug fixes and other improvements
 

@@ -1,131 +1,130 @@
-package com.helpcrunch.demo.screens;
+package com.helpcrunch.demo.screens
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
+import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import com.helpcrunch.demo.R
+import com.helpcrunch.demo.databinding.ActivitySendMessageBinding
+import com.helpcrunch.library.core.Callback
+import com.helpcrunch.library.core.HelpCrunch
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
+class SendMessageActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySendMessageBinding
 
-import com.helpcrunch.demo.R;
-import com.helpcrunch.library.core.HelpCrunch;
-
-import java.util.HashMap;
-
-public class SendMessageActivity extends AppCompatActivity {
-    private final BroadcastReceiver hcEventsBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            HelpCrunch.Event event = (HelpCrunch.Event) intent.getSerializableExtra(HelpCrunch.EVENT_TYPE);
-            HashMap<String, String> data = (HashMap<String, String>) intent.getSerializableExtra(HelpCrunch.EVENT_DATA);
-
-            setSendButtonParameters(View.VISIBLE, View.GONE, true);
+    private val hcEventsBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val event: HelpCrunch.Event? =
+                intent.getSerializableExtra(HelpCrunch.EVENT_TYPE) as HelpCrunch.Event?
+            val data =
+                intent.getSerializableExtra(HelpCrunch.EVENT_DATA) as HashMap<String, String>?
 
             if (event == null) {
-                Log.w(HelpCrunch.EVENTS, "Can't receive data");
-                return;
+                Log.w(HelpCrunch.EVENTS, "Can't receive data")
+                return
             }
 
             if (event == HelpCrunch.Event.MESSAGE_SENDING) {
                 if (data != null) {
-                    String error = data.get("error");
-                    String resultData = data.get("data");
+                    val error = data["error"]
+                    val resultData = data["data"]
 
                     if (error != null) {
-                        Toast.makeText(SendMessageActivity.this, error, Toast.LENGTH_SHORT).show();
+                        Log.d("sendMessage", "🔴 $error")
                     } else {
-                        addMessage(resultData);
+                        addMessage(resultData)
                     }
                 }
             }
         }
-    };
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_message);
-
-        initViews();
-
-        registerReceiver(hcEventsBroadcastReceiver, new IntentFilter(HelpCrunch.EVENTS));
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivitySendMessageBinding.inflate(layoutInflater)
 
-        unregisterReceiver(hcEventsBroadcastReceiver);
+        setContentView(binding.root)
+
+        initViews()
+        registerReceiver(hcEventsBroadcastReceiver, IntentFilter(HelpCrunch.EVENTS))
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-            return true;
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(hcEventsBroadcastReceiver)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun initViews() {
+        if (supportActionBar != null) {
+            supportActionBar!!.setTitle(R.string.send_message)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        }
+        binding.sendButton.setOnClickListener { sendMessage() }
+    }
+
+    private fun sendMessage() {
+        val text = binding.messageText.text.toString()
+        if (text.isBlank()) {
+            Toast.makeText(this@SendMessageActivity, "Text is empty", Toast.LENGTH_SHORT).show()
+            return
         }
 
-        return super.onOptionsItemSelected(item);
-    }
+        val isForceNewChat = binding.forceNewChat.isChecked
+        HelpCrunch.sendMessage(text, isForceNewChat, object : Callback<String?>() {
+            override fun onSuccess(result: String?) {
+                Log.d("sendMessage", "🟢 $result")
+                setSendButtonParameters(View.VISIBLE, View.GONE, true)
+            }
 
-    private void initViews() {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.send_message);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            override fun onError(message: String) {
+                Log.d("sendMessage", "🔴 $message")
+                setSendButtonParameters(View.VISIBLE, View.GONE, true)
+            }
         }
 
-        findViewById(R.id.send_button).setOnClickListener(v -> sendMessage());
+        )
+        setSendButtonParameters(View.GONE, View.VISIBLE, false)
     }
 
-    private void sendMessage() {
-        String text = ((EditText) findViewById(R.id.message_text)).getText().toString();
+    private fun addMessage(resultData: String?) {
+        val drawable = ResourcesCompat.getDrawable(resources, R.drawable.ic_hc_send, null)
+        drawable!!.colorFilter = PorterDuffColorFilter(
+            ContextCompat.getColor(this, R.color.colorBlue),
+            PorterDuff.Mode.SRC_IN
+        )
+        drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+        val textView = AppCompatTextView(this)
+        textView.gravity = Gravity.CENTER_VERTICAL
+        textView.setCompoundDrawables(drawable, null, null, null)
+        textView.text = resultData
+        textView.compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.messages_padding)
+        binding.messages.addView(textView)
+    }
 
-        if (TextUtils.isEmpty(text)) {
-            Toast.makeText(SendMessageActivity.this, "Text is empty", Toast.LENGTH_SHORT).show();
-
-            return;
+    private fun setSendButtonParameters(iconVisible: Int, progressVisible: Int, enabled: Boolean) =
+        with(binding) {
+            sendButtonIcon.visibility = iconVisible
+            sendButtonProgress.visibility = progressVisible
+            sendButton.isEnabled = enabled
         }
-
-        boolean isForceNewChat = ((CheckBox) findViewById(R.id.force_new_chat)).isChecked();
-
-        HelpCrunch.sendMessage(text, isForceNewChat);
-
-        setSendButtonParameters(View.GONE, View.VISIBLE, false);
-    }
-
-    private void addMessage(String resultData) {
-        LinearLayout messagesView = findViewById(R.id.messages);
-        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hc_send, null);
-        drawable.setColorFilter(ContextCompat.getColor(this, R.color.colorBlue), PorterDuff.Mode.SRC_IN);
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-
-        AppCompatTextView textView = new AppCompatTextView(this);
-        textView.setGravity(Gravity.CENTER_VERTICAL);
-        textView.setCompoundDrawables(drawable, null, null, null);
-        textView.setText(resultData);
-        textView.setCompoundDrawablePadding(getResources().getDimensionPixelSize(R.dimen.messages_padding));
-        messagesView.addView(textView);
-    }
-
-    private void setSendButtonParameters(int iconVisible, int progressVisible, boolean enabled) {
-        findViewById(R.id.send_button_icon).setVisibility(iconVisible);
-        findViewById(R.id.send_button_progress).setVisibility(progressVisible);
-        findViewById(R.id.send_button).setEnabled(enabled);
-    }
 }

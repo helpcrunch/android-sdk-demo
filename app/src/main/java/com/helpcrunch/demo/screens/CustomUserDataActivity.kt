@@ -1,147 +1,127 @@
-package com.helpcrunch.demo.screens;
+package com.helpcrunch.demo.screens
 
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.helpcrunch.demo.R
+import com.helpcrunch.demo.databinding.ActivityCustomUserDataBinding
+import com.helpcrunch.library.core.Callback
+import com.helpcrunch.library.core.HelpCrunch.getUser
+import com.helpcrunch.library.core.HelpCrunch.updateUser
+import com.helpcrunch.library.core.models.user.HCUser
 
-import androidx.appcompat.app.AppCompatActivity;
+class CustomUserDataActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCustomUserDataBinding
 
-import com.helpcrunch.demo.R;
-import com.helpcrunch.library.core.Callback;
-import com.helpcrunch.library.core.HelpCrunch;
-import com.helpcrunch.library.core.models.user.HCUser;
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-import org.jetbrains.annotations.NotNull;
+        binding = ActivityCustomUserDataBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class CustomUserDataActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_custom_user_data);
-
-        initViews();
-
-        fillData();
+        initViews()
+        fillData()
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_custom_data, menu);
-        return true;
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_custom_data, menu)
+        return true
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-            return true;
-        } else if (item.getItemId() == R.id.add_row) {
-            addRow(null, null);
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        } else if (item.itemId == R.id.add_row) {
+            addRow(null, null)
         }
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item)
     }
 
-    private void initViews() {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.change_custom_user_data);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    private fun initViews() = with(binding){
+        if (supportActionBar != null) {
+            supportActionBar!!.setTitle(R.string.change_custom_user_data)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         }
-
-        findViewById(R.id.save_user_data_button).setOnClickListener(view -> saveCustomData());
+        saveUserDataButton.setOnClickListener { saveCustomData() }
     }
 
-    private void fillData() {
-        HCUser currentUser = HelpCrunch.getUser();
-
-        if (currentUser == null) return;
-
-        Map<String, Object> data = currentUser.getCustomData();
-
+    private fun fillData() {
+        val currentUser = getUser() ?: return
+        val data = currentUser.customData
         if (data != null) {
-            for (Map.Entry<String, Object> entry : data.entrySet()) {
-                addRow(entry.getKey(), entry.getValue().toString());
+            for ((key, value) in data) {
+                addRow(key, value.toString())
             }
         }
     }
 
-    private void saveCustomData() {
-        if (HelpCrunch.getUser() == null) {
-            Toast.makeText(this, "There is no user yet", Toast.LENGTH_SHORT).show();
-            return;
+    private fun saveCustomData() {
+        if (getUser() == null) {
+            Toast.makeText(this, "There is no user yet", Toast.LENGTH_SHORT).show()
+            return
         }
-
-        HashMap<String, Object> customData = new HashMap<>();
-        LinearLayout form = findViewById(R.id.registration_form);
-
-        getNewData(customData, form);
-
-        HCUser user = HelpCrunch.getUser();
-
+        val customData = HashMap<String, Any?>()
+        getNewData(customData, binding.registrationForm)
+        var user = getUser()
         if (user == null) {
-            user = new HCUser.Builder().build();
+            user = HCUser.Builder().build()
         }
-
-        user.setCustomData(customData);
-
-        setUserDataButtonParameters(View.VISIBLE, false);
-
-        HelpCrunch.updateUser(user, new Callback<HCUser>() {
-            @Override
-            public void onSuccess(HCUser result) {
-                Toast.makeText(CustomUserDataActivity.this, getString(R.string.data_saved), Toast.LENGTH_SHORT).show();
-                setUserDataButtonParameters(View.GONE, true);
+        user.customData = customData
+        setUserDataButtonParameters(View.VISIBLE, false)
+        updateUser(user, object : Callback<HCUser>() {
+            override fun onSuccess(result: HCUser) {
+                Toast.makeText(
+                    this@CustomUserDataActivity,
+                    getString(R.string.data_saved),
+                    Toast.LENGTH_SHORT
+                ).show()
+                setUserDataButtonParameters(View.GONE, true)
             }
 
-            @Override
-            public void onError(@NotNull String message) {
-                Toast.makeText(CustomUserDataActivity.this, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show();
-                setUserDataButtonParameters(View.GONE, true);
+            override fun onError(message: String) {
+                Toast.makeText(
+                    this@CustomUserDataActivity,
+                    getString(R.string.something_wrong),
+                    Toast.LENGTH_SHORT
+                ).show()
+                setUserDataButtonParameters(View.GONE, true)
             }
-        });
+        })
     }
 
-    private void getNewData(HashMap<String, Object> customData, LinearLayout form) {
-        for (int i = 0; i < form.getChildCount(); i++) {
-            View child = form.getChildAt(i);
-
-            if (child instanceof LinearLayout) {
-                String key = ((EditText) child.findViewById(R.id.key)).getText().toString();
-                String value = ((EditText) child.findViewById(R.id.value)).getText().toString();
-
-                addData(customData, key, value);
+    private fun getNewData(customData: HashMap<String, Any?>, form: LinearLayout) {
+        for (i in 0 until form.childCount) {
+            val child = form.getChildAt(i)
+            if (child is LinearLayout) {
+                val key = (child.findViewById<View>(R.id.key) as EditText).text.toString()
+                val value = (child.findViewById<View>(R.id.value) as EditText).text.toString()
+                addData(customData, key, value)
             }
-        }
-    }
-
-    private void addRow(String key, String value) {
-        LinearLayout form = findViewById(R.id.registration_form);
-
-        View view = LayoutInflater.from(this).inflate(R.layout.layout_custom_user_data_row, null);
-
-        ((EditText) view.findViewById(R.id.key)).setText(key);
-        ((EditText) view.findViewById(R.id.value)).setText(value);
-
-        form.addView(view);
-    }
-
-    private void addData(Map<String, Object> customData, String key, String object) {
-        if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(object)) {
-            customData.put(key, object);
         }
     }
 
-    private void setUserDataButtonParameters(int visible, boolean enabled) {
-        findViewById(R.id.save_user_data_button_progress).setVisibility(visible);
-        findViewById(R.id.save_user_data_button).setEnabled(enabled);
+    private fun addRow(key: String?, value: String?) {
+        val view = LayoutInflater.from(this).inflate(R.layout.layout_custom_user_data_row, null)
+        (view.findViewById<View>(R.id.key) as EditText).setText(key)
+        (view.findViewById<View>(R.id.value) as EditText).setText(value)
+        binding.registrationForm.addView(view)
+    }
+
+    private fun addData(customData: MutableMap<String, Any?>, key: String, value: String) {
+        if (key.isNotBlank() && value.isNotBlank()) {
+            customData[key] = value
+        }
+    }
+
+    private fun setUserDataButtonParameters(visible: Int, enabled: Boolean) {
+        findViewById<View>(R.id.save_user_data_button_progress).visibility = visible
+        findViewById<View>(R.id.save_user_data_button).isEnabled = enabled
     }
 }

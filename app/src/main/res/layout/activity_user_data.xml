@@ -61,6 +61,13 @@
 		</LinearLayout>
 	</ScrollView>
 
+	<CheckBox
+		android:id="@+id/logout_if_necessary"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp"
+		android:text="Logout if necessary" />
+
 	<FrameLayout
 		android:id="@+id/save_user_data_button"
 		style="@style/Button">
