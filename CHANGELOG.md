@@ -1,5 +1,12 @@
 # Changelog
 ## v3.2.8 (26/04/2023)
+### ⚠ Please note
+> <p> The release <code>v3.2.8</code> is the last one that supports <code>Android API 19</code>. 
+> <p> The next planned release <code>v3.3.0</code>, will support <code>Android API 21</code> and higher.
+> <p> We are dropping support for older devices below <code>Android 5</code> and will update all dependencies to the latest versions available at the time of release.
+
+---
+
 * Bump up to `compileSdkVersion 33`
 * File picker design was updated. Fixed issues with file picker on Android 13 (#69))
 * `strings.xml` updates. Added new string:
@@ -11,10 +18,9 @@
 ```
 * Bug fixes and other improvements
 
-**⚠ Attention**
-This release is the last one that supports `Android API 19`. The next planned release `v3.3.0`, will support `Android API 21` and higher.
-We are dropping support for older devices below Android 5 and will update all dependencies to the latest versions available at the time of release.
----
+#### Bug Fixes:
+- [#69](https://github.com/helpcrunch/android-sdk-demo/issues/69) Permissions on Android 13
+
 
 ## v3.2.7 (24/04/2023)
 * Added the functionality of changing the language in the knowledge base 
