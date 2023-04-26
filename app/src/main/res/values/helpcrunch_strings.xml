@@ -11,6 +11,8 @@
 	<string name="hc_menu_view_image">View image</string>
 	<string name="hc_menu_item_file">File</string>
 	<string name="hc_menu_item_photo">Photo</string>
+	<string name="hc_menu_item_view_gallery">View gallery</string>
+	<string name="hc_menu_item_upload_file">Upload a file</string>
 	<string name="hc_download">Download</string>
 	<string name="hc_share">Share…</string>
 	<string name="hc_menu_end_chat">End this chat</string>
@@ -44,6 +46,7 @@
 	<string name="hc_download_no">No</string>
 	<string name="hc_download_loading_complete">Loading is complete 👌\nSaved to Downloads folder👌</string>
 	<string name="hc_sharing_error">Unable to share file</string>
+	<string name="hc_file_sending_error">Unable to send this file</string>
 	<string name="hc_loading">Loading…</string>
 
 	<string name="hc_copied">Copied</string>
@@ -112,6 +115,7 @@
 	<string name="hc_attachments_num" formatted="false" translatable="false">%d</string>
 	<string name="hc_picker_title">Select an option</string>
 	<string name="hc_select_photo_text">Select a media</string>
+	<string name="hc_select_photo_video">Photos &amp; videos</string>
 	<string name="hc_select_doc_text">Select a document</string>
 	<string name="hc_videos">Videos</string>
 	<string name="hc_images">Images</string>

@@ -1,7 +1,28 @@
 # Changelog
+## v3.2.8 (26/04/2023)
+* Bump up to `compileSdkVersion 33`
+* File picker design was updated. Fixed issues with file picker on Android 13 (#69))
+* `strings.xml` updates. Added new string:
+```xml
+<string name="hc_select_photo_video">Photos &amp; videos</string>
+<string name="hc_file_sending_error">Unable to send this file</string>
+<string name="hc_menu_item_view_gallery">View gallery</string>
+<string name="hc_menu_item_upload_file">Upload a file</string>
+```
+* Bug fixes and other improvements
+
+**⚠ Attention**
+This release is the last one that supports `Android API 19`. The next planned release `v3.3.0`, will support `Android API 21` and higher.
+We are dropping support for older devices below Android 5 and will update all dependencies to the latest versions available at the time of release.
+---
+
 ## v3.2.7 (24/04/2023)
 * Added the functionality of changing the language in the knowledge base 
 * Added the ability to set the chat color through the `int` color. 
+* `strings.xml` updates. Added new string:
+```xml
+<string name="hckb_missing_locale_message">This article isn’t translated into %s. You may choose another language:</string>
+```
 * Bug fixes and other improvements
 
 ## v3.2.6 (04/11/2022)
