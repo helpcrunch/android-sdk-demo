@@ -9,10 +9,10 @@ android {
     buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.helpcrunch.demo"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 33
         versionCode 3
-        versionName "1.0"
+        versionName "3.3.0-rc.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -41,16 +41,18 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
 
     //AndroidX
-    implementation "androidx.appcompat:appcompat:1.2.0"
-    implementation "com.google.android.material:material:1.5.0"
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "com.google.android.material:material:1.8.0"
 
     //Firebase
-    implementation platform("com.google.firebase:firebase-bom:30.4.1")
+    implementation platform("com.google.firebase:firebase-bom:31.4.0")
     implementation 'com.google.firebase:firebase-messaging'
 
     //Widgets
-    implementation 'com.github.TalbotGooday:AvatarView:0.1.1'
+    implementation 'com.github.TalbotGooday:AvatarView:0.1.2'
+    implementation 'com.github.QuadFlask:colorpicker:0.0.15'
+
     //HelpCrunch
-    implementation('com.helpcrunch:chat-sdk:3.2.8')
+    implementation('com.helpcrunch:chat-sdk:3.3.0-rc.1')
 }
 

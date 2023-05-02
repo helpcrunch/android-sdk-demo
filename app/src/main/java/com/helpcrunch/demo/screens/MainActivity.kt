@@ -34,6 +34,7 @@ import com.helpcrunch.library.core.options.HCOptions
 import com.helpcrunch.library.core.options.HCPreChatForm
 import com.helpcrunch.library.core.options.theme.HCMessageAreaTheme
 import com.helpcrunch.library.core.options.theme.HCTheme
+import kotlin.random.Random.Default.nextInt
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainNewBinding
@@ -132,11 +133,13 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         when (binding.themeGroup.checkedRadioButtonId) {
-            R.id.light -> theme = HCTheme.Builder(
-                HCTheme.Type.DEFAULT
-            ).build()
-            R.id.dark -> theme = HCTheme.Builder(HCTheme.Type.DARK).build()
+            R.id.light -> theme = HCTheme.Builder(theme = HCTheme.Type.DEFAULT).build()
+            R.id.dark -> theme = HCTheme.Builder(theme = HCTheme.Type.DARK).build()
             R.id.custom -> theme = CustomTheme.create(this)
+            R.id.random_hex -> theme = HCTheme.Builder(
+                mainColor = randomColor(),
+                shouldPaintIconsAutomatically = true
+            ).build()
         }
         val optionsBuilder = HCOptions.Builder()
             .setTheme(theme)
@@ -147,6 +150,10 @@ class MainActivity : AppCompatActivity() {
 
         optionsBuilder.setPreChatForm(preChatForm)
         showChat(optionsBuilder.build())
+    }
+
+    private fun randomColor(): Int {
+        return Color.argb(255, nextInt(256), nextInt(256), nextInt(256))
     }
 
     private fun openWithCustomSettings() {
@@ -318,4 +325,5 @@ class MainActivity : AppCompatActivity() {
     private fun onChatStateChanged(state: HelpCrunch.State) {
         binding.state.text = getStateString(state)
     }
+
 }

@@ -60,6 +60,12 @@
 					android:layout_height="wrap_content"
 					android:text="Custom Theme" />
 
+				<RadioButton
+					android:id="@+id/random_hex"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Random Main Color" />
+
 			</RadioGroup>
 
 			<View

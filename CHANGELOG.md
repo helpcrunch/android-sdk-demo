@@ -1,4 +1,13 @@
 # Changelog
+
+## v3.3.0-rc.1 (05/02/2022)
+* Bump up to `minSdkVersion 33`
+* Third party libraries updated to latest versions
+* Added functionality for KB restrictions
+* Demo migrated to Kotlin
+* Added random color theme sample 
+---
+
 ## v3.2.8 (26/04/2023)
 ### ⚠ Please note
 > <p> The release <code>v3.2.8</code> is the last one that supports <code>Android API 19</code>. 
