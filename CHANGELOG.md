@@ -1,5 +1,21 @@
 # Changelog
 
+## v3.3.0 (05/03/2022)
+* Bump up to `minSdkVersion 33`
+* Third party libraries updated to latest versions
+* Added functionality for KB restrictions
+* Demo migrated to Kotlin
+* Added random color theme sample
+* `strings.xml` updates. Added new string:
+```xml
+<string name="hc_password_hint">Password</string>
+<string name="hckb_error_protected_by_password">The knowledge base is protected by password</string>
+<string name="hckb_error_incorrect_password_title">Password is incorrect</string>
+<string name="hckb_error_access_denied">Access to knowledge base is prohibited</string>
+<string name="hckb_sign_in">Sign In</string>
+```
+---
+
 ## v3.3.0-rc.1 (05/02/2022)
 * Bump up to `minSdkVersion 33`
 * Third party libraries updated to latest versions

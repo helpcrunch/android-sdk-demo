@@ -31,6 +31,7 @@
 	<string name="hc_attachment_location">Location</string>
 	<string name="hc_attachment_article">Article</string>
 	<string name="hc_message_hint">Type message</string>
+	<string name="hc_password_hint">Password</string>
 
 	<plurals name="hc_typing">
 		<item quantity="zero">typing…</item>
@@ -168,6 +169,11 @@
 
 	<string name="hckb_locale_picker">Language</string>
 	<string name="hckb_missing_locale_message">This article isn’t translated into %s. You may choose another language:</string>
+
+	<string name="hckb_error_protected_by_password">The knowledge base is protected by password</string>
+	<string name="hckb_error_incorrect_password_title">Password is incorrect</string>
+	<string name="hckb_error_access_denied">Access to knowledge base is prohibited</string>
+	<string name="hckb_sign_in">Sign In</string>
 
 	<!--Time-->
 	<string name="hc_time_today">Today</string>
