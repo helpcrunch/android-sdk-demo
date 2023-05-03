@@ -1,7 +1,7 @@
  <a href="https://helpcrunch.com/"><p align="center"><img alt="flow" width="600" src="https://helpcrunch.com/img/layout/menu/logo.svg"></p></a>
 
 <p align=center>
-<a href="https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/chat-sdk"><img alt="Maven Central" src="https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/chat-sdk/badge.svg" /></a>
+<a href="https://maven-badges.herokuapp.com/maven-central/com.helpcrunch/chat-sdk"><img alt="Maven Central" src="https://img.shields.io/badge/maven%20central-3.2.8-success" /></a>
 <img alt="Platform" src="https://img.shields.io/badge/platforms-Android-green.svg" />
 <img alt="Languages" src="https://img.shields.io/badge/languages-Kotlin-F18E33.svg" />
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img alt="Apache License" src="http://img.shields.io/badge/license-APACHE2-blue.svg?style=flat" /></a>
