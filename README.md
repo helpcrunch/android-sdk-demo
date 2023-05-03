@@ -7,6 +7,13 @@
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img alt="Apache License" src="http://img.shields.io/badge/license-APACHE2-blue.svg?style=flat" /></a>
 </p>
 
+**⚠ Please note**
+---
+Version 3.2.8 is the last one that supports `Android API 19`. 
+Releases since version `v3.3.0`, will support `Android API 21` and higher.
+We are dropping support for older devices below Android 5 and will update all dependencies to the latest versions available at the time of release.
+---
+
 ### Helpcrunch Android SDK Demo
 A perfect live chat, email automation and a super-intuitive help desk in one smart customer communication platform.
 
