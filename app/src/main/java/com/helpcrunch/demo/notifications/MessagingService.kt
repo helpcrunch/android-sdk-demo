@@ -1,5 +1,6 @@
 package com.helpcrunch.demo.notifications
 
+import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.helpcrunch.library.core.HelpCrunch.showNotification
@@ -19,6 +20,7 @@ class MessagingService : FirebaseMessagingService() {
             showNotification(remoteMessage)
         } else {
             //Do something yours
+            Log.i("MessagingService", "I can handle a message here")
         }
     }
 }

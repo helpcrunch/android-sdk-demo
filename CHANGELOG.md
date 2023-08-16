@@ -1,5 +1,32 @@
 # Changelog
 
+## v3.3.1-v3.3.2 (05/03/2022)
+* 5-stars rating added
+* Added logic for chat creation threshold
+* Third party libraries updated to latest versions
+* `strings.xml` updates. Added new string:
+```xml
+<string name="hc_chat_rating_values_very_poor">Very poor</string>
+<string name="hc_chat_rating_values_good">Good</string>
+<string name="hc_error_conversation_limit">You\'ve reached the conversation limit.\nPlease, try again later.</string>
+
+```
+* `strings.xml` updates. Removed string:
+```xml
+
+<string name="hc_tech_chat_rated_poor">Poor</string>
+<string name="hc_tech_chat_rated_average">Average</string>
+<string name="hc_tech_chat_rated_great">Great</string>
+```
+* Bug fixes and other improvements
+
+#### Bug Fixes:
+- Fixed data loading bug for broadcast chats
+- Fixed language change bug in
+- [#71](https://github.com/helpcrunch/android-sdk-demo/issues/71) Back button click on Android 13
+- [#75](https://github.com/helpcrunch/android-sdk-demo/issues/75) Not expose -flattenpackagehierarchy 'com.helpcrunch.library' to clients
+
+---
 ## v3.3.0 (05/03/2022)
 * Bump up to `minSdkVersion 33`
 * Third party libraries updated to latest versions

@@ -34,7 +34,7 @@
 
         <service
             android:name=".notifications.MessagingService"
-            android:exported="true">
+            android:exported="false">
             <intent-filter android:priority="9991">
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

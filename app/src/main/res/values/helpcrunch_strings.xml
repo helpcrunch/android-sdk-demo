@@ -64,9 +64,6 @@
 	<string name="hc_you">You</string>
 	<string name="hc_someone">Someone</string>
 	<string name="hc_tech_client">client</string>
-	<string name="hc_tech_chat_rated_poor">Poor</string>
-	<string name="hc_tech_chat_rated_average">Average</string>
-	<string name="hc_tech_chat_rated_great">Great</string>
 	<string name="hc_tech_chat_rating_sent">Please rate this chat</string>
 	<string name="hc_tech_chat_rating_sent_push">Please rate this chat</string>
 	<string name="hc_tech_chat_rated">Chat rated %s</string>
@@ -107,7 +104,7 @@
 	<string name="hc_error_chat_deleted">This chat was removed by agent. You\'ll be logged out</string>
 	<string name="hc_error_file_size">You can\'t send files bigger than 16 MB.</string>
 	<string name="hc_error_file_cant_open">Can\'t open this file</string>
-	<string name="hc_error_no_camera_exists">No Application exists for camera!</string>
+	<string name="hc_error_conversation_limit">You\'ve reached the conversation limit.\nPlease, try again later.</string>
 
 	<!--File Picker-->
 	<string name="hc_permission_file_picker_rationale">Storage permission is needed to access files.</string>
@@ -130,9 +127,11 @@
 
 	<!--Rating View-->
 	<string name="hc_rating_title">How do you rate your customer service experience?</string>
+	<string name="hc_chat_rating_values_very_poor">Very poor</string>
 	<string name="hc_chat_rating_values_poor">Poor</string>
 	<string name="hc_chat_rating_values_average">Average</string>
-	<string name="hc_chat_rating_values_great">Great</string>
+	<string name="hc_chat_rating_values_good">Good</string>
+	<string name="hc_chat_rating_values_excellent">Excellent</string>
 	<string name="hc_view_article">View article</string>
 	<string name="hc_rating_title_block">Did this answer your question?</string>
 

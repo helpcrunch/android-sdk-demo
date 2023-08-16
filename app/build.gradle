@@ -1,11 +1,11 @@
-apply plugin: 'com.android.application'
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'com.google.gms.google-services'
+apply plugin: "com.android.application"
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "com.google.gms.google-services"
 
 
 android {
-    compileSdkVersion 33
+    compileSdk 33
     buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.helpcrunch.demo"
@@ -21,7 +21,7 @@ android {
         release {
             debuggable true
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
     compileOptions {
@@ -38,19 +38,19 @@ android {
 
 dependencies {
     //Multidex
-    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation "androidx.multidex:multidex:2.0.1"
 
     //AndroidX
     implementation "androidx.appcompat:appcompat:1.6.1"
-    implementation "com.google.android.material:material:1.8.0"
+    implementation "com.google.android.material:material:1.9.0"
 
     //Firebase
-    implementation platform("com.google.firebase:firebase-bom:31.4.0")
-    implementation 'com.google.firebase:firebase-messaging'
+    implementation platform("com.google.firebase:firebase-bom:32.2.0")
+    implementation "com.google.firebase:firebase-messaging"
 
     //Widgets
-    implementation 'com.github.TalbotGooday:AvatarView:0.1.2'
+    implementation "com.github.TalbotGooday:AvatarView:0.1.2"
 
     //HelpCrunch
-    implementation('com.helpcrunch:chat-sdk:3.3.0')
+    implementation("com.helpcrunch:chat-sdk:3.3.2")
 }

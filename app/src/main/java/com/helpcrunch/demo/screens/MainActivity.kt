@@ -23,13 +23,6 @@ import com.helpcrunch.library.core.Callback
 import com.helpcrunch.library.core.ERROR_CANT_OPEN_CHAT
 import com.helpcrunch.library.core.ERROR_USER_BLOCKED
 import com.helpcrunch.library.core.HelpCrunch
-import com.helpcrunch.library.core.HelpCrunch.getState
-import com.helpcrunch.library.core.HelpCrunch.getUnreadChatsCount
-import com.helpcrunch.library.core.HelpCrunch.getUser
-import com.helpcrunch.library.core.HelpCrunch.getVersion
-import com.helpcrunch.library.core.HelpCrunch.logout
-import com.helpcrunch.library.core.HelpCrunch.showChatScreen
-import com.helpcrunch.library.core.HelpCrunch.trackEvent
 import com.helpcrunch.library.core.options.HCOptions
 import com.helpcrunch.library.core.options.HCPreChatForm
 import com.helpcrunch.library.core.options.theme.HCMessageAreaTheme
@@ -64,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         updateUnreadMessages()
-        findViewById<View>(R.id.logout_button).isEnabled = getUser() != null
+        findViewById<View>(R.id.logout_button).isEnabled = HelpCrunch.getUser() != null
     }
 
     override fun onDestroy() {
@@ -83,9 +76,9 @@ class MainActivity : AppCompatActivity() {
             openUserDataScreen()
         }
         logoutButton.setOnClickListener { logout() }
-        val versionText = "SDK: v ${getVersion()}"
+        val versionText = "SDK: v ${HelpCrunch.getVersion()}"
         version.text = versionText
-        state.text = getStateString(getState())
+        state.text = getStateString(HelpCrunch.getState())
     }
 
     private fun getStateString(state: HelpCrunch.State): CharSequence {
@@ -109,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     private fun logout() {
         setLogoutButtonParameters(View.VISIBLE, false)
 
-        logout(object : Callback<Any?>() {
+        HelpCrunch.logout(object : Callback<Any?>() {
             override fun onSuccess(result: Any?) {
                 Toast.makeText(this@MainActivity, "Success", Toast.LENGTH_SHORT).show()
                 clearBadge()
@@ -181,10 +174,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun showChat(options: HCOptions?) {
         setChatScreenButtonParameters(View.GONE, View.VISIBLE, false)
-        showChatScreen(options, object : Callback<Any?>() {
+
+        HelpCrunch.showChatScreen(options, object : Callback<Any?>() {
             override fun onError(message: String) {
                 if (message == ERROR_USER_BLOCKED) {
-                    val user = getUser()
+                    val user = HelpCrunch.getUser()
                     if (user != null) {
                         val messageText = """
                             You are a very bad person, ${user.name}.
@@ -211,7 +205,7 @@ class MainActivity : AppCompatActivity() {
     private fun handleOpenChatClicked() {
         checkSettingsOpenScreen()
         clearBadge()
-        trackEvent(
+        HelpCrunch.trackEvent(
             "Event chat opened",
             "https://i.pinimg.com/originals/58/92/e7/5892e7f3cc64c8a912e2494a3ff77e08.jpg",
             "Say Cheese"
@@ -219,7 +213,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUnreadMessages() {
-        getUnreadChatsCount(object : Callback<Int>() {
+        HelpCrunch.getUnreadChatsCount(object : Callback<Int>() {
             override fun onSuccess(result: Int) {
                 setVisibilityForUnreadMessagesBadge(result)
             }
