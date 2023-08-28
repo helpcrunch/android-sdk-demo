@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:focusable="true"
+	android:focusableInTouchMode="true"
+	android:orientation="vertical"
+	android:padding="12dp"
+	tools:ignore="HardcodedText">
+
+	<androidx.appcompat.widget.AppCompatEditText
+		android:id="@+id/message_text"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="@string/send_message_hint" />
+
+	<FrameLayout
+		android:id="@+id/send_button"
+		style="@style/Button"
+		android:layout_marginTop="12dp">
+
+		<androidx.appcompat.widget.AppCompatTextView
+			style="@style/Text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="start|center_vertical"
+			android:layout_marginStart="18dp"
+			android:text="@string/send_message_button" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/send_button_icon"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
+			android:layout_gravity="center_vertical|end"
+			android:layout_marginEnd="15dp"
+			app:srcCompat="@drawable/ic_hc_send" />
+
+		<ProgressBar
+			android:id="@+id/send_button_progress"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_gravity="center_vertical|end"
+			android:layout_marginEnd="15dp"
+			android:visibility="gone"
+			tools:visibility="visible" />
+	</FrameLayout>
+
+	<CheckBox
+		android:id="@+id/force_new_chat"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/force_new_chat" />
+
+	<androidx.core.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginTop="12dp">
+
+		<LinearLayout
+			android:id="@+id/messages"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical" />
+	</androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

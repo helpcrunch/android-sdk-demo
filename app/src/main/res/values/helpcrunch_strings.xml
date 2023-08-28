@@ -1,0 +1,209 @@
+<resources>
+	<!--Chat Form-->
+	<string name="hc_waiting_message">Searching for a free agent. \nPlease hold on.</string>
+	<string name="hc_offline_message">Sorry, we\'re offline now 🙈 Feel free to send all your questions, contact details or feedback right here, and we\'ll get back to you asap 😇</string>
+
+	<!--Chat messages menu-->
+	<string name="hc_menu_copy">Copy</string>
+	<string name="hc_menu_edit">Edit</string>
+	<string name="hc_menu_copy_link">Copy link</string>
+	<string name="hc_menu_open">Open</string>
+	<string name="hc_menu_view_image">View image</string>
+	<string name="hc_menu_item_file">File</string>
+	<string name="hc_menu_item_photo">Photo</string>
+	<string name="hc_menu_item_view_gallery">View gallery</string>
+	<string name="hc_menu_item_upload_file">Upload a file</string>
+	<string name="hc_download">Download</string>
+	<string name="hc_share">Share…</string>
+	<string name="hc_menu_end_chat">End this chat</string>
+
+	<!--Chats list-->
+	<string name="hc_support_team">%s Team</string>
+	<string name="hc_no_chats_found_title">You have no chats</string>
+	<string name="hc_no_chats_found_subtitle">Start a new one</string>
+	<string name="hc_create_conversation_button">New conversation</string>
+
+	<!--Chat-->
+	<string name="hc_message_reply">"Reply"</string>
+	<string name="hc_attachment_video">Video</string>
+	<string name="hc_attachment_file">File</string>
+	<string name="hc_attachment_image">Image</string>
+	<string name="hc_attachment_location">Location</string>
+	<string name="hc_attachment_article">Article</string>
+	<string name="hc_message_hint">Type message</string>
+	<string name="hc_password_hint">Password</string>
+
+	<plurals name="hc_typing">
+		<item quantity="zero">typing…</item>
+		<item quantity="one">is typing…</item>
+		<item quantity="two">are typing…</item>
+		<item quantity="few">are typing…</item>
+		<item quantity="many">are typing…</item>
+		<item quantity="other">are typing…</item>
+	</plurals>
+
+	<string name="hc_download_file_title">Download file?</string>
+	<string name="hc_download_ok">Yes</string>
+	<string name="hc_download_no">No</string>
+	<string name="hc_download_loading_complete">Loading is complete 👌\nSaved to Downloads folder👌</string>
+	<string name="hc_sharing_error">Unable to share file</string>
+	<string name="hc_file_sending_error">Unable to send this file</string>
+	<string name="hc_loading">Loading…</string>
+
+	<string name="hc_copied">Copied</string>
+	<string name="hc_sent_at">at</string>
+	<string name="hc_permissions_ok">OK</string>
+	<string name="hc_permissions_cancel">Cancel</string>
+	<string name="hc_permissions_content">Allow file system and camera access to improve file sharing</string>
+	<string name="hc_messages_updating">Updating…</string>
+	<string name="hc_button_send">Send</string>
+	<string name="hc_more_agents">and %d more</string>
+	<string name="hc_new_chat_arrived">New chat has arrived</string>
+
+	<!--Tech-->
+	<string name="hc_you">You</string>
+	<string name="hc_someone">Someone</string>
+	<string name="hc_tech_client">client</string>
+	<string name="hc_tech_chat_rating_sent">Please rate this chat</string>
+	<string name="hc_tech_chat_rating_sent_push">Please rate this chat</string>
+	<string name="hc_tech_chat_rated">Chat rated %s</string>
+	<string name="hc_tech_chat_marked_by">Chat marked %1$s by %2$s</string>
+	<string name="hc_tech_chat_marked_as">Chat marked %s</string>
+	<string name="hc_tech_someone_closed_chat">%s closed this chat</string>
+	<string name="hc_closed">Closed</string>
+	<string name="hc_chat_closed">This chat is closed</string>
+
+	<string-array name="hc_chat_statuses">
+		<item>New</item>
+		<item>Open</item>
+		<item>Pending</item>
+		<item>On-hold</item>
+		<item>Closed</item>
+	</string-array>
+
+	<!--Notifications-->
+	<string name="hc_notification_channel_text">Allow Support messages notifications</string>
+
+	<!--Pre-Chat Form-->
+	<string name="hc_pre_chat_message">Usually we respond immediately. If not, you can expect a reply within a few hours. Please kindly introduce yourself.</string>
+	<string name="hc_pre_chat_continue">Continue</string>
+	<string name="hc_pre_chat_name">Name</string>
+	<string name="hc_pre_chat_email">Email</string>
+	<string name="hc_pre_chat_company">Company</string>
+	<string name="hc_pre_chat_phone_number">Phone number</string>
+	<string name="hc_pre_chat_error_required">%s is required</string>
+	<string name="hc_pre_chat_error_pattern">%s is not valid</string>
+	<string name="hc_pre_chat_gdpr">I have read and accept the %s</string>
+	<string name="hc_pre_chat_gdpr_link_text">Privacy Policy</string>
+	<string name="hc_department_picker_hint">Choose a department</string>
+	<string name="hc_department_picker_any_department">Any department</string>
+
+	<!--In App Errors -->
+	<string name="hc_error_no_internet_connection">Please, check your internet connection</string>
+	<string name="hc_error_handler_unknown">Something went wrong. Please try again later</string>
+	<string name="hc_error_chat_deleted">This chat was removed by agent. You\'ll be logged out</string>
+	<string name="hc_error_file_size">You can\'t send files bigger than 16 MB.</string>
+	<string name="hc_error_file_cant_open">Can\'t open this file</string>
+	<string name="hc_error_conversation_limit">You\'ve reached the conversation limit.\nPlease, try again later.</string>
+
+	<!--File Picker-->
+	<string name="hc_permission_file_picker_rationale">Storage permission is needed to access files.</string>
+	<string name="hc_no_files_found">No files found</string>
+	<string name="hc_attachments_title_text" formatted="false" translatable="false">(%d/%d)</string>
+	<string name="hc_attachments_num" formatted="false" translatable="false">%d</string>
+	<string name="hc_picker_title">Select an option</string>
+	<string name="hc_select_photo_text">Select a media</string>
+	<string name="hc_select_photo_video">Photos &amp; videos</string>
+	<string name="hc_select_doc_text">Select a document</string>
+	<string name="hc_videos">Videos</string>
+	<string name="hc_images">Images</string>
+	<string name="hc_all_photos">All Photos</string>
+	<string name="hc_all_videos">All Videos</string>
+	<string name="hc_all_files">All Files</string>
+	<string name="hc_done">Done</string>
+	<string name="hc_downloading">Downloading…</string>
+	<string name="hc_debug">Debug</string>
+	<string name="hc_send_intent_title">Send to:</string>
+
+	<!--Rating View-->
+	<string name="hc_rating_title">How do you rate your customer service experience?</string>
+	<string name="hc_chat_rating_values_very_poor">Very poor</string>
+	<string name="hc_chat_rating_values_poor">Poor</string>
+	<string name="hc_chat_rating_values_average">Average</string>
+	<string name="hc_chat_rating_values_good">Good</string>
+	<string name="hc_chat_rating_values_excellent">Excellent</string>
+	<string name="hc_view_article">View article</string>
+	<string name="hc_rating_title_block">Did this answer your question?</string>
+
+	<!--End chat-->
+	<string name="hc_end_chat_dialog_message">You will not be able to continue this conversation.</string>
+	<string name="hc_end_chat_dialog_title">Are you sure?</string>
+	<string name="hc_end_chat_dialog_ok">End chat</string>
+	<string name="hc_end_chat_dialog_cancel">Cancel</string>
+
+	<!--Knowledge Base-->
+	<string name="hckb_written_by">Written by %s</string>
+	<string name="hckb_updated_at">Updated %s</string>
+	<string name="hckb_error_cant_open_article">Can\'t open the article</string>
+	<string name="hckb_hide_articles">Hide articles</string>
+	<string name="hckb_categories_title">Hello 👋 How can we help?</string>
+	<string name="hckb_action_search_articles_hint">Search articles</string>
+	<string name="hckb_no_articles_title">There are no articles</string>
+	<string name="hckb_no_articles_subtitle">We’re working on adding our help articles.\nYou’ll find them here very soon.</string>
+
+	<string name="hc_type_chat">Ask</string>
+	<string name="hc_type_kb">Search</string>
+	<string name="hc_draft_message">Draft:</string>
+	<string name="notifications_you">You</string>
+
+	<plurals name="hckb_see_all_articles_count">
+		<item quantity="one">See %d more article</item>
+		<item quantity="other">See all %d articles</item>
+	</plurals>
+
+	<plurals name="hckb_search_result">
+		<item quantity="one">%d result</item>
+		<item quantity="other">%d results</item>
+	</plurals>
+
+	<string name="hckb_locale_picker">Language</string>
+	<string name="hckb_missing_locale_message">This article isn’t translated into %s. You may choose another language:</string>
+
+	<string name="hckb_error_protected_by_password">The knowledge base is protected by password</string>
+	<string name="hckb_error_incorrect_password_title">Password is incorrect</string>
+	<string name="hckb_error_access_denied">Access to knowledge base is prohibited</string>
+	<string name="hckb_sign_in">Sign In</string>
+
+	<!--Time-->
+	<string name="hc_time_today">Today</string>
+	<string name="hc_time_yesterday">Yesterday</string>
+	<string name="hc_time_just_now">&lt;1M</string>
+	<string name="hc_time_mins_ago">M</string>
+	<string name="hc_time_hours_ago">H</string>
+	<string name="hc_time_days_ago">D</string>
+	<string name="hc_time_week_ago">W</string>
+
+	<!-- Chat Bot-->
+	<string name="hc_error_wrong_email">Enter an email</string>
+	<string name="hc_error_wrong_url">Enter a URL</string>
+	<string name="hc_error_wrong_phone">Enter a phone number</string>
+	<string name="hc_error_wrong_credit_card">Enter a credit card</string>
+	<string name="hc_error_not_found">Not found</string>
+	<string name="hc_bot_answer_yes">Yes</string>
+	<string name="hc_bot_answer_no">No</string>
+
+	<string-array name="hc_month">
+		<item>January</item>
+		<item>February</item>
+		<item>March</item>
+		<item>April</item>
+		<item>May</item>
+		<item>June</item>
+		<item>July</item>
+		<item>August</item>
+		<item>September</item>
+		<item>October</item>
+		<item>November</item>
+		<item>December</item>
+	</string-array>
+</resources>

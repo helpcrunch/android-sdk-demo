@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">HelpCrunch Demo</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_demo_name">Name</string>
+    <string name="app_demo_organization">Organization</string>
+    <string name="app_demo_app_id">App id</string>
+    <string name="app_demo_secret">Secret</string>
+    <string name="app_demo_email">Email</string>
+    <string name="app_demo_phone">Phone</string>
+    <string name="app_demo_user_id">User ID</string>
+    <string name="app_demo_company">Company</string>
+    <string name="name_is_empty">Name is empty</string>
+    <string name="all_fields_are_empty">All fields are empty</string>
+    <string name="data_saved">User data is saved</string>
+    <string name="something_wrong">Something went wrong. Try later.</string>
+    <string name="error_id_is_empty">ID is empty</string>
+    <string name="change_user_data">User data</string>
+    <string name="change_custom_user_data">Custom data</string>
+    <string name="send_message">Send user message</string>
+    <string name="send_message_hint">Send user message</string>
+    <string name="send_message_button">Send text</string>
+    <string name="force_new_chat">Force new chat</string>
+
+</resources>

@@ -1,0 +1,113 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:padding="20dp"
+	tools:ignore="HardcodedText">
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+
+		<LinearLayout
+			android:id="@+id/registration_form"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<androidx.appcompat.widget.AppCompatEditText
+				android:id="@+id/nameEditText"
+				style="@style/Widget.AppCompat.EditText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/app_demo_name" />
+
+			<androidx.appcompat.widget.AppCompatEditText
+				android:id="@+id/emailEditText"
+				style="@style/Widget.AppCompat.EditText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/app_demo_email"
+				android:inputType="textEmailAddress" />
+
+			<androidx.appcompat.widget.AppCompatEditText
+				android:id="@+id/phoneEditText"
+				style="@style/Widget.AppCompat.EditText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/app_demo_phone"
+				android:inputType="phone" />
+
+			<androidx.appcompat.widget.AppCompatEditText
+				android:id="@+id/companyEditText"
+				style="@style/Widget.AppCompat.EditText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/app_demo_company"
+				android:inputType="text"
+				android:maxLines="1" />
+
+			<androidx.appcompat.widget.AppCompatEditText
+				android:id="@+id/userIdEditText"
+				style="@style/Widget.AppCompat.EditText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/app_demo_user_id"
+				android:inputType="text"
+				android:maxLines="1" />
+
+		</LinearLayout>
+	</ScrollView>
+
+	<CheckBox
+		android:id="@+id/logout_if_necessary"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp"
+		android:text="Logout if necessary" />
+
+	<FrameLayout
+		android:id="@+id/save_user_data_button"
+		style="@style/Button">
+
+		<TextView
+			style="@style/Text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Save" />
+
+		<ProgressBar
+			android:id="@+id/save_user_data_button_progress"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_gravity="center_vertical|end"
+			android:layout_marginEnd="15dp"
+			android:theme="@style/ProgressBarTheme"
+			android:visibility="gone"
+			tools:visibility="visible" />
+
+	</FrameLayout>
+
+	<FrameLayout
+		android:id="@+id/logout_button"
+		style="@style/Button.Logout">
+
+		<androidx.appcompat.widget.AppCompatTextView
+			style="@style/Text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Logout" />
+
+		<ProgressBar
+			android:id="@+id/logout_button_progress"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_gravity="center_vertical|end"
+			android:layout_marginEnd="15dp"
+			android:visibility="gone"
+			tools:visibility="visible" />
+	</FrameLayout>
+
+</LinearLayout>

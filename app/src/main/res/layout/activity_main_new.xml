@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	tools:ignore="HardcodedText">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/logo"
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:layout_marginTop="30dp"
+		app:srcCompat="@drawable/hc_branding_light" />
+
+	<androidx.appcompat.widget.AppCompatTextView
+		android:id="@+id/version"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="20dp"
+		android:textSize="12sp"
+		tools:text="0.0.0.00" />
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="20dp"
+			android:layout_marginTop="20dp"
+			android:layout_marginEnd="20dp"
+			android:orientation="vertical">
+
+			<RadioGroup
+				android:id="@+id/theme_group"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<RadioButton
+					android:id="@+id/light"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:checked="true"
+					android:text="Light Theme" />
+
+				<RadioButton
+					android:id="@+id/dark"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Dark Theme" />
+
+				<RadioButton
+					android:id="@+id/custom"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Custom Theme" />
+
+				<RadioButton
+					android:id="@+id/random_hex"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Random Main Color" />
+
+			</RadioGroup>
+
+			<View
+				android:id="@+id/divider"
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_marginTop="10dp"
+				android:layout_marginBottom="10dp"
+				android:layout_weight="1"
+				android:background="?android:attr/listDivider" />
+
+			<LinearLayout
+				android:id="@+id/chat_id_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="5dp"
+				android:layout_marginTop="10dp"
+				android:background="?selectableItemBackground"
+				android:orientation="horizontal">
+
+				<androidx.appcompat.widget.AppCompatTextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="SDK status:"
+					android:textStyle="bold" />
+
+				<androidx.appcompat.widget.AppCompatTextView
+					android:id="@+id/state"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="12dp"
+					tools:text="Idle" />
+
+			</LinearLayout>
+
+			<FrameLayout
+				android:visibility="gone"
+				android:id="@+id/chat_custom_button"
+				style="@style/Button">
+
+				<androidx.appcompat.widget.AppCompatTextView
+					style="@style/Text"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Launch Chat CUSTOM settings" />
+
+			</FrameLayout>
+
+			<FrameLayout
+				android:id="@+id/userData"
+				style="@style/Button"
+				android:layout_marginStart="20dp"
+
+				android:layout_marginEnd="20dp"
+				android:visibility="gone">
+
+				<androidx.appcompat.widget.AppCompatTextView
+					style="@style/Text"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Launch Chat with user data" />
+
+			</FrameLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="30dp"
+				android:layout_marginBottom="8dp"
+				android:baselineAligned="false"
+				android:orientation="horizontal">
+
+				<FrameLayout
+					android:id="@+id/user_data_button"
+					style="@style/Button"
+					android:layout_marginEnd="8dp"
+					android:layout_marginBottom="0dp"
+					android:layout_weight="1">
+
+					<androidx.appcompat.widget.AppCompatTextView
+						style="@style/Text"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="start|center_vertical"
+						android:layout_marginStart="18dp"
+						android:text="@string/change_user_data" />
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical|end"
+						android:layout_marginEnd="15dp"
+						app:srcCompat="@drawable/ic_arrow_right" />
+				</FrameLayout>
+
+				<FrameLayout
+					android:id="@+id/custom_user_data_button"
+					style="@style/Button"
+					android:layout_marginStart="8dp"
+					android:layout_marginBottom="0dp"
+					android:layout_weight="1">
+
+					<androidx.appcompat.widget.AppCompatTextView
+						style="@style/Text"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="start|center_vertical"
+						android:layout_marginStart="18dp"
+						android:text="@string/change_custom_user_data" />
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical|end"
+						android:layout_marginEnd="15dp"
+						app:srcCompat="@drawable/ic_arrow_right" />
+				</FrameLayout>
+
+			</LinearLayout>
+
+			<FrameLayout
+				android:id="@+id/send_message_button"
+				style="@style/Button"
+				android:layout_marginBottom="0dp">
+
+				<androidx.appcompat.widget.AppCompatTextView
+					style="@style/Text"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="start|center_vertical"
+					android:layout_marginStart="18dp"
+					android:text="@string/send_message" />
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:layout_width="24dp"
+					android:layout_height="24dp"
+					android:layout_gravity="center_vertical|end"
+					android:layout_marginEnd="15dp"
+					app:srcCompat="@drawable/ic_arrow_right" />
+			</FrameLayout>
+
+			<View
+				android:id="@+id/divider1"
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_marginTop="10dp"
+				android:layout_marginBottom="10dp"
+				android:background="?android:attr/listDivider" />
+
+			<FrameLayout
+				android:id="@+id/chat_button"
+				style="@style/Button">
+
+				<androidx.appcompat.widget.AppCompatTextView
+					style="@style/Text"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Launch Chat" />
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/logo_btn"
+					android:layout_width="18dp"
+					android:layout_height="18dp"
+					android:layout_gravity="center_vertical|end"
+					android:layout_marginTop="1dp"
+					android:layout_marginEnd="20dp"
+					app:srcCompat="@drawable/ic_favicon" />
+
+				<ProgressBar
+					android:id="@+id/progress_open"
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:layout_gravity="center_vertical|end"
+					android:layout_marginEnd="15dp"
+					android:visibility="gone"
+					tools:visibility="visible" />
+
+				<FrameLayout
+					android:id="@+id/badge_view"
+					style="@style/Indicator"
+					android:layout_marginEnd="15dp"
+					android:visibility="invisible">
+
+					<androidx.appcompat.widget.AppCompatTextView
+						android:id="@+id/badge_tv"
+						style="@style/Text.Counter"
+						tools:text="1" />
+				</FrameLayout>
+			</FrameLayout>
+
+			<FrameLayout
+				android:id="@+id/logout_button"
+				style="@style/Button.Logout">
+
+				<androidx.appcompat.widget.AppCompatTextView
+					style="@style/Text"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Logout" />
+
+				<ProgressBar
+					android:id="@+id/progress"
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:layout_gravity="center_vertical|end"
+					android:layout_marginEnd="15dp"
+					android:visibility="gone"
+					tools:visibility="visible" />
+			</FrameLayout>
+
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>
