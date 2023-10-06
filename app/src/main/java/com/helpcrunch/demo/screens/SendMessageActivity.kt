@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.helpcrunch.demo.R
 import com.helpcrunch.demo.databinding.ActivitySendMessageBinding
 import com.helpcrunch.library.core.Callback
@@ -58,12 +59,12 @@ class SendMessageActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initViews()
-        registerReceiver(hcEventsBroadcastReceiver, IntentFilter(HelpCrunch.EVENTS))
+        LocalBroadcastManager.getInstance(this).registerReceiver(hcEventsBroadcastReceiver, IntentFilter(HelpCrunch.EVENTS))
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(hcEventsBroadcastReceiver)
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(hcEventsBroadcastReceiver)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.text.buildSpannedString
 import androidx.core.text.inSpans
 import androidx.core.view.isVisible
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.helpcrunch.demo.R
 import com.helpcrunch.demo.databinding.ActivityMainNewBinding
 import com.helpcrunch.demo.design.CustomTheme
@@ -50,8 +51,8 @@ class MainActivity : AppCompatActivity() {
 
         initViews()
 
-        registerReceiver(hcEventsBroadcastReceiver, IntentFilter(HelpCrunch.EVENTS))
-        registerReceiver(hcStateBroadcastReceiver, IntentFilter(HelpCrunch.STATE))
+        LocalBroadcastManager.getInstance(this).registerReceiver(hcEventsBroadcastReceiver, IntentFilter(HelpCrunch.EVENTS))
+        LocalBroadcastManager.getInstance(this).registerReceiver(hcStateBroadcastReceiver, IntentFilter(HelpCrunch.STATE))
     }
 
     override fun onResume() {
@@ -62,8 +63,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(hcEventsBroadcastReceiver)
-        unregisterReceiver(hcStateBroadcastReceiver)
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(hcEventsBroadcastReceiver)
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(hcStateBroadcastReceiver)
     }
 
     private fun initViews() = with(binding) {
@@ -319,5 +320,4 @@ class MainActivity : AppCompatActivity() {
     private fun onChatStateChanged(state: HelpCrunch.State) {
         binding.state.text = getStateString(state)
     }
-
 }

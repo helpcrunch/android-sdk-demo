@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.3.3 (06/10/2023)
+* Bump up to `compileSdkVersion 34`
+* `sendBroadcast` calls replaced with `LocalBroadcastManager.getInstance(this).sendBroadcast`
+* Bug fixes and other improvements
+
+---
 ## v3.3.1-v3.3.2 (05/03/2022)
 * 5-stars rating added
 * Added logic for chat creation threshold
@@ -28,7 +34,7 @@
 
 ---
 ## v3.3.0 (05/03/2022)
-* Bump up to `minSdkVersion 33`
+* Bump up to `minSdkVersion 21`
 * Third party libraries updated to latest versions
 * Added functionality for KB restrictions
 * Demo migrated to Kotlin
@@ -44,7 +50,7 @@
 ---
 
 ## v3.3.0-rc.1 (05/02/2022)
-* Bump up to `minSdkVersion 33`
+* Bump up to `minSdkVersion 21`
 * Third party libraries updated to latest versions
 * Added functionality for KB restrictions
 * Demo migrated to Kotlin
