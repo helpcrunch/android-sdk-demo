@@ -1,5 +1,8 @@
 # Changelog
 
+## v3.3.4 (07/10/2023)
+* Bug fixes and other improvements
+
 ## v3.3.3 (06/10/2023)
 * Bump up to `compileSdkVersion 34`
 * `sendBroadcast` calls replaced with `LocalBroadcastManager.getInstance(this).sendBroadcast`
