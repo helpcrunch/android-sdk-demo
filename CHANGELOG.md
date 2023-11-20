@@ -1,5 +1,12 @@
 # Changelog
 
+## v3.3.5 (07/10/2023)
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+* Bug fixes and other improvements
+#### Bug Fixes:
+- [#77](https://github.com/helpcrunch/android-sdk-demo/issues/77) NullPointerException: Attempt to invoke virtual method TimeData.a() on a null object reference
+
+---
 ## v3.3.4 (07/10/2023)
 * Bug fixes and other improvements
 

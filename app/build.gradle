@@ -42,15 +42,15 @@ dependencies {
 
     //AndroidX
     implementation "androidx.appcompat:appcompat:1.6.1"
-    implementation "com.google.android.material:material:1.9.0"
+    implementation "com.google.android.material:material:1.10.0"
 
     //Firebase
-    implementation platform('com.google.firebase:firebase-bom:32.3.1')
+    implementation platform('com.google.firebase:firebase-bom:32.4.0')
     implementation "com.google.firebase:firebase-messaging"
 
     //Widgets
     implementation "com.github.TalbotGooday:AvatarView:0.1.2"
 
     //HelpCrunch
-    implementation("com.helpcrunch:chat-sdk:3.3.4")
+    implementation("com.helpcrunch:chat-sdk:3.3.5")
 }
