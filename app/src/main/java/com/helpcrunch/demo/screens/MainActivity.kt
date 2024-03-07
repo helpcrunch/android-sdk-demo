@@ -138,11 +138,14 @@ class MainActivity : AppCompatActivity() {
         val optionsBuilder = HCOptions.Builder()
             .setTheme(theme)
 
+        // Add "test_url" to your custom fields in the HelpCrunch Dashboard
+        // Then you can use it in the pre-chat form
         val preChatForm = HCPreChatForm.Builder()
-            .withField("test_url", "My custom pre-chat URL field", true)
+//            .withField("test_url", "My custom pre-chat URL field", true)
             .build()
 
         optionsBuilder.setPreChatForm(preChatForm)
+
         showChat(optionsBuilder.build())
     }
 
