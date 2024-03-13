@@ -17,7 +17,7 @@ api('androidx.core:core-ktx:1.12.0')
 api('androidx.recyclerview:recyclerview:1.3.2')
 api('androidx.lifecycle:lifecycle-process:2.6.2')
 // Firebase
-api platform('com.google.firebase:firebase-bom:32.7.1')
+api platform('com.google.firebase:firebase-bom:32.7.4')
 api("com.google.firebase:firebase-messaging-ktx")
 // Gson
 api('com.google.code.gson:gson:2.10.1')
