@@ -43,19 +43,19 @@ api("io.noties.markwon:inline-parser:4.6.2")
 api("io.noties.markwon:image:4.6.2")
 api("io.noties.markwon:linkify:4.6.2")
 // Worker
-api("androidx.work:work-runtime-ktx:2.8.1")
+api("androidx.work:work-runtime-ktx:2.9.0")
 // LiveData
 api('androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2')
 api('androidx.lifecycle:lifecycle-livedata-ktx:2.6.2')
 // Koin
 api('io.insert-koin:koin-android:3.5.0')
 //Video
-api("com.github.TalbotGooday:Android-Oembed-Video:0.2.4")
+api("com.github.TalbotGooday:Android-Oembed-Video:0.2.8")
 //Images
 api("com.github.chrisbanes:PhotoView:2.3.0")
 //Drawable
 api("com.github.duanhong169:drawabletoolbox:1.0.7")
-api("com.github.TalbotGooday:AvatarView:0.1.3")
+api("com.github.TalbotGooday:AvatarView:0.1.4")
 // Socket
 api("io.socket:socket.io-client:1.0.1")
 // Coroutines

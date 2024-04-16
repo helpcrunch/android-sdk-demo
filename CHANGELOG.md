@@ -1,9 +1,52 @@
 # Changelog
 
+## v3.3.8 (16/04/2024)
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+* `strings.xml` updates. Added new string:
+```xml
+<string name="hc_menu_copy_video_link">Copy video link</string>
+<string name="hc_menu_copy_image_link">Copy image link</string>
+<string name="hc_menu_copy_file_link">Copy file link</string>
+<string name="hc_menu_copy_article_link">Copy article link</string>
+<string name="hc_menu_copy_message">Copy message as text</string>
+
+<string name="hc_download_file">Save to Downloads</string>
+<string name="hc_download_image">Save to Gallery</string>
+<string name="hc_download_loading_complete">Loading is complete 👌\nSaved to Downloads folder</string>
+<string name="hc_download_image_saving_complete">Image saved to Gallery 👌</string>
+<string name="hc_saving_error">Unable to save file</string>
+
+<string name="hc_you_nominative">@string/hc_you</string>
+<string name="hc_you_genitive">@string/hc_you</string>
+<string name="hc_you_dative">@string/hc_you</string>
+<string name="hc_you_accusative">@string/hc_you</string>
+<string name="hc_you_ablative">@string/hc_you</string>
+<string name="hc_you_local">@string/hc_you</string>
+
+<string name="hc_tech_you_closed_chat">%s closed this conversation</string>
+
+<string name="hc_attachment_story">Story</string>
+
+```
+* `strings.xml` updates. Removed string:
+```xml
+<string name="hc_all_photos">All Photos</string>
+<string name="hc_all_videos">All Videos</string>
+<string name="hc_all_files">All Files</string>
+```
+* Added Ukrainian language support
+* Bug fixes and other improvements
+#### Bug Fixes:
+- [#83](https://github.com/helpcrunch/android-sdk-demo/issues/83) Crash on 3.3.7
+- [#80](https://github.com/helpcrunch/android-sdk-demo/issues/80) InflateException on inflating class com.goodayapps.widget.AvatarView
+- [#78](https://github.com/helpcrunch/android-sdk-demo/issues/78) Fatal Exception: java.lang.NullPointerException in com.helpcrunch.library.ui.screens.chat.HcChatFragment
+
+---
 ## v3.3.7 (13/03/2024)
 * Updated [third-party libraries](DEPENDENCY_LIST.md)
 * Bug fixes and other improvements
 
+---
 ## v3.3.6 (06/02/2024)
 * Updated [third-party libraries](DEPENDENCY_LIST.md)
 * Bug fixes and other improvements
