@@ -34,6 +34,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.helpcrunch.demo'
 }
 
 dependencies {
@@ -41,18 +42,18 @@ dependencies {
     implementation "androidx.multidex:multidex:2.0.1"
 
     // AndroidX
-    implementation "androidx.appcompat:appcompat:1.6.1"
-    implementation "com.google.android.material:material:1.11.0"
+    implementation "androidx.appcompat:appcompat:1.7.0"
+    implementation "com.google.android.material:material:1.12.0"
 
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:32.8.1')
+    implementation platform('com.google.firebase:firebase-bom:33.1.1')
     implementation "com.google.firebase:firebase-messaging"
 
     // Widgets
     implementation "com.github.TalbotGooday:AvatarView:0.1.4"
 
     // HelpCrunch
-    implementation("com.helpcrunch:chat-sdk:3.3.8")
+    implementation("com.helpcrunch:chat-sdk:3.3.9")
     // or a snapshot
-//     implementation("com.helpcrunch:chat-sdk:3.3.8+113-SNAPSHOT")
+//     implementation("com.helpcrunch:chat-sdk:3.3.9-209-SNAPSHOT")
 }
