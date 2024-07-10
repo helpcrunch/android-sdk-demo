@@ -75,7 +75,7 @@ android {
 ## Simple flow:
 A. Initialize HelpCrunch by calling the following in the onCreate() method of your application
 ```java
- HelpCrunch.initialize(ORGANISATION, APP_ID, SECRET)
+ HelpCrunch.initialize(ORGANISATION, APP_ID, SECRET);
 ```
 also you can set up option or user data
 ```java
@@ -112,7 +112,7 @@ customData.put("CUSTOM_TIME", System.currentTimeMillis());
 ```
 C. Open Chat Screen calling `showChatScreen(Context context)` method:
 ```java
-Helpcrunch.showChatScreen(context)
+Helpcrunch.showChatScreen(context);
 ```
 ## R8 / Proguard
 HelpCrunch SDK is fully compatible with R8 out of the box and doesn't require adding any extra rules.

@@ -1,5 +1,10 @@
 # Changelog
+## v3.3.9 (10/07/2024)
+* Added scale direction for chat rating
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+* Bug fixes and other improvements
 
+---
 ## v3.3.8 (16/04/2024)
 * Updated [third-party libraries](DEPENDENCY_LIST.md)
 * `strings.xml` updates. Added new string:
