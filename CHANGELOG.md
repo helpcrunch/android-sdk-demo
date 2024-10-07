@@ -1,4 +1,11 @@
 # Changelog
+## v3.4.0 (07/10/2024)
+* Improved socket performance
+* Fixed errors related to launching SDK on devices without the Google Services
+* Minor UI fixes
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+
+---
 ## v3.3.9 (10/07/2024)
 * Added scale direction for chat rating
 * Updated [third-party libraries](DEPENDENCY_LIST.md)

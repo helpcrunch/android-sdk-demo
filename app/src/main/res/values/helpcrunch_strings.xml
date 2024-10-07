@@ -116,11 +116,12 @@
 
 	<!--In App Errors -->
 	<string name="hc_error_no_internet_connection">Please, check your internet connection</string>
-	<string name="hc_error_handler_unknown">Something went wrong. Please try again later</string>
+	<string name="hc_error_handler_unknown">Something went wrong.\nPlease try again later</string>
 	<string name="hc_error_chat_deleted">This chat was removed by agent. You\'ll be logged out</string>
 	<string name="hc_error_file_size">You can\'t send files bigger than 16 MB.</string>
 	<string name="hc_error_file_cant_open">Can\'t open this file</string>
 	<string name="hc_error_conversation_limit">You\'ve reached the conversation limit.\nPlease, try again later.</string>
+	<string name="hc_error_button_retry">Retry</string>
 
 	<!--File Picker-->
 	<string name="hc_permission_file_picker_rationale">Storage permission is needed to access files.</string>
