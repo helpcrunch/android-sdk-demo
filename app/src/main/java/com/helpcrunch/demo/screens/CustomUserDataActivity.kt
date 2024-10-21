@@ -12,8 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.helpcrunch.demo.R
 import com.helpcrunch.demo.databinding.ActivityCustomUserDataBinding
 import com.helpcrunch.library.core.Callback
-import com.helpcrunch.library.core.HelpCrunch.getUser
-import com.helpcrunch.library.core.HelpCrunch.updateUser
+import com.helpcrunch.library.core.HelpCrunch
 import com.helpcrunch.library.core.models.user.HCUser
 
 class CustomUserDataActivity : AppCompatActivity() {
@@ -44,7 +43,7 @@ class CustomUserDataActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun initViews() = with(binding){
+    private fun initViews() = with(binding) {
         if (supportActionBar != null) {
             supportActionBar!!.setTitle(R.string.change_custom_user_data)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -53,7 +52,7 @@ class CustomUserDataActivity : AppCompatActivity() {
     }
 
     private fun fillData() {
-        val currentUser = getUser() ?: return
+        val currentUser = HelpCrunch.getUser() ?: return
         val data = currentUser.customData
         if (data != null) {
             for ((key, value) in data) {
@@ -63,19 +62,19 @@ class CustomUserDataActivity : AppCompatActivity() {
     }
 
     private fun saveCustomData() {
-        if (getUser() == null) {
+        if (HelpCrunch.getUser() == null) {
             Toast.makeText(this, "There is no user yet", Toast.LENGTH_SHORT).show()
             return
         }
         val customData = HashMap<String, Any?>()
         getNewData(customData, binding.registrationForm)
-        var user = getUser()
+        var user = HelpCrunch.getUser()
         if (user == null) {
             user = HCUser.Builder().build()
         }
         user.customData = customData
         setUserDataButtonParameters(View.VISIBLE, false)
-        updateUser(user, object : Callback<HCUser>() {
+        HelpCrunch.updateUser(user, object : Callback<HCUser>() {
             override fun onSuccess(result: HCUser) {
                 Toast.makeText(
                     this@CustomUserDataActivity,
