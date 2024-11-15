@@ -1,11 +1,19 @@
 # Changelog
 
+## v3.4.1 (15/11/2024)
+
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+* Bug fixes and other improvements
+
+---
+
 ## v3.4.1 (21/10/2024)
 
-* Removed file read and write permissions to comply with
-  new [Google Play's Photo and Video Permissions policy ](https://support.google.com/googleplay/android-developer/answer/14115180#zippy=%2Chow-easy-is-it-to-integrate-the-photo-picker-into-my-app)
+* Removed file read and write permissions to comply with new [Google Play's Photo and Video Permissions policy](https://support.google.com/googleplay/android-developer/answer/14115180#zippy=%2Chow-easy-is-it-to-integrate-the-photo-picker-into-my-app)
 
----## v3.4.0 (07/10/2024)
+---
+
+## v3.4.0 (07/10/2024)
 
 * Improved socket performance
 * Fixed errors related to launching SDK on devices without the Google Services
