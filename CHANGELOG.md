@@ -1,6 +1,44 @@
 # Changelog
 
-## v3.4.1 (15/11/2024)
+## v3.4.4 (05/02/2025)
+* Updated `showKbScreen` function provides a seamless way to integrate a Knowledge Base into your app, improving user support and engagement. You can open KB urls within the SDK
+```kotlin
+// The URL of the article to be displayed
+val url = ...
+// The SDK will try to apply the locale from the article URL
+val forceApplyLocaleFromUrl = true
+val optionsBuilder = HCOptions.Builder()
+optionsBuilder.setChatViewType(HcChatViewType.KB_ONLY)
+
+HelpCrunch.showKbScreen(
+  articleUrl = url,
+  forceApplyLocaleFromUrl = forceApplyLocaleFromUrl,
+  options = optionsBuilder.build()
+)
+```
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+* Bug fixes and other improvements
+
+---
+
+## v3.4.3 (25/01/2025)
+
+* Added the ability to manually specify the SDK opening mode: chat only, Knowledge Base only, chat first, Knowledge Base first
+```kotlin
+ val chatViewType =  HcChatViewType.CHAT_ONLY
+                     // HcChatViewType.CHAT_FIRST
+                     // HcChatViewType.KB_ONLY
+                     // HcChatViewType.KB_FIRST
+ val optionsBuilder = HCOptions.Builder()
+ optionsBuilder.setChatViewType(chatViewType)
+ HelpCrunch.showChatScreen(optionsBuilder.build())
+```
+* Bug fixes and other improvements
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+
+---
+
+## v3.4.2 (15/11/2024)
 
 * Updated [third-party libraries](DEPENDENCY_LIST.md)
 * Bug fixes and other improvements
