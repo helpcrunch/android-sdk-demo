@@ -3,7 +3,7 @@
     <item android:state_pressed="true">
 
         <layer-list>
-            <item android:bottom="4dp" android:left="4dp" android:right="4dp" android:top="4dp">
+            <item>
                 <shape android:shape="rectangle">
                     <corners android:bottomLeftRadius="30dp" android:bottomRightRadius="30dp" android:radius="60dp" android:topLeftRadius="30dp" android:topRightRadius="30dp" />
                     <solid android:color="#C03617" />
@@ -17,7 +17,7 @@
     <item android:state_enabled="false">
 
         <layer-list>
-            <item android:bottom="4dp" android:left="4dp" android:right="4dp" android:top="4dp">
+            <item>
                 <shape android:shape="rectangle">
                     <corners android:bottomLeftRadius="30dp" android:bottomRightRadius="30dp" android:radius="60dp" android:topLeftRadius="30dp" android:topRightRadius="30dp" />
                     <solid android:color="#D37C67" />
@@ -32,7 +32,7 @@
     <item>
 
         <layer-list>
-            <item android:bottom="4dp" android:left="4dp" android:right="4dp" android:top="4dp">
+            <item>
                 <shape android:shape="rectangle">
                     <corners android:bottomLeftRadius="30dp" android:bottomRightRadius="30dp" android:radius="60dp" android:topLeftRadius="30dp" android:topRightRadius="30dp" />
                     <solid android:color="#E4411C" />

@@ -1,67 +1,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:focusable="true"
-	android:focusableInTouchMode="true"
-	android:orientation="vertical"
-	android:padding="12dp"
-	tools:ignore="HardcodedText">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:padding="12dp"
+    tools:ignore="HardcodedText">
 
-	<androidx.appcompat.widget.AppCompatEditText
-		android:id="@+id/message_text"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:hint="@string/send_message_hint" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hckb_category_items_margin"
+        android:hint="@string/hc_message_hint">
 
-	<FrameLayout
-		android:id="@+id/send_button"
-		style="@style/Button"
-		android:layout_marginTop="12dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/message_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1" />
 
-		<androidx.appcompat.widget.AppCompatTextView
-			style="@style/Text"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="start|center_vertical"
-			android:layout_marginStart="18dp"
-			android:text="@string/send_message_button" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/send_button_icon"
-			android:layout_width="24dp"
-			android:layout_height="24dp"
-			android:layout_gravity="center_vertical|end"
-			android:layout_marginEnd="15dp"
-			app:srcCompat="@drawable/ic_hc_send" />
+    <FrameLayout
+        android:id="@+id/sendText"
+        style="@style/Button"
+        android:layout_marginTop="@dimen/hc_default_text_space">
 
-		<ProgressBar
-			android:id="@+id/send_button_progress"
-			android:layout_width="30dp"
-			android:layout_height="30dp"
-			android:layout_gravity="center_vertical|end"
-			android:layout_marginEnd="15dp"
-			android:visibility="gone"
-			tools:visibility="visible" />
-	</FrameLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Text.InButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send_message_button" />
 
-	<CheckBox
-		android:id="@+id/force_new_chat"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="@string/force_new_chat" />
+        <com.helpcrunch.library.utils.views.icon_progress.HcIconProgress
+            android:id="@+id/sendTextIcon"
+            style="@style/HcProgressBar.White"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="15dp"
+            app:srcCompat="@drawable/ic_hc_send" />
+    </FrameLayout>
 
-	<androidx.core.widget.NestedScrollView
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:layout_marginTop="12dp">
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/force_new_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/force_new_chat" />
 
-		<LinearLayout
-			android:id="@+id/messages"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical" />
-	</androidx.core.widget.NestedScrollView>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp">
+
+        <LinearLayout
+            android:id="@+id/messages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

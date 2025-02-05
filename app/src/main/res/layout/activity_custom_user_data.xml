@@ -1,44 +1,74 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:orientation="vertical"
-	tools:ignore="HardcodedText">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-	<ScrollView
-		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:layout_weight="1">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-		<LinearLayout
-			android:id="@+id/registration_form"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/registration_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-		</LinearLayout>
-	</ScrollView>
+        </LinearLayout>
+    </ScrollView>
 
-	<FrameLayout
-		android:id="@+id/save_user_data_button"
-		style="@style/Button"
-		android:layout_margin="20dp">
+    <FrameLayout
+        android:id="@+id/addNewItem"
+        style="@style/Button"
+        android:layout_marginHorizontal="@dimen/hc_spacing_medium"
+        android:layout_marginTop="@dimen/hc_default_text_space">
 
-		<TextView
-			style="@style/Text"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="Save" />
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Text.InButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add item" />
 
-		<ProgressBar
-			android:id="@+id/save_user_data_button_progress"
-			android:layout_width="30dp"
-			android:layout_height="30dp"
-			android:layout_gravity="center_vertical|end"
-			android:layout_marginEnd="15dp"
-			android:visibility="gone"
-			tools:visibility="visible" />
+        <com.helpcrunch.library.utils.views.icon_progress.HcIconProgress
+            android:id="@+id/addNewItemIcon"
+            style="@style/HcProgressBar.White"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="15dp"
+            app:srcCompat="@drawable/ic_add" />
+    </FrameLayout>
 
-	</FrameLayout>
+    <View
+        android:id="@+id/divider21"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="?android:attr/listDivider" />
+
+    <FrameLayout
+        android:id="@+id/saveUserDataButton"
+        style="@style/Button"
+        android:layout_marginHorizontal="@dimen/hc_spacing_medium"
+        android:layout_marginTop="@dimen/hc_default_text_space">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Text.InButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save" />
+
+        <com.helpcrunch.library.utils.views.icon_progress.HcIconProgress
+            android:id="@+id/saveUserDataButtonIcon"
+            style="@style/HcProgressBar.White"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="15dp"
+            app:srcCompat="@drawable/ic_save" />
+    </FrameLayout>
+
 </LinearLayout>

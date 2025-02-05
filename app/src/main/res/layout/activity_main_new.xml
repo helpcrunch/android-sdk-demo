@@ -1,281 +1,437 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="vertical"
-	tools:ignore="HardcodedText">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText">
 
-	<androidx.appcompat.widget.AppCompatImageView
-		android:id="@+id/logo"
-		android:layout_width="match_parent"
-		android:layout_height="40dp"
-		android:layout_marginTop="30dp"
-		app:srcCompat="@drawable/hc_branding_light" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/hc_branding_light" />
 
-	<androidx.appcompat.widget.AppCompatTextView
-		android:id="@+id/version"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal"
-		android:layout_marginTop="20dp"
-		android:textSize="12sp"
-		tools:text="0.0.0.00" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="@dimen/hc_spacing_large"
+        android:textSize="12sp"
+        tools:text="0.0.0.00" />
 
-	<ScrollView
-		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:layout_weight="1">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="20dp"
-			android:layout_marginTop="20dp"
-			android:layout_marginEnd="20dp"
-			android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-			<RadioGroup
-				android:id="@+id/theme_group"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/chat_id_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                android:layout_marginTop="@dimen/hc_spacing_large">
 
-				<RadioButton
-					android:id="@+id/light"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:checked="true"
-					android:text="Light Theme" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="?selectableItemBackground"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/hc_spacing_large">
 
-				<RadioButton
-					android:id="@+id/dark"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Dark Theme" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SDK status:"
+                        android:textStyle="bold" />
 
-				<RadioButton
-					android:id="@+id/custom"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Custom Theme" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        tools:text="Idle" />
 
-				<RadioButton
-					android:id="@+id/random_hex"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Random Main Color" />
+                </LinearLayout>
 
-			</RadioGroup>
+            </com.google.android.material.card.MaterialCardView>
 
-			<View
-				android:id="@+id/divider"
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginTop="10dp"
-				android:layout_marginBottom="10dp"
-				android:layout_weight="1"
-				android:background="?android:attr/listDivider" />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                android:layout_marginTop="@dimen/hc_spacing_large">
 
-			<LinearLayout
-				android:id="@+id/chat_id_container"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginStart="5dp"
-				android:layout_marginTop="10dp"
-				android:background="?selectableItemBackground"
-				android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-				<androidx.appcompat.widget.AppCompatTextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="SDK status:"
-					android:textStyle="bold" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                        android:layout_marginTop="@dimen/hc_spacing_large"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="1"
+                        android:text="Theme:"
+                        android:textColor="@color/md_theme_light_scrim"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-				<androidx.appcompat.widget.AppCompatTextView
-					android:id="@+id/state"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="12dp"
-					tools:text="Idle" />
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/theme_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                        android:layout_marginBottom="@dimen/hc_spacing_xmedium"
+                        app:chipSpacingHorizontal="8dp"
+                        app:chipSpacingVertical="-8dp"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
 
-			</LinearLayout>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/light"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="Light" />
 
-			<FrameLayout
-				android:visibility="gone"
-				android:id="@+id/chat_custom_button"
-				style="@style/Button">
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/dark"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dark" />
 
-				<androidx.appcompat.widget.AppCompatTextView
-					style="@style/Text"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Launch Chat CUSTOM settings" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/custom"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Custom" />
 
-			</FrameLayout>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/random_hex"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Random Main Color" />
 
-			<FrameLayout
-				android:id="@+id/userData"
-				style="@style/Button"
-				android:layout_marginStart="20dp"
+                    </com.google.android.material.chip.ChipGroup>
 
-				android:layout_marginEnd="20dp"
-				android:visibility="gone">
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-				<androidx.appcompat.widget.AppCompatTextView
-					style="@style/Text"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Launch Chat with user data" />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                android:layout_marginTop="@dimen/hc_spacing_large">
 
-			</FrameLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="30dp"
-				android:layout_marginBottom="8dp"
-				android:baselineAligned="false"
-				android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                        android:layout_marginTop="@dimen/hc_spacing_large"
+                        android:layout_weight="1"
+                        android:text="Override show chat options:"
+                        android:textColor="@color/md_theme_light_scrim"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-				<FrameLayout
-					android:id="@+id/user_data_button"
-					style="@style/Button"
-					android:layout_marginEnd="8dp"
-					android:layout_marginBottom="0dp"
-					android:layout_weight="1">
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chat_state_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                        android:layout_marginBottom="@dimen/hc_spacing_xmedium"
+                        app:chipSpacingHorizontal="8dp"
+                        app:chipSpacingVertical="-8dp"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
 
-					<androidx.appcompat.widget.AppCompatTextView
-						style="@style/Text"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="start|center_vertical"
-						android:layout_marginStart="18dp"
-						android:text="@string/change_user_data" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/default_chat_settings"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="Server Settings" />
 
-					<androidx.appcompat.widget.AppCompatImageView
-						android:layout_width="24dp"
-						android:layout_height="24dp"
-						android:layout_gravity="center_vertical|end"
-						android:layout_marginEnd="15dp"
-						app:srcCompat="@drawable/ic_arrow_right" />
-				</FrameLayout>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chat_only"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chat Only" />
 
-				<FrameLayout
-					android:id="@+id/custom_user_data_button"
-					style="@style/Button"
-					android:layout_marginStart="8dp"
-					android:layout_marginBottom="0dp"
-					android:layout_weight="1">
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chat_first"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chat First" />
 
-					<androidx.appcompat.widget.AppCompatTextView
-						style="@style/Text"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="start|center_vertical"
-						android:layout_marginStart="18dp"
-						android:text="@string/change_custom_user_data" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/kb_only"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="KB Only" />
 
-					<androidx.appcompat.widget.AppCompatImageView
-						android:layout_width="24dp"
-						android:layout_height="24dp"
-						android:layout_gravity="center_vertical|end"
-						android:layout_marginEnd="15dp"
-						app:srcCompat="@drawable/ic_arrow_right" />
-				</FrameLayout>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/kb_first"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="KB First" />
 
-			</LinearLayout>
+                    </com.google.android.material.chip.ChipGroup>
 
-			<FrameLayout
-				android:id="@+id/send_message_button"
-				style="@style/Button"
-				android:layout_marginBottom="0dp">
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-				<androidx.appcompat.widget.AppCompatTextView
-					style="@style/Text"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="start|center_vertical"
-					android:layout_marginStart="18dp"
-					android:text="@string/send_message" />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                android:layout_marginTop="@dimen/hc_spacing_large">
 
-				<androidx.appcompat.widget.AppCompatImageView
-					android:layout_width="24dp"
-					android:layout_height="24dp"
-					android:layout_gravity="center_vertical|end"
-					android:layout_marginEnd="15dp"
-					app:srcCompat="@drawable/ic_arrow_right" />
-			</FrameLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-			<View
-				android:id="@+id/divider1"
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginTop="10dp"
-				android:layout_marginBottom="10dp"
-				android:background="?android:attr/listDivider" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                        android:layout_marginTop="@dimen/hc_spacing_large"
+                        android:text="Knowledge Base settings:"
+                        android:textColor="@color/md_theme_light_scrim"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-			<FrameLayout
-				android:id="@+id/chat_button"
-				style="@style/Button">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                        android:layout_marginTop="@dimen/hc_spacing_large"
+                        android:text="Paste the URL of the article you want to open after the chat launch. The article must be public"
+                        android:textColor="@color/md_theme_light_scrim"
+                        android:textSize="14sp" />
 
-				<androidx.appcompat.widget.AppCompatTextView
-					style="@style/Text"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Launch Chat" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                        android:layout_marginTop="@dimen/hc_spacing_xmedium"
+                        android:hint="Article URL:"
+                        app:endIconMode="clear_text">
 
-				<androidx.appcompat.widget.AppCompatImageView
-					android:id="@+id/logo_btn"
-					android:layout_width="18dp"
-					android:layout_height="18dp"
-					android:layout_gravity="center_vertical|end"
-					android:layout_marginTop="1dp"
-					android:layout_marginEnd="20dp"
-					app:srcCompat="@drawable/ic_favicon" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/urlEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
 
-				<ProgressBar
-					android:id="@+id/progress_open"
-					android:layout_width="30dp"
-					android:layout_height="30dp"
-					android:layout_gravity="center_vertical|end"
-					android:layout_marginEnd="15dp"
-					android:visibility="gone"
-					tools:visibility="visible" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-				<FrameLayout
-					android:id="@+id/badge_view"
-					style="@style/Indicator"
-					android:layout_marginEnd="15dp"
-					android:visibility="invisible">
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/forceApplyLocaleFromUrl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                        android:layout_marginTop="@dimen/hc_spacing_xmedium"
+                        android:text="Force apply locale from URL" />
 
-					<androidx.appcompat.widget.AppCompatTextView
-						android:id="@+id/badge_tv"
-						style="@style/Text.Counter"
-						tools:text="1" />
-				</FrameLayout>
-			</FrameLayout>
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/enable_preview_translation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                        android:text="Enable/disable KB preview translation" />
 
-			<FrameLayout
-				android:id="@+id/logout_button"
-				style="@style/Button.Logout">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="@dimen/hc_spacing_large"
+                        android:layout_weight="1"
+                        android:background="?android:attr/listDivider" />
 
-				<androidx.appcompat.widget.AppCompatTextView
-					style="@style/Text"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Logout" />
+                    <FrameLayout
+                        android:id="@+id/open_kb_article"
+                        style="@style/Button"
+                        android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                        android:layout_marginBottom="@dimen/hc_spacing_large">
 
-				<ProgressBar
-					android:id="@+id/progress"
-					android:layout_width="30dp"
-					android:layout_height="30dp"
-					android:layout_gravity="center_vertical|end"
-					android:layout_marginEnd="15dp"
-					android:visibility="gone"
-					tools:visibility="visible" />
-			</FrameLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Text.InButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Open KB Article" />
 
-		</LinearLayout>
-	</ScrollView>
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/open_kb_article_progress"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginEnd="15dp"
+                            android:tint="@color/hc_color_white"
+                            app:srcCompat="@drawable/ic_book" />
+                    </FrameLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/hc_spacing_large">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/user_block"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/hc_spacing_large"
+                        android:paddingVertical="16dp">
+
+                        <com.goodayapps.widget.AvatarView
+                            android:id="@+id/user_avatar"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/user_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hc_spacing_large"
+                            android:layout_weight="1"
+                            android:text="SDK status"
+                            android:textColor="@color/md_theme_light_scrim"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:id="@+id/chatButton"
+                        style="@style/Button"
+                        android:layout_marginHorizontal="@dimen/hc_spacing_large">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Text.InButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Launch Chat" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/logo_btn"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginEnd="20dp"
+                            app:srcCompat="@drawable/ic_favicon" />
+
+                        <ProgressBar
+                            android:id="@+id/progress_open"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginEnd="15dp"
+                            android:visibility="gone"
+                            tools:visibility="visible" />
+
+                        <FrameLayout
+                            android:id="@+id/badge_view"
+                            style="@style/Indicator"
+                            android:layout_marginEnd="15dp"
+                            android:visibility="invisible">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/badge_tv"
+                                style="@style/Text.Counter"
+                                tools:text="1" />
+                        </FrameLayout>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/sendMessageButton"
+                        style="@style/Button"
+                        android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                        android:layout_weight="1">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Text.InButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/send_message" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginEnd="15dp"
+                            app:srcCompat="@drawable/ic_hc_send" />
+                    </FrameLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="@dimen/hc_spacing_large"
+                        android:layout_weight="1"
+                        android:background="?android:attr/listDivider" />
+
+                    <FrameLayout
+                        android:id="@+id/logoutButton"
+                        style="@style/Button.Logout"
+                        android:layout_marginHorizontal="@dimen/hc_spacing_large"
+                        android:layout_marginBottom="@dimen/hc_spacing_large">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Text.InButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Logout" />
+
+                        <com.helpcrunch.library.utils.views.icon_progress.HcIconProgress
+                            android:id="@+id/logoutButtonIcon"
+                            style="@style/HcProgressBar.White"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginEnd="15dp"
+                            app:srcCompat="@drawable/ic_exit" />
+                    </FrameLayout>
+
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

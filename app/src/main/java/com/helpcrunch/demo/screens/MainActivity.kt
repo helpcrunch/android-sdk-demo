@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.style.ForegroundColorSpan
 import android.util.Log
@@ -12,11 +13,15 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.buildSpannedString
 import androidx.core.text.inSpans
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import coil.dispose
+import com.goodayapps.widget.AvatarDrawable
+import com.goodayapps.widget.AvatarView
 import com.helpcrunch.demo.R
 import com.helpcrunch.demo.databinding.ActivityMainNewBinding
 import com.helpcrunch.demo.design.CustomTheme
@@ -26,8 +31,9 @@ import com.helpcrunch.library.core.ERROR_USER_BLOCKED
 import com.helpcrunch.library.core.HelpCrunch
 import com.helpcrunch.library.core.options.HCOptions
 import com.helpcrunch.library.core.options.HCPreChatForm
-import com.helpcrunch.library.core.options.theme.HCMessageAreaTheme
+import com.helpcrunch.library.core.options.chat.HcChatViewType
 import com.helpcrunch.library.core.options.theme.HCTheme
+import java.util.Locale
 import kotlin.random.Random.Default.nextInt
 
 class MainActivity : AppCompatActivity() {
@@ -51,14 +57,16 @@ class MainActivity : AppCompatActivity() {
 
         initViews()
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(hcEventsBroadcastReceiver, IntentFilter(HelpCrunch.EVENTS))
-        LocalBroadcastManager.getInstance(this).registerReceiver(hcStateBroadcastReceiver, IntentFilter(HelpCrunch.STATE))
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(hcEventsBroadcastReceiver, IntentFilter(HelpCrunch.EVENTS))
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(hcStateBroadcastReceiver, IntentFilter(HelpCrunch.STATE))
     }
 
     override fun onResume() {
         super.onResume()
         updateUnreadMessages()
-        findViewById<View>(R.id.logout_button).isEnabled = HelpCrunch.getUser() != null
+        handleCurrentCustomer()
     }
 
     override fun onDestroy() {
@@ -68,18 +76,39 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() = with(binding) {
+        openKbArticle.isEnabled = false
         chatButton.setOnClickListener { handleOpenChatClicked() }
-        chatCustomButton.setOnClickListener { openWithCustomSettings() }
-        customUserDataButton.setOnClickListener { openCustomUserDataScreen() }
-        userDataButton.setOnClickListener { openUserDataScreen() }
+        openKbArticle.setOnClickListener { handleKnowledgeBaseClicked() }
         sendMessageButton.setOnClickListener { openSendMessageScreen() }
-        userData.setOnClickListener {
+        userBlock.setOnClickListener {
             openUserDataScreen()
         }
         logoutButton.setOnClickListener { logout() }
-        val versionText = "SDK: v ${HelpCrunch.getVersion()}"
+        val versionText = "SDK: v${HelpCrunch.getVersion()}"
         version.text = versionText
         state.text = getStateString(HelpCrunch.getState())
+        urlEditText.addTextChangedListener(afterTextChanged = {
+            openKbArticle.isEnabled = urlEditText.text.isNullOrBlank().not()
+        })
+    }
+
+    private fun handleCurrentCustomer() = with(binding) {
+        val user = HelpCrunch.getUser()
+
+        val name = user?.name ?: "Anonymous User"
+
+        userAvatar.setAvatar(
+            avatar = null,
+            placeholder = name.getPlaceholderText(),
+            avatarColor = ResourcesCompat.getColor(
+                this@MainActivity.resources,
+                R.color.colorBlue,
+                null
+            ),
+        )
+
+        userName.text = name
+        binding.logoutButton.isEnabled = HelpCrunch.getUser() != null
     }
 
     private fun getStateString(state: HelpCrunch.State): CharSequence {
@@ -91,28 +120,34 @@ class MainActivity : AppCompatActivity() {
                 "User is blocked",
                 Color.RED
             )
+
             HelpCrunch.State.ERROR_INITIALIZATION -> getStateSpannableString(
                 "Initialization error",
                 Color.RED
             )
+
             HelpCrunch.State.ERROR_UNKNOWN -> getStateSpannableString("Error unknown", Color.RED)
             HelpCrunch.State.HIDDEN -> getStateSpannableString("Hidden", Color.GRAY)
         }
     }
 
-    private fun logout() {
-        setLogoutButtonParameters(View.VISIBLE, false)
+    private fun logout() = with(binding) {
+        logoutButtonIcon.setLoading(true)
+        logoutButton.isEnabled = false
 
         HelpCrunch.logout(object : Callback<Any?>() {
             override fun onSuccess(result: Any?) {
                 Toast.makeText(this@MainActivity, "Success", Toast.LENGTH_SHORT).show()
                 clearBadge()
-                setLogoutButtonParameters(View.GONE, false)
+                logoutButtonIcon.setLoading(false)
+                logoutButton.isEnabled = true
             }
 
             override fun onError(message: String) {
                 Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
-                setLogoutButtonParameters(View.GONE, true)
+
+                logoutButtonIcon.setLoading(false)
+                logoutButton.isEnabled = true
             }
         })
     }
@@ -122,26 +157,18 @@ class MainActivity : AppCompatActivity() {
         badgeView.visibility = View.INVISIBLE
     }
 
-    private fun checkSettingsOpenScreen() {
-        var theme = HCTheme.Builder(HCTheme.Type.DEFAULT)
-            .build()
+    private fun openChat() {
+        var theme = createThemeByOptions()
+        val chatViewType = createChatViewType()
 
-        when (binding.themeGroup.checkedRadioButtonId) {
-            R.id.light -> theme = HCTheme.Builder(theme = HCTheme.Type.DEFAULT).build()
-            R.id.dark -> theme = HCTheme.Builder(theme = HCTheme.Type.DARK).build()
-            R.id.custom -> theme = CustomTheme.create(this)
-            R.id.random_hex -> theme = HCTheme.Builder(
-                mainColor = randomColor(),
-                shouldPaintIconsAutomatically = true
-            ).build()
-        }
         val optionsBuilder = HCOptions.Builder()
             .setTheme(theme)
 
-        // Add "test_url" to your custom fields in the HelpCrunch Dashboard
-        // Then you can use it in the pre-chat form
+        if (chatViewType != null) {
+            optionsBuilder.setChatViewType(chatViewType)
+        }
+
         val preChatForm = HCPreChatForm.Builder()
-//            .withField("test_url", "My custom pre-chat URL field", true)
             .build()
 
         optionsBuilder.setPreChatForm(preChatForm)
@@ -149,68 +176,114 @@ class MainActivity : AppCompatActivity() {
         showChat(optionsBuilder.build())
     }
 
-    private fun randomColor(): Int {
-        return Color.argb(255, nextInt(256), nextInt(256), nextInt(256))
-    }
+    private fun openKnowledgeBase() {
+        val url = binding.urlEditText.text.toString()
+        val forceApplyLocaleFromUrl = binding.forceApplyLocaleFromUrl.isChecked
 
-    private fun openWithCustomSettings() {
-        val brandColor = ContextCompat.getColor(this, R.color.send_bg_enable_color)
+        var theme = createThemeByOptions()
+        val chatViewType = createChatViewType()
 
-        val messageAreaTheme = HCMessageAreaTheme.Builder()
-            .setButtonType(HCMessageAreaTheme.ButtonType.TEXT)
-            .build()
-
-        val theme = HCTheme.Builder(brandColor, true)
-            .setMessageAreaTheme(messageAreaTheme)
-            .build()
-
-        val preChatForm: HCPreChatForm = HCPreChatForm.Builder()
-            .withField("test_url", "My custom pre-chat URL field", true)
-            .build()
-
-        val options = HCOptions.Builder()
+        val optionsBuilder = HCOptions.Builder()
             .setTheme(theme)
-            .setPreChatForm(preChatForm)
-            .build()
 
-        showChat(options)
+        if (chatViewType != null) {
+            optionsBuilder.setChatViewType(chatViewType)
+        }
+
+        showKnowledgeBase(
+            url = url,
+            forceApplyLocaleFromUrl = forceApplyLocaleFromUrl,
+            options = optionsBuilder.build()
+        )
     }
 
     private fun showChat(options: HCOptions?) {
         setChatScreenButtonParameters(View.GONE, View.VISIBLE, false)
 
-        HelpCrunch.showChatScreen(options, object : Callback<Any?>() {
-            override fun onError(message: String) {
-                if (message == ERROR_USER_BLOCKED) {
-                    val user = HelpCrunch.getUser()
-                    if (user != null) {
-                        val messageText = """
-                            You are a very bad person, ${user.name}.
-                            Please, uninstall the application.
-                            """.trimIndent()
-                        Toast.makeText(this@MainActivity, messageText, Toast.LENGTH_SHORT).show()
+        HelpCrunch.showChatScreen(
+            options = options,
+            callback = object : Callback<Any?>() {
+                override fun onError(message: String) {
+                    if (message == ERROR_USER_BLOCKED) {
+                        val user = HelpCrunch.getUser()
+                        if (user != null) {
+                            val messageText = """
+                                    You are a very bad person, ${user.name}.
+                                    Please, uninstall the application.
+                                    """.trimIndent()
+                            Toast.makeText(this@MainActivity, messageText, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    } else if (message == ERROR_CANT_OPEN_CHAT) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Can't open chat. Something is wrong",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-                } else if (message == ERROR_CANT_OPEN_CHAT) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Can't open chat. Something is wrong",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    setChatScreenButtonParameters(View.VISIBLE, View.GONE, true)
                 }
-                setChatScreenButtonParameters(View.VISIBLE, View.GONE, true)
-            }
 
-            override fun onSuccess(result: Any?) {
-                setChatScreenButtonParameters(View.VISIBLE, View.GONE, true)
-            }
-        })
+                override fun onSuccess(result: Any?) {
+                    setChatScreenButtonParameters(View.VISIBLE, View.GONE, true)
+                }
+            })
+    }
+
+    private fun showKnowledgeBase(
+        url: String,
+        forceApplyLocaleFromUrl: Boolean,
+        options: HCOptions?
+    ) {
+        binding.openKbArticle.isEnabled = false
+
+        HelpCrunch.showKbScreen(
+            articleUrl = url,
+            forceApplyLocaleFromUrl = forceApplyLocaleFromUrl,
+            options = options,
+            callback = object : Callback<Any?>() {
+                override fun onError(message: String) {
+                    if (message == ERROR_USER_BLOCKED) {
+                        val user = HelpCrunch.getUser()
+                        if (user != null) {
+                            val messageText = """
+                                        You are a very bad person, ${user.name}.
+                                        Please, uninstall the application.
+                                        """.trimIndent()
+                            Toast.makeText(this@MainActivity, messageText, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    } else if (message == ERROR_CANT_OPEN_CHAT) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Can't open chat. Something is wrong",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    binding.openKbArticle.isEnabled = true
+                }
+
+                override fun onSuccess(result: Any?) {
+                    binding.openKbArticle.isEnabled = true
+                }
+            })
     }
 
     private fun handleOpenChatClicked() {
-        checkSettingsOpenScreen()
+        openChat()
         clearBadge()
         HelpCrunch.trackEvent(
             "Event chat opened",
+            "https://i.pinimg.com/originals/58/92/e7/5892e7f3cc64c8a912e2494a3ff77e08.jpg",
+            "Say Cheese"
+        )
+    }
+
+    private fun handleKnowledgeBaseClicked() {
+        openKnowledgeBase()
+        clearBadge()
+        HelpCrunch.trackEvent(
+            "Event KB opened",
             "https://i.pinimg.com/originals/58/92/e7/5892e7f3cc64c8a912e2494a3ff77e08.jpg",
             "Say Cheese"
         )
@@ -241,11 +314,6 @@ class MainActivity : AppCompatActivity() {
         progressOpen.visibility = progressVisible
         logoBtn.visibility = logoVisible
         chatButton.isEnabled = buttonEnabled
-    }
-
-    private fun setLogoutButtonParameters(visible: Int, enabled: Boolean) = with(binding) {
-        progress.visibility = visible
-        logoutButton.isEnabled = enabled
     }
 
     private fun openCustomUserDataScreen() {
@@ -287,6 +355,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     Log.w(HelpCrunch.EVENTS, "Can't receive screen event")
                 }
+
                 HelpCrunch.Event.SCREEN_OPENED -> if (screen != null) {
                     Log.i(
                         HelpCrunch.EVENTS,
@@ -295,11 +364,13 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     Log.w(HelpCrunch.EVENTS, "Can't receive screen event")
                 }
+
                 HelpCrunch.Event.ON_IMAGE_URL,
                 HelpCrunch.Event.ON_FILE_URL,
                 HelpCrunch.Event.ON_ANY_OTHER_URL -> {
                     Log.i(HelpCrunch.EVENTS, "Url opened. data: $data")
                 }
+
                 HelpCrunch.Event.ON_UNREAD_COUNT_CHANGED -> {
                     Log.i(HelpCrunch.EVENTS, "new unread message")
                     val unreadChatsCountStr = data!![HelpCrunch.UNREAD_CHATS]
@@ -307,12 +378,15 @@ class MainActivity : AppCompatActivity() {
                         setVisibilityForUnreadMessagesBadge(unreadChatsCountStr.toInt())
                     }
                 }
+
                 HelpCrunch.Event.CHAT_CREATED -> {
                     Log.i(HelpCrunch.EVENTS, "Chat id: " + data!!["chat_id"])
                 }
+
                 HelpCrunch.Event.MESSAGE_SENDING -> {
                     Log.i(HelpCrunch.EVENTS, "message sending...")
                 }
+
                 HelpCrunch.Event.ON_FIREBASE_NOTIFICATION -> {
                     Log.i(HelpCrunch.EVENTS, "new firebase notification...")
                 }
@@ -323,4 +397,98 @@ class MainActivity : AppCompatActivity() {
     private fun onChatStateChanged(state: HelpCrunch.State) {
         binding.state.text = getStateString(state)
     }
+
+    private fun createThemeByOptions(): HCTheme = when (binding.themeGroup.checkedChipId) {
+        R.id.light -> HCTheme.Builder(theme = HCTheme.Type.DEFAULT).build()
+        R.id.dark -> HCTheme.Builder(theme = HCTheme.Type.DARK).build()
+        R.id.custom -> CustomTheme.create(this)
+        R.id.random_hex -> HCTheme.Builder(
+            mainColor = randomColor(),
+            shouldPaintIconsAutomatically = true
+        ).build()
+
+        else -> HCTheme.Builder(theme = HCTheme.Type.DEFAULT).build()
+    }
+
+    private fun createChatViewType(): HcChatViewType? {
+        return when (binding.chatStateGroup.checkedChipId) {
+            R.id.chat_only -> HcChatViewType.CHAT_ONLY
+            R.id.chat_first -> HcChatViewType.CHAT_FIRST
+            R.id.kb_only -> HcChatViewType.KB_ONLY
+            R.id.kb_first -> HcChatViewType.KB_FIRST
+            else -> null
+        }
+
+    }
+
+    private fun randomColor(): Int {
+        return Color.argb(255, nextInt(256), nextInt(256), nextInt(256))
+    }
+
+    fun AvatarView.setAvatar(
+        avatar: String?,
+        placeholder: String?,
+        @ColorInt avatarColor: Int,
+        avatarDrawable: Drawable? = null,
+        @ColorInt placeholderTextColor: Int? = null,
+    ) {
+        val placeholderText = placeholder.getPlaceholderText()
+        this.dispose()
+        this.apply {
+            this.textColor = placeholderTextColor ?: Color.WHITE
+            this.backgroundPlaceholderColor = avatarColor
+            this.placeholderText = placeholderText
+            this.volumetricType = AvatarDrawable.Volumetric.PLACEHOLDER
+        }
+
+        when {
+            avatarDrawable != null -> {
+                this.setImageDrawable(avatarDrawable)
+            }
+
+            else -> {
+                this.setImageDrawable(null)
+                this.dispose()
+            }
+        }
+    }
+
+    /**
+     * Converts full name to a two letters placeholder
+     *
+     * eg. Alex Gooday -> AG
+     *
+     * @return two letters placeholder and "?" if placeholder can't be generated
+     */
+    fun String?.getPlaceholderText(upperCase: Boolean = true): String {
+        if (this.isNullOrBlank()) return "?"
+
+        val nickNameParts = split(" ").dropLastWhile { it.isEmpty() }.toTypedArray()
+        val nickNamePart = nickNameParts[0]
+
+        var letter1 = ""
+        var letter2 = ""
+
+        if (nickNamePart.isNotEmpty()) {
+            letter1 = nickNamePart[0].toString()
+        }
+
+        if (nickNameParts.size > 1) {
+            val nickNamePart1 = nickNameParts[1]
+            if (nickNamePart1.isNotEmpty()) {
+                letter2 = nickNamePart1[0].toString()
+            }
+        } else if (nickNamePart.length > 1) {
+            letter2 = nickNamePart[1].toString()
+        }
+
+        var placeholderText = letter1 + letter2
+
+        if (placeholderText.isEmpty()) {
+            placeholderText = "?"
+        }
+
+        return if (upperCase) placeholderText.uppercase(Locale.getDefault()) else placeholderText
+    }
+
 }

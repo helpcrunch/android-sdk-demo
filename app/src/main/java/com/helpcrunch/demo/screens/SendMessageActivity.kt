@@ -7,6 +7,8 @@ import android.content.IntentFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
+import android.text.TextUtils
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
@@ -16,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.text.buildSpannedString
+import androidx.core.text.inSpans
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.helpcrunch.demo.R
 import com.helpcrunch.demo.databinding.ActivitySendMessageBinding
@@ -27,10 +31,11 @@ class SendMessageActivity : AppCompatActivity() {
 
     private val hcEventsBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            val event: HelpCrunch.Event? =
-                intent.getSerializableExtra(HelpCrunch.EVENT_TYPE) as HelpCrunch.Event?
+            val event = intent.getSerializableExtra(HelpCrunch.EVENT_TYPE) as HelpCrunch.Event?
             val data =
                 intent.getSerializableExtra(HelpCrunch.EVENT_DATA) as HashMap<String, String>?
+            binding.sendTextIcon.setLoading(false)
+            binding.sendText.isEnabled = true
 
             if (event == null) {
                 Log.w(HelpCrunch.EVENTS, "Can't receive data")
@@ -43,7 +48,19 @@ class SendMessageActivity : AppCompatActivity() {
                     val resultData = data["data"]
 
                     if (error != null) {
-                        Log.d("sendMessage", "🔴 $error")
+                        addMessage(buildSpannedString {
+                            inSpans(
+                                ForegroundColorSpan(
+                                    ResourcesCompat.getColor(
+                                        resources,
+                                        R.color.hc_color_red_error,
+                                        theme
+                                    )
+                                )
+                            ) {
+                                append(error)
+                            }
+                        })
                     } else {
                         addMessage(resultData)
                     }
@@ -55,16 +72,16 @@ class SendMessageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySendMessageBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
-        initViews()
-        LocalBroadcastManager.getInstance(this).registerReceiver(hcEventsBroadcastReceiver, IntentFilter(HelpCrunch.EVENTS))
-    }
+        if (supportActionBar != null) {
+            supportActionBar!!.setTitle(R.string.send_message)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(hcEventsBroadcastReceiver)
+        initViews()
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(hcEventsBroadcastReceiver, IntentFilter(HelpCrunch.EVENTS))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -75,39 +92,38 @@ class SendMessageActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(hcEventsBroadcastReceiver)
+    }
+
     private fun initViews() {
-        if (supportActionBar != null) {
-            supportActionBar!!.setTitle(R.string.send_message)
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        }
-        binding.sendButton.setOnClickListener { sendMessage() }
+        binding.sendText.setOnClickListener { v: View? -> sendMessage() }
     }
 
     private fun sendMessage() {
+        binding.sendTextIcon.setLoading(true)
+        binding.sendText.isEnabled = false
+
         val text = binding.messageText.text.toString()
-        if (text.isBlank()) {
+
+        if (TextUtils.isEmpty(text)) {
             Toast.makeText(this@SendMessageActivity, "Text is empty", Toast.LENGTH_SHORT).show()
             return
         }
-
         val isForceNewChat = binding.forceNewChat.isChecked
         HelpCrunch.sendMessage(text, isForceNewChat, object : Callback<String?>() {
             override fun onSuccess(result: String?) {
-                Log.d("sendMessage", "🟢 $result")
-                setSendButtonParameters(View.VISIBLE, View.GONE, true)
+                Log.d("sendMessage + ", result.orEmpty())
             }
 
             override fun onError(message: String) {
-                Log.d("sendMessage", "🔴 $message")
-                setSendButtonParameters(View.VISIBLE, View.GONE, true)
+                Log.d("sendMessage - ", message)
             }
-        }
-
-        )
-        setSendButtonParameters(View.GONE, View.VISIBLE, false)
+        })
     }
 
-    private fun addMessage(resultData: String?) {
+    private fun addMessage(resultData: CharSequence?) {
         val drawable = ResourcesCompat.getDrawable(resources, R.drawable.ic_hc_send, null)
         drawable!!.colorFilter = PorterDuffColorFilter(
             ContextCompat.getColor(this, R.color.colorBlue),
@@ -121,11 +137,4 @@ class SendMessageActivity : AppCompatActivity() {
         textView.compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.messages_padding)
         binding.messages.addView(textView)
     }
-
-    private fun setSendButtonParameters(iconVisible: Int, progressVisible: Int, enabled: Boolean) =
-        with(binding) {
-            sendButtonIcon.visibility = iconVisible
-            sendButtonProgress.visibility = progressVisible
-            sendButton.isEnabled = enabled
-        }
 }

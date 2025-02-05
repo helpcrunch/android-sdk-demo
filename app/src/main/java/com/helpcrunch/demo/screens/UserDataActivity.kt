@@ -2,13 +2,14 @@ package com.helpcrunch.demo.screens
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.helpcrunch.demo.R
 import com.helpcrunch.demo.databinding.ActivityUserDataBinding
 import com.helpcrunch.library.core.Callback
 import com.helpcrunch.library.core.HelpCrunch
+import com.helpcrunch.library.core.HelpCrunch.forceUpdateUser
+import com.helpcrunch.library.core.HelpCrunch.updateUser
 import com.helpcrunch.library.core.models.user.HCUser
 
 class UserDataActivity : AppCompatActivity() {
@@ -39,88 +40,85 @@ class UserDataActivity : AppCompatActivity() {
     private fun initViews() = with(binding) {
         val currentUser = HelpCrunch.getUser()
         if (currentUser != null) {
-            nameEditText.setText(currentUser.name)
-            emailEditText.setText(currentUser.email)
-            phoneEditText.setText(currentUser.phone)
-            userIdEditText.setText(currentUser.userId)
-            companyEditText.setText(currentUser.company)
+            setUser(currentUser)
         }
         saveUserDataButton.setOnClickListener { updateUserData() }
         logoutButton.setOnClickListener { logout() }
     }
 
-    private fun logout() {
-        setLogoutButtonParameters(View.VISIBLE, false)
+    private fun logout() = with(binding) {
+        logoutButtonIcon.setLoading(true)
+        logoutButton.isEnabled = false
+        saveUserDataButton.isEnabled = false
 
         HelpCrunch.logout(object : Callback<Any?>() {
             override fun onSuccess(result: Any?) {
                 Toast.makeText(this@UserDataActivity, "Success", Toast.LENGTH_SHORT).show()
-                setLogoutButtonParameters(View.GONE, false)
+                logoutButtonIcon.setLoading(false)
+                logoutButton.isEnabled = true
+                saveUserDataButton.isEnabled = true
             }
 
             override fun onError(message: String) {
                 Toast.makeText(this@UserDataActivity, message, Toast.LENGTH_SHORT).show()
-                setLogoutButtonParameters(View.GONE, true)
+                logoutButtonIcon.setLoading(false)
+                logoutButton.isEnabled = true
+                saveUserDataButton.isEnabled = true
             }
         })
     }
 
-    private fun updateUserData() = with(binding) {
-        val username = nameEditText.text.toString().trim { it <= ' ' }
-        val email = emailEditText.text.toString().trim { it <= ' ' }
-        val phone = phoneEditText.text.toString().trim { it <= ' ' }
-        val company = companyEditText.text.toString().trim { it <= ' ' }
-        val registerUserId = userIdEditText.text.toString().trim { it <= ' ' }
+    private fun updateUserData() {
+        val registerUserId = binding.userIdEditText.text.toString()
+        showProgress(true)
+        doUpdateUser(registerUserId)
+    }
 
-        if (username.trim { it <= ' ' }.isNotBlank()) {
-            val customData = HashMap<String, Any>()
+    private fun doUpdateUser(registerUserId: String) {
+        val username = binding.nameEditText.text.toString()
 
-            val registerUser: HCUser = HCUser.Builder()
-                .withUserId(registerUserId)
-                .withName(username)
-                .withEmail(email)
-                .withPhone(phone)
-                .withCustomData(customData)
-                .withCompany(company)
-                .build()
+        val registerUser = HCUser.Builder()
+            .withName(username)
+            .withEmail(binding.emailEditText.text.toString())
+            .withPhone(binding.phoneEditText.text.toString())
+            .withUserId(registerUserId)
+            .withCompany(binding.companyEditText.text.toString())
+            .build()
 
-            setSaveUserDataButtonParameters(View.VISIBLE, false)
-            val callback = object : Callback<HCUser>() {
-                override fun onSuccess(result: HCUser) {
-                    Toast.makeText(
-                        this@UserDataActivity,
-                        getString(R.string.data_saved),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    setSaveUserDataButtonParameters(View.GONE, true)
-                }
-
-                override fun onError(message: String) {
-                    Toast.makeText(this@UserDataActivity, message, Toast.LENGTH_SHORT).show()
-                    setSaveUserDataButtonParameters(View.GONE, true)
-                }
+        val callback = object : Callback<HCUser>() {
+            override fun onSuccess(result: HCUser) {
+                Toast.makeText(
+                    this@UserDataActivity,
+                    getString(R.string.data_saved),
+                    Toast.LENGTH_SHORT
+                ).show()
+                showProgress(false)
             }
-            if (binding.logoutIfNecessary.isChecked) {
-                HelpCrunch.forceUpdateUser(registerUser, callback)
-            } else {
-                HelpCrunch.updateUser(registerUser, callback)
+
+            override fun onError(message: String) {
+                Toast.makeText(this@UserDataActivity, message, Toast.LENGTH_SHORT)
+                    .show()
+                showProgress(false)
             }
+        }
+
+        if (binding.logoutIfNecessary.isChecked) {
+            forceUpdateUser(registerUser, callback)
         } else {
-            Toast.makeText(
-                this@UserDataActivity,
-                getString(R.string.error_id_is_empty),
-                Toast.LENGTH_SHORT
-            ).show()
+            updateUser(registerUser, callback)
         }
     }
 
-    private fun setSaveUserDataButtonParameters(visible: Int, enabled: Boolean) = with(binding) {
-        saveUserDataButtonProgress.visibility = visible
-        saveUserDataButton.isEnabled = enabled
+    private fun showProgress(isProgress: Boolean) = with(binding) {
+        saveUserDataButtonIcon.setLoading(isProgress)
+        saveUserDataButton.isEnabled = isProgress.not()
     }
 
-    private fun setLogoutButtonParameters(visible: Int, enabled: Boolean) = with(binding) {
-        logoutButtonProgress.visibility = visible
-        logoutButton.isEnabled = enabled
+    private fun setUser(currentUser: HCUser) = with(binding) {
+        nameEditText.setText(currentUser.name)
+        emailEditText.setText(currentUser.email)
+        phoneEditText.setText(currentUser.phone)
+        userIdEditText.setText(currentUser.userId)
+        companyEditText.setText(currentUser.company)
     }
 }

@@ -1,8 +1,8 @@
 package com.helpcrunch.demo.screens
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
@@ -12,7 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.helpcrunch.demo.R
 import com.helpcrunch.demo.databinding.ActivityCustomUserDataBinding
 import com.helpcrunch.library.core.Callback
-import com.helpcrunch.library.core.HelpCrunch
+import com.helpcrunch.library.core.HelpCrunch.getUser
+import com.helpcrunch.library.core.HelpCrunch.updateUser
 import com.helpcrunch.library.core.models.user.HCUser
 
 class CustomUserDataActivity : AppCompatActivity() {
@@ -28,60 +29,50 @@ class CustomUserDataActivity : AppCompatActivity() {
         fillData()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_custom_data, menu)
-        return true
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()
             return true
-        } else if (item.itemId == R.id.add_row) {
-            addRow(null, null)
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun initViews() = with(binding) {
-        if (supportActionBar != null) {
-            supportActionBar!!.setTitle(R.string.change_custom_user_data)
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        }
-        saveUserDataButton.setOnClickListener { saveCustomData() }
+    private fun initViews() {
+        binding.saveUserDataButton.setOnClickListener { saveCustomData() }
+        binding.addNewItem.setOnClickListener { addRow(null, null) }
     }
 
     private fun fillData() {
-        val currentUser = HelpCrunch.getUser() ?: return
-        val data = currentUser.customData
-        if (data != null) {
+        val data = getUser()?.customData ?: return
+
+        if (data.isNotEmpty()) {
             for ((key, value) in data) {
                 addRow(key, value.toString())
             }
+        } else {
+            addRow(null, null)
         }
     }
 
     private fun saveCustomData() {
-        if (HelpCrunch.getUser() == null) {
-            Toast.makeText(this, "There is no user yet", Toast.LENGTH_SHORT).show()
-            return
-        }
+        binding.saveUserDataButtonIcon.setLoading(true)
+        binding.saveUserDataButton.isEnabled = false
+
         val customData = HashMap<String, Any?>()
         getNewData(customData, binding.registrationForm)
-        var user = HelpCrunch.getUser()
-        if (user == null) {
-            user = HCUser.Builder().build()
-        }
-        user.customData = customData
-        setUserDataButtonParameters(View.VISIBLE, false)
-        HelpCrunch.updateUser(user, object : Callback<HCUser>() {
+        val user = HCUser.Builder(getUser())
+            .withCustomData(customData)
+            .build()
+        updateUser(user, object : Callback<HCUser>() {
             override fun onSuccess(result: HCUser) {
                 Toast.makeText(
                     this@CustomUserDataActivity,
                     getString(R.string.data_saved),
                     Toast.LENGTH_SHORT
                 ).show()
-                setUserDataButtonParameters(View.GONE, true)
+
+                binding.saveUserDataButtonIcon.setLoading(false)
+                binding.saveUserDataButton.isEnabled = true
             }
 
             override fun onError(message: String) {
@@ -90,7 +81,9 @@ class CustomUserDataActivity : AppCompatActivity() {
                     getString(R.string.something_wrong),
                     Toast.LENGTH_SHORT
                 ).show()
-                setUserDataButtonParameters(View.GONE, true)
+
+                binding.saveUserDataButtonIcon.setLoading(false)
+                binding.saveUserDataButton.isEnabled = true
             }
         })
     }
@@ -113,14 +106,9 @@ class CustomUserDataActivity : AppCompatActivity() {
         binding.registrationForm.addView(view)
     }
 
-    private fun addData(customData: MutableMap<String, Any?>, key: String, value: String) {
-        if (key.isNotBlank() && value.isNotBlank()) {
-            customData[key] = value
+    private fun addData(customData: MutableMap<String, Any?>, key: String, item: String) {
+        if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(item)) {
+            customData[key] = item
         }
-    }
-
-    private fun setUserDataButtonParameters(visible: Int, enabled: Boolean) {
-        findViewById<View>(R.id.save_user_data_button_progress).visibility = visible
-        findViewById<View>(R.id.save_user_data_button).isEnabled = enabled
     }
 }

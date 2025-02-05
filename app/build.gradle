@@ -53,7 +53,7 @@ dependencies {
     implementation "com.github.TalbotGooday:AvatarView:0.1.4"
 
     // HelpCrunch
-     implementation("com.helpcrunch:chat-sdk:3.4.3")
-     // or a snapshot
-     // implementation("com.helpcrunch:chat-sdk:3.4.3+227-SNAPSHOT")
+    implementation("com.helpcrunch:chat-sdk:3.4.4")
+    // or a snapshot
+    //implementation("com.helpcrunch:chat-sdk:3.4.4+234-SNAPSHOT")
 }

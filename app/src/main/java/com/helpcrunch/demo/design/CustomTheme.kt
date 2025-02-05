@@ -4,11 +4,18 @@ import android.content.Context
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import com.helpcrunch.library.R
-import com.helpcrunch.library.core.options.theme.*
+import com.helpcrunch.library.core.options.theme.HCAvatarTheme
+import com.helpcrunch.library.core.options.theme.HCChatAreaTheme
+import com.helpcrunch.library.core.options.theme.HCMessageAreaTheme
+import com.helpcrunch.library.core.options.theme.HCNotificationsTheme
+import com.helpcrunch.library.core.options.theme.HCPreChatTheme
+import com.helpcrunch.library.core.options.theme.HCSystemAlertsTheme
+import com.helpcrunch.library.core.options.theme.HCTheme
+import com.helpcrunch.library.core.options.theme.HCToolbarAreaTheme
 
 class CustomTheme {
-    companion object{
-        fun create(ctx: Context): HCTheme{
+    companion object {
+        fun create(ctx: Context): HCTheme {
             return HCTheme.build {
                 val avatarTheme = HCAvatarTheme.build {
                     setPlaceholderBackgroundColor(ctx.color(R.color.hc_color_chat_bubble_dark_other))
@@ -48,8 +55,7 @@ class CustomTheme {
                 })
 
                 setMessageAreaTheme(HCMessageAreaTheme.build {
-                    setButtonType(HCMessageAreaTheme.ButtonType.ICON)
-                    setButtonSendBackgroundSelector(R.drawable.bg_hc_selector_btn_send_dark)
+                    setButtonType(HCMessageAreaTheme.ButtonType.TEXT)
                     setInputFieldTextColor(ctx.color(R.color.hc_color_chats_text_dark))
                     setInputFieldTextHintColor(ctx.color(R.color.hc_color_chats_text_hint_dark))
                     setInputOutlineColor(ctx.color(R.color.hc_color_toolbar_dark_bg))

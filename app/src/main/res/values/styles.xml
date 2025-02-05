@@ -93,6 +93,12 @@
         <item name="textAllCaps">true</item>
     </style>
 
+    <style name="Text.InButton">
+        <item name="android:layout_gravity">start|center_vertical</item>
+        <item name="android:layout_marginStart">18dp</item>
+        <item name="android:layout_marginEnd">35dp</item>
+    </style>
+
     <style name="Text.Counter">
         <item name="android:layout_centerInParent">true</item>
         <item name="android:textAllCaps">true</item>
@@ -109,4 +115,14 @@
     <style name="ProgressBarTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorAccent">@android:color/white</item>
     </style>
+
+    <style name="HcProgressBar">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+    </style>
+
+    <style name="HcProgressBar.White">
+        <item name="android:indeterminateTint">@color/hc_color_white</item>
+    </style>
+
 </resources>

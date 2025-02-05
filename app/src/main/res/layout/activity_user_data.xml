@@ -1,113 +1,142 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="vertical"
-	android:padding="20dp"
-	tools:ignore="HardcodedText">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:ignore="HardcodedText">
 
-	<ScrollView
-		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:layout_weight="1">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-		<LinearLayout
-			android:id="@+id/registration_form"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/registration_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-			<androidx.appcompat.widget.AppCompatEditText
-				android:id="@+id/nameEditText"
-				style="@style/Widget.AppCompat.EditText"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:hint="@string/app_demo_name" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/app_demo_name">
 
-			<androidx.appcompat.widget.AppCompatEditText
-				android:id="@+id/emailEditText"
-				style="@style/Widget.AppCompat.EditText"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:hint="@string/app_demo_email"
-				android:inputType="textEmailAddress" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-			<androidx.appcompat.widget.AppCompatEditText
-				android:id="@+id/phoneEditText"
-				style="@style/Widget.AppCompat.EditText"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:hint="@string/app_demo_phone"
-				android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-			<androidx.appcompat.widget.AppCompatEditText
-				android:id="@+id/companyEditText"
-				style="@style/Widget.AppCompat.EditText"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:hint="@string/app_demo_company"
-				android:inputType="text"
-				android:maxLines="1" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hckb_category_items_margin"
+                android:hint="@string/app_demo_email">
 
-			<androidx.appcompat.widget.AppCompatEditText
-				android:id="@+id/userIdEditText"
-				style="@style/Widget.AppCompat.EditText"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:hint="@string/app_demo_user_id"
-				android:inputType="text"
-				android:maxLines="1" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
 
-		</LinearLayout>
-	</ScrollView>
+            </com.google.android.material.textfield.TextInputLayout>
 
-	<CheckBox
-		android:id="@+id/logout_if_necessary"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="16dp"
-		android:text="Logout if necessary" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hckb_category_items_margin"
+                android:hint="@string/app_demo_phone">
 
-	<FrameLayout
-		android:id="@+id/save_user_data_button"
-		style="@style/Button">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" />
 
-		<TextView
-			style="@style/Text"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="Save" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-		<ProgressBar
-			android:id="@+id/save_user_data_button_progress"
-			android:layout_width="30dp"
-			android:layout_height="30dp"
-			android:layout_gravity="center_vertical|end"
-			android:layout_marginEnd="15dp"
-			android:theme="@style/ProgressBarTheme"
-			android:visibility="gone"
-			tools:visibility="visible" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hckb_category_items_margin"
+                android:hint="@string/app_demo_user_id">
 
-	</FrameLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/userIdEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1" />
 
-	<FrameLayout
-		android:id="@+id/logout_button"
-		style="@style/Button.Logout">
+            </com.google.android.material.textfield.TextInputLayout>
 
-		<androidx.appcompat.widget.AppCompatTextView
-			style="@style/Text"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="Logout" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hckb_category_items_margin"
+                android:hint="@string/app_demo_company">
 
-		<ProgressBar
-			android:id="@+id/logout_button_progress"
-			android:layout_width="30dp"
-			android:layout_height="30dp"
-			android:layout_gravity="center_vertical|end"
-			android:layout_marginEnd="15dp"
-			android:visibility="gone"
-			tools:visibility="visible" />
-	</FrameLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/companyEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/logout_if_necessary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Logout if necessary" />
+
+    <FrameLayout
+        android:id="@+id/saveUserDataButton"
+        style="@style/Button">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Text.InButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save" />
+
+        <com.helpcrunch.library.utils.views.icon_progress.HcIconProgress
+            android:id="@+id/saveUserDataButtonIcon"
+            style="@style/HcProgressBar.White"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="15dp"
+            app:srcCompat="@drawable/ic_save" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/logoutButton"
+        style="@style/Button.Logout">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Text.InButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout" />
+
+        <com.helpcrunch.library.utils.views.icon_progress.HcIconProgress
+            android:id="@+id/logoutButtonIcon"
+            style="@style/HcProgressBar.White"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="15dp"
+            app:srcCompat="@drawable/ic_exit" />
+    </FrameLayout>
 
 </LinearLayout>
