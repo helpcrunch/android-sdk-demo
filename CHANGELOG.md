@@ -1,5 +1,15 @@
 # Changelog
 
+## v3.4.5 (09/03/2025)
+* Added AI bot support
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+* Bug fixes and other improvements
+
+#### Bug Fixes:
+- ANR on Android 13
+- WhatsApp sharing doesn't work
+---
+
 ## v3.4.4 (05/02/2025)
 * Updated `showKbScreen` function provides a seamless way to integrate a Knowledge Base into your app, improving user support and engagement. You can open KB urls within the SDK
 ```kotlin
