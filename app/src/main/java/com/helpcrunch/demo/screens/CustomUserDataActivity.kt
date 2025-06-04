@@ -9,6 +9,9 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import com.helpcrunch.demo.R
 import com.helpcrunch.demo.databinding.ActivityCustomUserDataBinding
 import com.helpcrunch.library.core.Callback
@@ -23,6 +26,7 @@ class CustomUserDataActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityCustomUserDataBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         initViews()
@@ -38,6 +42,29 @@ class CustomUserDataActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            v.setPadding(
+                insets.left,
+                insets.top,
+                insets.right,
+                insets.bottom
+            )
+
+            WindowInsetsCompat.CONSUMED
+        }
+
+        WindowCompat.getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = true
+
+        setSupportActionBar(binding.toolbar)
+
+        if (supportActionBar != null) {
+            supportActionBar!!.setTitle(R.string.send_message)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        }
+
         binding.saveUserDataButton.setOnClickListener { saveCustomData() }
         binding.addNewItem.setOnClickListener { addRow(null, null) }
     }

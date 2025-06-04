@@ -4,13 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
     tools:ignore="HardcodedText">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:padding="@dimen/hc_spacing_medium">
 
         <LinearLayout
             android:id="@+id/registration_form"
@@ -21,7 +31,6 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:hint="@string/app_demo_name">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -97,11 +106,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Logout if necessary" />
+        android:text="Logout if necessary"
+        android:layout_marginHorizontal="@dimen/hc_spacing_medium" />
 
     <FrameLayout
         android:id="@+id/saveUserDataButton"
-        style="@style/Button">
+        style="@style/Button"
+        android:layout_margin="@dimen/hc_spacing_medium">
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/Text.InButton"
@@ -121,7 +132,9 @@
 
     <FrameLayout
         android:id="@+id/logoutButton"
-        style="@style/Button.Logout">
+        style="@style/Button.Logout"
+        android:layout_marginHorizontal="@dimen/hc_spacing_medium"
+        android:layout_marginBottom="@dimen/hc_spacing_medium">
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/Text.InButton"

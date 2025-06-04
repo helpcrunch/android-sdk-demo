@@ -10,13 +10,20 @@ import android.os.Bundle
 import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.text.buildSpannedString
 import androidx.core.text.inSpans
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.core.widget.addTextChangedListener
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import coil.dispose
@@ -51,6 +58,8 @@ class MainActivity : AppCompatActivity() {
     private val hcEventsBroadcastReceiver: BroadcastReceiver = createHelpCrunchEventsReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         binding = ActivityMainNewBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -76,6 +85,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() = with(binding) {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            v.setPadding(
+                insets.left,
+                insets.top,
+                insets.right,
+                0
+            )
+
+            binding.bottomSpacing.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = insets.bottom
+            }
+
+            WindowInsetsCompat.CONSUMED
+        }
+
+        WindowCompat.getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = true
+
         openKbArticle.isEnabled = false
         chatButton.setOnClickListener { handleOpenChatClicked() }
         openKbArticle.setOnClickListener { handleKnowledgeBaseClicked() }

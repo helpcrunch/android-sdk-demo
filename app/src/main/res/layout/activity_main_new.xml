@@ -432,6 +432,12 @@
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <Space
+                android:id="@+id/bottom_spacing"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hc_spacing_medium" />
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

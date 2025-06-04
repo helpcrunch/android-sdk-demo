@@ -20,6 +20,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.buildSpannedString
 import androidx.core.text.inSpans
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.helpcrunch.demo.R
 import com.helpcrunch.demo.databinding.ActivitySendMessageBinding
@@ -74,11 +77,6 @@ class SendMessageActivity : AppCompatActivity() {
         binding = ActivitySendMessageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (supportActionBar != null) {
-            supportActionBar!!.setTitle(R.string.send_message)
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        }
-
         initViews()
         LocalBroadcastManager.getInstance(this)
             .registerReceiver(hcEventsBroadcastReceiver, IntentFilter(HelpCrunch.EVENTS))
@@ -98,6 +96,29 @@ class SendMessageActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            v.setPadding(
+                insets.left,
+                insets.top,
+                insets.right,
+                insets.bottom
+            )
+
+            WindowInsetsCompat.CONSUMED
+        }
+
+        WindowCompat.getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = true
+
+        setSupportActionBar(binding.toolbar)
+
+        if (supportActionBar != null) {
+            supportActionBar!!.setTitle(R.string.send_message)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        }
+
         binding.sendText.setOnClickListener { v: View? -> sendMessage() }
     }
 

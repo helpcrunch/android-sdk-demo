@@ -8,9 +8,9 @@ class App : MultiDexApplication() {
         super.onCreate()
 
         HelpCrunch.initialize(
-            organization = "organization",
-            appId = 1000,
-            secret = "secret"
-        )
+            "qaleks",
+            76,
+            "bhVe1W3dbOMjrqvWuQf/W1gzvJepuo0EAudlwcn6sCwDxv4nZQSqO1zI7dkrPOJpD0HpjYtrWqyfAFdsV8lz+g=="
+        );
     }
 }

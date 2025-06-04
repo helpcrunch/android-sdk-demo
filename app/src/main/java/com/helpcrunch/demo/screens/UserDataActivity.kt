@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import com.helpcrunch.demo.R
 import com.helpcrunch.demo.databinding.ActivityUserDataBinding
 import com.helpcrunch.library.core.Callback
@@ -17,14 +20,8 @@ class UserDataActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityUserDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        if (supportActionBar != null) {
-            supportActionBar!!.setTitle(R.string.change_user_data)
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        }
 
         initViews()
     }
@@ -38,6 +35,29 @@ class UserDataActivity : AppCompatActivity() {
     }
 
     private fun initViews() = with(binding) {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            v.setPadding(
+                insets.left,
+                insets.top,
+                insets.right,
+                insets.bottom
+            )
+
+            WindowInsetsCompat.CONSUMED
+        }
+
+        WindowCompat.getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = true
+
+        setSupportActionBar(binding.toolbar)
+
+        if (supportActionBar != null) {
+            supportActionBar!!.setTitle(R.string.change_user_data)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        }
+
         val currentUser = HelpCrunch.getUser()
         if (currentUser != null) {
             setUser(currentUser)

@@ -1,31 +1,57 @@
 # Changelog
 
+## v3.4.6 (04/06/2025)
+
+* Added edge-to-edge and targetSdkVersion 35 support
+* Updated [third-party libraries](DEPENDENCY_LIST.md)
+* Bug fixes and other improvements
+
+---
+
+#### Bug Fixes:
+
+- [#99](https://github.com/helpcrunch/android-sdk-demo/issues/99) IllegalStateException: Couldn't
+  read row 0, col -1 from CursorWindow
+- [#98](https://github.com/helpcrunch/android-sdk-demo/issues/98) NullPointerException in
+  HcChatsListFragment
+- [#97](https://github.com/helpcrunch/android-sdk-demo/issues/97) IllegalStateException: Fragment
+  MediaPickerBottomSheet not attached to a context.
+
+---
+
 ## v3.4.5 (09/03/2025)
+
 * Added AI bot support
 * Updated [third-party libraries](DEPENDENCY_LIST.md)
 * Bug fixes and other improvements
 
 #### Bug Fixes:
+
 - ANR on Android 13
 - WhatsApp sharing doesn't work
+
 ---
 
 ## v3.4.4 (05/02/2025)
-* Updated `showKbScreen` function provides a seamless way to integrate a Knowledge Base into your app, improving user support and engagement. You can open KB urls within the SDK
+
+* Updated `showKbScreen` function provides a seamless way to integrate a Knowledge Base into your
+  app, improving user support and engagement. You can open KB urls within the SDK
+
 ```kotlin
 // The URL of the article to be displayed
-val url = ...
+val url = "..."
 // The SDK will try to apply the locale from the article URL
 val forceApplyLocaleFromUrl = true
 val optionsBuilder = HCOptions.Builder()
 optionsBuilder.setChatViewType(HcChatViewType.KB_ONLY)
 
 HelpCrunch.showKbScreen(
-  articleUrl = url,
-  forceApplyLocaleFromUrl = forceApplyLocaleFromUrl,
-  options = optionsBuilder.build()
+    articleUrl = url,
+    forceApplyLocaleFromUrl = forceApplyLocaleFromUrl,
+    options = optionsBuilder.build()
 )
 ```
+
 * Updated [third-party libraries](DEPENDENCY_LIST.md)
 * Bug fixes and other improvements
 
@@ -33,16 +59,19 @@ HelpCrunch.showKbScreen(
 
 ## v3.4.3 (25/01/2025)
 
-* Added the ability to manually specify the SDK opening mode: chat only, Knowledge Base only, chat first, Knowledge Base first
+* Added the ability to manually specify the SDK opening mode: chat only, Knowledge Base only, chat
+  first, Knowledge Base first
+
 ```kotlin
- val chatViewType =  HcChatViewType.CHAT_ONLY
-                     // HcChatViewType.CHAT_FIRST
-                     // HcChatViewType.KB_ONLY
-                     // HcChatViewType.KB_FIRST
- val optionsBuilder = HCOptions.Builder()
- optionsBuilder.setChatViewType(chatViewType)
- HelpCrunch.showChatScreen(optionsBuilder.build())
+ val chatViewType = HcChatViewType.CHAT_ONLY
+// HcChatViewType.CHAT_FIRST
+// HcChatViewType.KB_ONLY
+// HcChatViewType.KB_FIRST
+val optionsBuilder = HCOptions.Builder()
+optionsBuilder.setChatViewType(chatViewType)
+HelpCrunch.showChatScreen(optionsBuilder.build())
 ```
+
 * Bug fixes and other improvements
 * Updated [third-party libraries](DEPENDENCY_LIST.md)
 
@@ -57,7 +86,8 @@ HelpCrunch.showKbScreen(
 
 ## v3.4.1 (21/10/2024)
 
-* Removed file read and write permissions to comply with new [Google Play's Photo and Video Permissions policy](https://support.google.com/googleplay/android-developer/answer/14115180#zippy=%2Chow-easy-is-it-to-integrate-the-photo-picker-into-my-app)
+* Removed file read and write permissions to comply with
+  new [Google Play's Photo and Video Permissions policy](https://support.google.com/googleplay/android-developer/answer/14115180#zippy=%2Chow-easy-is-it-to-integrate-the-photo-picker-into-my-app)
 
 ---
 
