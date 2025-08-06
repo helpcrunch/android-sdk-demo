@@ -1,5 +1,20 @@
 # Changelog
 
+## v3.4.6 (31/07/2025)
+
+* Bug fixes and other improvements
+
+---
+
+#### Bug Fixes:
+
+- [#104](https://github.com/helpcrunch/android-sdk-demo/issues/104) IllegalStateException: State
+  is 'DESTROYED' and cannot be moved to STARTED
+- [#103](https://github.com/helpcrunch/android-sdk-demo/issues/103) IllegalStateException: State
+  is 'DESTROYED' and cannot be moved to STARTED
+
+---
+
 ## v3.4.6 (04/06/2025)
 
 * Added edge-to-edge and targetSdkVersion 35 support

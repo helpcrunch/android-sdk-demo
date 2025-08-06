@@ -26,7 +26,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.addTextChangedListener
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import coil.dispose
+import coil3.dispose
 import com.goodayapps.widget.AvatarDrawable
 import com.goodayapps.widget.AvatarView
 import com.helpcrunch.demo.R
@@ -187,15 +187,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openChat() {
-        var theme = createThemeByOptions()
-        val chatViewType = createChatViewType()
-
-        val optionsBuilder = HCOptions.Builder()
-            .setTheme(theme)
-
-        if (chatViewType != null) {
-            optionsBuilder.setChatViewType(chatViewType)
-        }
+        val optionsBuilder = createOptionsBuilder()
 
         val preChatForm = HCPreChatForm.Builder()
             .build()
@@ -209,21 +201,28 @@ class MainActivity : AppCompatActivity() {
         val url = binding.urlEditText.text.toString()
         val forceApplyLocaleFromUrl = binding.forceApplyLocaleFromUrl.isChecked
 
-        var theme = createThemeByOptions()
-        val chatViewType = createChatViewType()
-
-        val optionsBuilder = HCOptions.Builder()
-            .setTheme(theme)
-
-        if (chatViewType != null) {
-            optionsBuilder.setChatViewType(chatViewType)
-        }
+        val optionsBuilder = createOptionsBuilder()
 
         showKnowledgeBase(
             url = url,
             forceApplyLocaleFromUrl = forceApplyLocaleFromUrl,
             options = optionsBuilder.build()
         )
+    }
+
+    private fun createOptionsBuilder(): HCOptions.Builder {
+        val theme = createThemeByOptions()
+        val chatViewType = createChatViewType()
+
+        val optionsBuilder = HCOptions.Builder()
+            .setLogLevel(Log.ERROR)
+            .setTheme(theme)
+
+        if (chatViewType != null) {
+            optionsBuilder.setChatViewType(chatViewType)
+        }
+
+        return optionsBuilder
     }
 
     private fun showChat(options: HCOptions?) {
