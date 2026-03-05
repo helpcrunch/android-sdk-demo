@@ -1,5 +1,28 @@
 # Changelog
 
+## v3.4.8 (05/03/2026)
+
+* Bug fixes and other improvements
+
+BREAKING CHANGES:
+This library now uses Java 11 bytecode, so you will need to enable it in your project as well:
+
+```gradle
+android {
+    //...
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_11
+        }
+    }
+}
+```
+---
+
 ## v3.4.6 (31/07/2025)
 
 * Bug fixes and other improvements
