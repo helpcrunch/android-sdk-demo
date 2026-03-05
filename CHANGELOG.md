@@ -4,7 +4,7 @@
 
 * Bug fixes and other improvements
 
-BREAKING CHANGES:
+### BREAKING CHANGES:
 This library now uses Java 11 bytecode, so you will need to enable it in your project as well:
 
 ```gradle
