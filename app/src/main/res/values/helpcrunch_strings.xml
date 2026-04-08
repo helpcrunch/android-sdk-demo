@@ -23,6 +23,7 @@
     <string name="hc_download_file">Save to Downloads</string>
     <string name="hc_download_image">Save to Gallery</string>
     <string name="hc_share">Share…</string>
+    <string name="hc_cancel_sending">Cancel sending</string>
     <string name="hc_menu_end_chat">End this chat</string>
 
     <!--Chats list-->
@@ -136,6 +137,7 @@
     <string name="hc_images">Images</string>
     <string name="hc_done">Done</string>
     <string name="hc_downloading">Downloading…</string>
+    <string name="hc_connecting">Connecting…</string>
     <string name="hc_debug">Debug</string>
     <string name="hc_send_intent_title">Send to:</string>
 
