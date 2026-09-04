@@ -1,5 +1,18 @@
 # Changelog
 
+## v3.4.9 (04/09/2026)
+
+* Bug fixes and other improvements
+
+---
+
+#### Bug Fixes:
+
+- Fixed ANR on SDK start
+- Fixed ANR when invoking the file picker.
+
+---
+
 ## v3.4.8 (05/03/2026)
 
 * Bug fixes and other improvements
