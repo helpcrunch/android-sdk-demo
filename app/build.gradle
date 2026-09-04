@@ -7,14 +7,14 @@ apply plugin: "com.google.gms.google-services"
 
 
 android {
-    compileSdk 36
+    compileSdk 37
 
     defaultConfig {
         applicationId "com.helpcrunch.demo"
         minSdkVersion 23
-        targetSdkVersion 36
+        targetSdkVersion 37
         versionCode 3
-        versionName "3.4.7"
+        versionName "3.4.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -65,7 +65,7 @@ dependencies {
     implementation "com.github.TalbotGooday:AvatarView:0.1.4"
 
     // HelpCrunch
-    implementation("com.helpcrunch:chat-sdk:3.4.8")
+    implementation("com.helpcrunch:chat-sdk:3.4.9")
     // or a snapshot
-//    implementation("com.helpcrunch:chat-sdk:3.4.8+281-SNAPSHOT")
+    //    implementation("com.helpcrunch:chat-sdk:3.4.8+281-SNAPSHOT")
 }
