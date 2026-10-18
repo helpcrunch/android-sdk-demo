@@ -1,5 +1,33 @@
 # Changelog
 
+## v3.5.0 (18/10/2026)
+
+* Added `HCOptions.Builder.setKnowledgeBaseLocalization(locale)` to force the Knowledge Base
+  language independently of `setLocale()`
+* Added support for files inside message content
+* `FOREGROUND_SERVICE_MEDIA_PLAYBACK` permission is now optional: by default audio messages are
+  played in-process. To keep audio playing in the background with a media notification, see
+  [Background audio playback](README.md#background-audio-playback-optional)
+* Updated `compileSdk` to 37
+* Updated ProGuard rules
+* Bug fixes and other improvements
+
+### BREAKING CHANGES:
+
+- Removed the deprecated legacy theme API (`com.helpcrunch.library.core.options.design.HCTheme`
+  and `HCOptions.Builder.setTheme(HCTheme)` that used it). Use
+  `com.helpcrunch.library.core.options.theme.HCTheme` instead.
+
+---
+
+#### Bug Fixes:
+
+- Fixed incorrect deep-link handling (custom schemes, `tel:`, `mailto:` etc.); a message is shown
+  if no application can open the link
+- Fixed message content parsing
+
+---
+
 ## v3.4.9 (04/09/2026)
 
 * Bug fixes and other improvements
