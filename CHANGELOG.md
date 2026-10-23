@@ -1,4 +1,9 @@
 # Changelog
+## v3.5.1 (23/10/2026)
+
+* Bug fixes and other improvements
+
+---
 
 ## v3.5.0 (18/10/2026)
 
